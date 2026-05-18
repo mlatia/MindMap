@@ -1,26 +1,8 @@
-/* 
- * App.css - App Component Styles
- *
- * Component-specific styles for the main App component.
- * Uses a clean, minimal design with responsive layout.
+/*
+ * App.css - layout helpers untuk halaman.
+ * Styling utama (palet, tipografi, komponen) ada di index.css.
  */
-
-/* Main container - centered with max-width */
-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-/* Primary heading styles */
-h1 {
-  color: #2c3e50;  /* Dark blue-grey */
-  margin-bottom: 1rem;
-}
-
-/* Paragraph text styles */
-p {
-  color: #34495e;  /* Lighter blue-grey */
-  line-height: 1.6;
-} 
+.page { padding: 2rem 0 4rem; }
+.row.spread { justify-content: space-between; align-items: center; }
+.center-text { text-align: center; }
+.muted { color: var(--color-muted); }

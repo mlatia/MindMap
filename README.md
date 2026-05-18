@@ -1,338 +1,133 @@
-# PERN Starter Kit
+# Mind Map Otomatis (PERN + LLM + D3)
 
-This is a full-stack starter kit using the PERN (PostgreSQL, Express, React, and Node.js) stack. It includes a modern frontend built with React (using Vite), a RESTful API server with Express, a PostgreSQL database, and a collection of tooling, Docker configurations, and automated tests to streamline development and deployment.
+Implementasi tugas akhir **"Pengembangan Sistem Mind Map Otomatis dari Hasil Generatif AI"** — Melati Anggraini (NIM 13522035), Teknik Informatika ITB.
 
-Below is an overview of each part of the project:
+Sistem ini menerima input teks bebas dari pengguna, mengekstraksi struktur hierarkis konsep menggunakan strategi **Auto-CoT prompting** terhadap LLM (Claude / OpenAI), memvalidasi output dengan **validation layer 4 tahap**, kemudian memvisualisasikannya dengan algoritma **Reingold-Tilford radial** dan **Force-Directed dengan konstrain radial** (D3.js).
 
----
+## Stack
 
-## Table of Contents
+- **client** — React + Vite + React Router + D3.js. Styling mengikuti portofolio (white + black sans-serif + pink highlighter + pastel sticky-note).
+- **server** — Node.js + Express + JWT. Pipeline mind map ada di `src/mindmap/`.
+- **database** — PostgreSQL (JSONB). Schema: `users`, `projects`, `mindmap_revisions`.
 
-- [Folder Structure](#folder-structure)
-- [Features](#features)
-- [Setup and Usage](#setup-and-usage)
-  - [1. Environment Variables](#1-environment-variables)
-  - [2. Installation](#2-installation)
-  - [3. Running with Docker](#3-running-with-docker)
-  - [4. Running Locally (without Docker)](#4-running-locally-without-docker)
-  - [5. Additional Scripts](#5-additional-scripts)
-- [Counter Feature](#counter-feature)
-- [Testing](#testing)
-  - [Frontend Tests (React)](#frontend-tests-react)
-  - [Backend Tests (Express)](#backend-tests-express)
-  - [End-to-End Tests (Cypress)](#end-to-end-tests-cypress)
-- [Security](#security)
-- [Authentication](#authentication)
-- [Contributing](#contributing)
-- [License](#license)
+## Modul
 
----
+### Backend
+| Kode | File | Modul |
+| --- | --- | --- |
+| MSM-01 | `server/src/mindmap/preprocess.js` | Preprocessing teks (split kalimat, tokenize, stopwords ID/EN) |
+| MSM-02 | `server/src/mindmap/embedding.js` | Sentence embedding (TF-IDF deterministik) + k-medoids clustering |
+| MSM-03 | `server/src/mindmap/autoCoT.js` | Auto-CoT prompt builder (system + user + JSON schema + few-shot demonstration) |
+| MSM-04 | `server/src/mindmap/llmClient.js` | LLM client (Anthropic / OpenAI / mock deterministik) |
+| MSM-05 | `server/src/mindmap/validation.js` | Validation layer 4 tahap (struktural, semantik, kendala, kelengkapan) |
+| MBE-01 | `server/src/app.js` + `routes/` | API Gateway |
+| MBE-02 | `server/src/middleware/auth.middleware.js`, `routes/auth.routes.js` | Autentikasi JWT |
+| MBE-03 | `server/src/routes/projects.routes.js` | Manajemen Proyek (CRUD + revisions) |
 
-## Folder Structure
+### Frontend
+| Kode | File | Modul |
+| --- | --- | --- |
+| MFE-01 | `client/src/pages/Login.jsx`, `Register.jsx` | Autentikasi |
+| MFE-02 | `client/src/pages/NewMindMap.jsx` | Input Teks |
+| MFE-03 | `client/src/components/Mindmap/MindMapRadial.jsx` | Visualisasi (Reingold-Tilford radial) |
+| MFE-04 | `client/src/components/Mindmap/MindMapForce.jsx` | Layout alternatif (Force-Directed + radial constraint) |
+| MFE-05/06 | `client/src/pages/MindMapDetail.jsx` + `state/useMindMap.js` | Editor + Undo/Redo |
+| MFE-07 | `client/src/pages/Dashboard.jsx` | Manajemen Proyek |
+| MFE-08 | `client/src/components/Mindmap/exportUtils.js` | Ekspor PNG / PDF |
+| MFE-09 | `client/src/services/api.js` | Layanan API |
+| MFE-10 | `client/src/state/useMindMap.js` | State management (useReducer + history) |
 
-A high-level look at the folders and their purposes:
+## Endpoint utama
 
-- **client/**  
-  Contains the React frontend. Uses Vite for bundling and development. Includes:
-  - `src/` folder with React components and main entry points:
-    - `App.jsx` as the main App component.
-    - `main.jsx` to bootstrap React into the DOM.
-    - Global styles (`index.css`) and component-level styles (`App.css`).
-  - `tests/` folder with:
-    - `unit/` (Vitest unit tests).
-    - `e2e/` (Cypress end-to-end tests).
-  - `Dockerfile` for building an optimized production image with Nginx.
+- `POST /api/auth/register` `{ username, email, password }` → 201
+- `POST /api/auth/login` `{ email, password }` → `{ user, token }`
+- `POST /api/mindmap/generate` `{ text, demos? }` _(auth)_ → `{ mindmap, meta }`
+- `GET  /api/projects` _(auth)_ → daftar proyek
+- `POST /api/projects` _(auth)_ → buat proyek
+- `GET  /api/projects/:id` _(auth)_ → detail
+- `PUT  /api/projects/:id` _(auth)_ → update mindmap / layout / title
+- `DELETE /api/projects/:id` _(auth)_ → hapus
+- `GET/POST /api/projects/:id/revisions` _(auth)_ → snapshot revisi (undo/redo persisten)
 
-- **server/**  
-  Contains the Express backend. Includes:
-  - `src/app.js` as the main Express server configuration.  
-  - `src/index.js` to start the server on the specified port.  
-  - `src/routes/` for Express routes, including `auth.js` to handle user registration and login.  
-  - `src/auth/passport.js` configures Passport (LocalStrategy) if needed for session-based authentication.  
-  - `tests/` folder with Mocha/Chai integration tests.  
-  - `Dockerfile` for building a Node-based backend container.  
+## Format JSON mind map
 
-- **database/**  
-  Contains database-related files:
-  - `db.config.js` exports a pooled PostgreSQL connection.  
-  - `init.sql` schema for initializing your production database.  
-  - `init.test.sql` schema for test databases.  
-  - `init.test.db.js` script to create a fresh test database (used before running backend tests).  
-  - `Dockerfile` to build a custom PostgreSQL image, if needed.
+```json
+{
+  "concept": "Mind Map",
+  "level": 0,
+  "children": [
+    { "concept": "Buzan",       "level": 1, "children": [ ... ] },
+    { "concept": "Auto-CoT",    "level": 1, "children": [ ... ] }
+  ]
+}
+```
 
-- **docs/**  
-  Contains basic READMEs and placeholders for further documentation (e.g., architecture diagrams, specifications, etc.).
+## Validation Layer (FR-4)
 
-- **scripts/**  
-  Several helper shell scripts for Docker management:
-  - `start.sh`: Builds and starts containers in detached mode.  
-  - `stop.sh`: Stops running containers.  
-  - `logs.sh`: Shows logs for all or a specific container.  
-  - `cleanup.sh`: Removes containers and prunes unused Docker images.
+1. **Struktural** — JSON schema (concept string non-kosong, level integer konsisten dengan kedalaman, children array).
+2. **Semantik** — minimal 55% node-nya mengandung token yang muncul di teks sumber (cegah halusinasi LLM).
+3. **Kendala** — maksimal 4 level (root + 3 sub) dan ≤ 7 cabang per node (sesuai standar Buzan).
+4. **Kelengkapan** — minimal 40% istilah dominan (top-8 TF) teks sumber tertangkap dalam pohon.
 
-- **docker-compose.yml**  
-  Defines services for the frontend (client), backend (server), and database (PostgreSQL).
+Gagal di tahap manapun → retry otomatis (maks. 3x) dengan prompt yang diperkaya pesan error sebelumnya.
 
-- **.gitignore**  
-  Specifies files and directories to be ignored by Git.
+## Setup
 
----
+### Environment variables (server/.env)
 
-## Features
-
-1. **React Frontend (Vite)**  
-   - Fast dev server and production build.  
-   - Basic structure with a landing page.
-
-2. **Express.js Backend**  
-   - RESTful API ready with routes for user registration, login, and example endpoints.  
-   - Uses Helmet, rate-limit, and other security best practices.  
-   - Authentication (Passport, bcryptjs, JWT) for secure login and session management if needed.
-
-3. **PostgreSQL Database**  
-   - Connection pooling via `pg`.  
-   - Example schema with Users and Example tables.  
-   - Ready for migrations and seeding scripts.
-
-4. **Docker and Docker Compose**  
-   - Containerized setup for client, server, and database.  
-   - Nginx serving the production build of the React app.  
-   - The database runs on a `postgres:15-alpine` base image (or the included custom Dockerfile in `database/`).
-
-5. **Automated Testing**  
-   - **Unit Tests** (frontend) with Vitest.  
-   - **Integration Tests** (backend) with Mocha/Chai.  
-   - **Unit Tests** (backend) with Mocha/Chai.  
-   - **End-to-End Tests** with Cypress in the `client/tests/e2e` folder.
-
-6. **Security and Utility**  
-   - Rate limiting (express-rate-limit).  
-   - Helmet for HTTP headers security.  
-   - CORS configuration and environment-based configurations.
-
----
-
-## Setup and Usage
-
-### 1. Environment Variables
-
-- Create a `.env` file in the `server/` directory for backend secret keys and DB credentials (e.g., `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`, `DB_NAME`).
-- Create a `.env` file in the `client/` directory if needed for any custom environment variables (e.g., `VITE_API_URL`).
-- For testing, a separate `.env.test` is typically used (and loaded in `init.test.db.js`).
-
-Example environment variables in `server/.env`:
 ```
 DB_USER=postgres
 DB_PASSWORD=postgres
-DB_HOST=database
+DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=pern_app
-SESSION_SECRET=some-secret-key
-JWT_SECRET=some-other-secret
-CLIENT_URL=http://localhost:5173
+DB_NAME=mindmap
+JWT_SECRET=ganti-saya
+SESSION_SECRET=ganti-saya
+LLM_PROVIDER=mock           # anthropic | openai | mock
+ANTHROPIC_API_KEY=          # jika provider=anthropic
+OPENAI_API_KEY=             # jika provider=openai
+LLM_MODEL=claude-sonnet-4-6 # opsional, override default
 ```
 
-### 2. Installation
+Catatan: provider default `mock` memakai pipeline deterministik lokal (TF-IDF + k-medoids) sehingga sistem tetap berjalan tanpa koneksi internet — berguna untuk demo dan unit testing (FR-3 stabilitas output).
 
-Clone the repository:
+### Jalankan
+
 ```bash
-git clone https://github.com/AsherMorse/PernStarterKit.git
-cd PernStarterKit
+# database
+psql -U postgres -c "CREATE DATABASE mindmap"
+psql -U postgres -d mindmap -f database/init.sql
+
+# backend
+cd server && npm install && npm run dev    # → http://localhost:5000
+
+# frontend
+cd client && npm install && npm run dev    # → http://localhost:5173
 ```
 
-### 3. Running with Docker
+Atau dengan Docker:
 
-The easiest way to run the project is using our provided Docker scripts:
-
-1. Start all services:
 ```bash
 ./scripts/start.sh
 ```
-This script will:
-- Build and start all containers (`database`, `server`, and `client`)
-- The React app will be available at [http://localhost:5173](http://localhost:5173)
-- The Express backend will run on [http://localhost:5000](http://localhost:5000)
-- PostgreSQL will listen on port 5438 (mapped to 5432 in the container)
-
-2. View logs (optional):
-```bash
-./scripts/logs.sh
-```
-
-3. Stop all services:
-```bash
-./scripts/stop.sh
-```
-
-4. Clean up resources (optional):
-```bash
-./scripts/cleanup.sh
-```
-
-### 4. Running Locally (without Docker)
-
-Alternatively, you can run services individually for development:
-
-1. Install dependencies in each directory:
-```bash
-# Install client dependencies
-cd client && npm install
-
-# Install server dependencies
-cd ../server && npm install
-
-# Install database dependencies (if needed)
-cd ../database && npm install
-```
-
-2. Start services:
-- **Database**: Install and start PostgreSQL locally, ensuring your `.env` matches local connection settings.  
-- **Backend** (`server/`):
-  ```bash
-  npm run dev
-  ```
-  It will start on `localhost:5000` by default.
-
-- **Frontend** (`client/`):
-  ```bash
-  npm run dev
-  ```
-  The development server will be at `http://localhost:5173` by default.
-
-### 5. Additional Scripts
-
-In the `scripts/` folder:
-
-- **start.sh**: Builds and starts containers (equivalent to `docker compose up -d --build`).
-- **stop.sh**: Stops all containers (`docker compose down`).
-- **logs.sh**: Shows logs for all containers or a specified container.
-- **cleanup.sh**: Cleans up Docker resources (containers, images, volumes).
-
-
-## Counter Feature
-
-A simple counter has been added to demonstrate state management, API calls, and associated testing.  
-- The counter is displayed in the frontend with a button to increment it.  
-- The server exposes the `/api/counter` and `/api/counter/increment` routes:
-  - **GET** `/api/counter` returns the current count.  
-  - **POST** `/api/counter/increment` increments and returns the count.  
-- The counter state persists in memory on the server for demonstration purposes.
-
-### Relevant Files
-- Client:
-  - `src/App.jsx` to fetch and display the counter, and handle increment actions.
-  - `tests/e2e/counter.cy.js` for end-to-end testing of the increment functionality.
-  - `tests/unit/App.test.jsx` verifying the UI state updates properly after clicking the increment button.
-- Server:
-  - `src/routes/counter.js` containing routes for retrieving and incrementing the count.
-  - `tests/integration/counter.test.js` for integration tests (ensuring the route logic is correct).
-
----
 
 ## Testing
 
-### Frontend Tests (React)
+Pipeline mind map memiliki 16 unit test di `server/__tests__/unit/mindmap.pipeline.test.js` yang mengcover preprocess, embedding, prompt builder, mock generator, dan semua 4 tahap validasi. Frontend smoke test di `client/__tests__/unit/App.test.jsx`.
 
-- **Vitest Unit Tests**  
-  - Located in `client/tests/unit`.
-  - Use `@testing-library/react` for component rendering and testing.
-  - Run them with:
-    ```bash
-    cd client
-    npm run test:unit
-    ```
-    For coverage:
-    ```bash
-    npm run test:unit:coverage
-    ```
+```bash
+cd server && npm test           # 16 unit tests
+cd client && npm run test:unit  # smoke tests
+cd client && npm run test:e2e   # Cypress E2E
+```
 
-### Backend Tests (Express)
+## Design language
 
-- **Mocha/Chai Integration Tests**  
-  - Located in `server/tests/integration`.
-  - Use supertest for testing HTTP routes.
-  - Run them with:
-    ```bash
-    cd server
-    npm test
-    ```
+Mengikuti portofolio personal Melati:
 
-- **Mocha/Chai Unit Tests**  
-  - Located in `server/tests/unit`.
-  - Designed to test individual functions and modules.
-  - You can run them the same way as other backend tests:
-    ```bash
-    cd server
-    npm test
-    ```
-
-### End-to-End Tests (Cypress)
-
-- **E2E Tests** for the entire application’s UI flows:
-  - Found in `client/tests/e2e`.
-  - These include tests for the new counter functionality under `counter.cy.js`.
-  - Run in headless mode:
-    ```bash
-    cd client
-    npm run test:e2e
-    ```
-  - Or open the Cypress GUI:
-    ```bash
-    npm run test:e2e:dev
-    ```
-  - Cypress configuration is located at `client/cypress.config.js`.
-
----
-
-## Security
-
-The server applies the following security measures:
-
-- **Helmet**: Sets HTTP response headers for better security.
-- **express-rate-limit**: Limits the number of requests per time window per IP.
-- **passport** (Local Strategy) and/or **JWT** authentication (depending on usage).
-- **CORS**: Origin controlled via environment variable `CLIENT_URL`.
-
----
-
-## Authentication
-
-The backend provides routes for user registration and login:
-
-- **POST** `/api/auth/register`  
-  Creates a new user with a hashed password.
-
-- **POST** `/api/auth/login`  
-  Logs in an existing user and returns a JWT token (stored in the `Authorization` header or application state).
-
-See `server/src/routes/auth.js` for details on how the routes are implemented. The database schema includes a `users` table with fields for `username`, `email`, and a hashed `password`.
-
----
-
-## Contributing
-
-1. Create a new branch for your feature or bugfix.
-2. Make changes, run tests, and ensure everything is passing.
-3. Check the status of your codebase:
-   ```bash
-   git status
-   ```
-4. Stage all changes:
-   ```bash
-   git add .
-   ```
-5. Commit with a concise message:
-   ```bash
-   git commit -m "Your concise commit message"
-   ```
-6. Push and create a pull request.
-
----
-
-## License
-
-This project is provided under the [MIT License](LICENSE). You are free to modify and distribute it, subject to the conditions outlined in the license file.
-
----
-
-**Happy coding with the PERN Starter Kit! If you have any issues or questions, feel free to open an issue or submit a pull request.** 
+- Background putih bersih dengan grid titik halus
+- Tipografi `Plus Jakarta Sans` (bold 700–800) untuk heading dan `Caveat` untuk aksen hand-drawn
+- Aksen pink highlighter (`#FFB7DE` / `#FF7AC4`) untuk tag dan sticker
+- Sticky-note cards dengan palet pastel: kuning, biru, pink, mint, lilac
+- Tombol pill rounded dengan border 1.5px hitam dan drop-shadow 4px solid hitam
+- Bintang sparkle 4-titik sebagai icon brand

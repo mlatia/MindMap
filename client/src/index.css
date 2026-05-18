@@ -1,80 +1,333 @@
-/* 
- * index.css - Global Styles
+/*
+ * index.css - Global theme untuk Mind Map Otomatis
  *
- * Global CSS styles for the PERN Stack application.
- * Includes base styles, typography, and dark/light theme support.
+ * Inspirasi visual mengikuti portofolio "Melati Anggraini":
+ *   - background putih bersih
+ *   - tipografi sans-serif tebal hitam
+ *   - aksen pink highlighter (sticker) + sparkle bintang
+ *   - sticky-note kartu warna pastel kuning / biru / pink
+ *   - garis hand-drawn tipis dengan sedikit kemiringan
  */
 
-/* Base styles and typography */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;700&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* ---- Palette ---- */
+  --color-bg: #FFFFFF;
+  --color-surface: #FAFAFA;
+  --color-ink: #0A0A0A;
+  --color-ink-soft: #2D2D2D;
+  --color-muted: #6B6B6B;
+  --color-border: #1A1A1A;
+
+  /* Accent tags (highlighter sticker) */
+  --pink-tag: #FFB7DE;
+  --pink-strong: #FF7AC4;
+
+  /* Sticky-note pastels */
+  --note-yellow: #FFE45C;
+  --note-blue:   #9EDDF3;
+  --note-pink:   #FFB8E0;
+  --note-mint:   #BFE9C5;
+  --note-lilac:  #D9C7FF;
+
+  /* Mind-map levels */
+  --branch-1: #FFE45C;
+  --branch-2: #9EDDF3;
+  --branch-3: #FFB8E0;
+  --branch-4: #BFE9C5;
+  --branch-5: #D9C7FF;
+  --branch-6: #FFD2A6;
+
+  /* Typography */
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  font-weight: 500;
   line-height: 1.5;
-  font-weight: 400;
-
-  /* Theme colors - dark mode default */
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  /* Font rendering optimizations */
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  color-scheme: light;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
-/* Layout */
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-ink);
 }
 
-/* Container */
-.App {
-  max-width: 1280px;
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--color-ink);
+}
+h1 { font-size: 3rem; line-height: 1.05; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.25rem; }
+
+p { margin: 0; color: var(--color-ink-soft); }
+
+button {
+  font-family: inherit;
+  font-weight: 700;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-ink);
+  color: #fff;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+}
+button:hover { transform: translateY(-1px); }
+button:focus, button:focus-visible {
+  outline: 3px solid var(--pink-tag);
+  outline-offset: 2px;
+}
+button.secondary {
+  background: #fff;
+  color: var(--color-ink);
+}
+button.ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1.5px dashed var(--color-border);
+}
+button.pink {
+  background: var(--pink-strong);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: 1rem;
+  border: 1.5px solid var(--color-border);
+  background: #fff;
+  color: var(--color-ink);
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  width: 100%;
+}
+input:focus, textarea:focus, select:focus {
+  outline: 3px solid var(--pink-tag);
+  outline-offset: 1px;
+}
+
+/* ---- Pink highlighter tag (sticker dari portofolio) ---- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: var(--pink-tag);
+  color: var(--color-ink);
+  padding: 0.15rem 0.6rem;
+  border-radius: 6px;
+  transform: rotate(-3deg);
+  box-shadow: 1px 1px 0 var(--color-ink);
+}
+.tag.yellow { background: var(--note-yellow); }
+.tag.blue   { background: var(--note-blue); }
+.tag.mint   { background: var(--note-mint); }
+
+/* ---- Sticky-note card ---- */
+.card {
+  background: #fff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 18px;
+  padding: 1.25rem 1.4rem;
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+.card.yellow { background: var(--note-yellow); }
+.card.blue   { background: var(--note-blue); }
+.card.pink   { background: var(--note-pink); }
+
+/* ---- Caveat hand-drawn label ---- */
+.scribble {
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+/* ---- Layout helpers ---- */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1180px;
   margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.row { display: flex; gap: 1rem; }
+.col { display: flex; flex-direction: column; gap: 1rem; }
+.spacer { flex: 1; }
+
+/* ---- Top nav (mirroring portfolio header) ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1.5px solid var(--color-border);
+  background: #fff;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+.brand svg { width: 22px; height: 22px; }
+.nav-links { display: flex; gap: 1.4rem; align-items: center; font-weight: 600; }
+.nav-links a.active { background: var(--pink-tag); padding: 0.2rem 0.5rem; border-radius: 6px; }
+
+/* ---- Hero / hand-drawn arrow accents ---- */
+.hand-arrow { color: var(--color-ink); }
+
+/* ---- Toolbar ---- */
+.toolbar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: 3px 3px 0 var(--color-ink);
+}
+
+/* ---- Mind map canvas wrapper ---- */
+.canvas-wrap {
+  position: relative;
+  background:
+    radial-gradient(circle at 1px 1px, #E5E5E5 1px, transparent 1px) 0 0/22px 22px,
+    #fff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.empty-hint {
+  font-family: 'Caveat', cursive;
+  font-size: 1.4rem;
+  color: var(--color-muted);
   padding: 2rem;
   text-align: center;
 }
 
-/* Typography */
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ---- Mind map node SVG ---- */
+.node-rect {
+  fill: #fff;
+  stroke: var(--color-ink);
+  stroke-width: 1.5;
+  rx: 14;
+}
+.node-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  fill: var(--color-ink);
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+.link {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1.4;
+  opacity: 0.65;
 }
 
-/* Buttons */
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* ---- Forms grid for auth pages ---- */
+.auth-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+.auth-shell .panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+}
+.auth-shell .accent {
+  background:
+    radial-gradient(circle at 1px 1px, #E5E5E5 1px, transparent 1px) 0 0/22px 22px,
+    var(--note-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .auth-shell { grid-template-columns: 1fr; }
+  .auth-shell .accent { display: none; }
+}
+
+/* ---- Dashboard grid ---- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.project-card {
+  background: #fff;
+  border: 1.5px solid var(--color-border);
+  border-radius: 16px;
+  padding: 1.15rem;
+  box-shadow: 4px 4px 0 var(--color-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: transform 100ms ease;
+}
+.project-card:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--color-ink); }
+.project-card .meta { font-size: 0.8rem; color: var(--color-muted); }
+
+/* ---- Banner / hero ---- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  padding: 3rem 0;
+  align-items: center;
+}
+@media (max-width: 880px) { .hero { grid-template-columns: 1fr; } }
+
+.banner-bullet {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
 }
 
-button:hover {
-  border-color: #646cff;
+/* ---- Validation / toast ---- */
+.alert {
+  border: 1.5px solid var(--color-border);
+  background: var(--note-yellow);
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 3px 3px 0 var(--color-ink);
 }
-
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* Light theme overrides */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} 
+.alert.error { background: #FFC9C9; }
+.alert.ok    { background: var(--note-mint); }

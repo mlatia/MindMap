@@ -1,24 +1,12 @@
--- init.test.sql - PERN Stack Test Database Initialization
+-- init.test.sql - Test database schema for Mind Map Otomatis
 --
--- This script initializes a clean test database for running automated tests.
--- It drops and recreates all tables to ensure a pristine test environment.
---
--- Tables:
---   users - Test user accounts with additional email field
---   example - Example table matching production schema
---
--- Note: 
---   - All tables are dropped with CASCADE to ensure clean state
---   - Schema matches production but may include test-specific fields
---   - No sample data is included (should be added in specific test files)
---   - All tables include created_at timestamp for consistency
---
--- Usage:
---   This script should be run before each test suite execution
---   to ensure a clean, consistent test environment.
+-- Skema test (drop & recreate) untuk integration testing backend.
 
--- Create users table
+DROP TABLE IF EXISTS mindmap_revisions CASCADE;
+DROP TABLE IF EXISTS projects CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS example CASCADE;
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -27,10 +15,28 @@ CREATE TABLE users (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create example table
-DROP TABLE IF EXISTS example CASCADE;
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(160) NOT NULL,
+    source_text TEXT NOT NULL,
+    mindmap JSONB NOT NULL DEFAULT '{}'::jsonb,
+    layout VARCHAR(40) NOT NULL DEFAULT 'reingold-tilford-radial',
+    meta JSONB NOT NULL DEFAULT '{}'::jsonb,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE mindmap_revisions (
+    id SERIAL PRIMARY KEY,
+    project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
+    mindmap JSONB NOT NULL,
+    note VARCHAR(200),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE example (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-); 
+);

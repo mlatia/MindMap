@@ -1,54 +1,47 @@
 /**
  * db.config.js - Database Connection Configuration
- * 
- * This module configures and exports a PostgreSQL connection pool for the application.
- * It handles both production and test environments, using appropriate environment variables.
- * 
- * Features:
- * - Single connection pool instance (singleton pattern)
- * - Automatic test environment detection
- * - Error handling for unexpected connection issues
- * 
- * Environment Variables Required:
- * - DB_USER: Database user
- * - DB_PASSWORD: Database password
- * - DB_HOST: Database host
- * - DB_PORT: Database port
- * - DB_NAME: Database name
- * - NODE_ENV: Application environment ('test' or 'production')
- * 
- * Usage:
- *   import pool from './db.config.js';
- *   const result = await pool.query('SELECT NOW()');
+ *
+ * Singleton PostgreSQL Pool. Membaca konfigurasi dari env yang sudah
+ * di-load oleh server/src/index.js (lewat `import 'dotenv/config'`).
+ *
+ * Jika dipakai dari script test (NODE_ENV=test), load .env.test secara
+ * sinkron sebelum Pool dibuat.
  */
-
+import { readFileSync, existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import pkg from 'pg';
+
 const { Pool } = pkg;
 
-// Load test environment variables if in test mode
+// ---- Load .env.test SECARA SINKRON jika NODE_ENV=test ----
 if (process.env.NODE_ENV === 'test') {
-  import('dotenv').then(dotenv => {
-    dotenv.config({ path: '.env.test' });
-  });
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  const envPath = join(__dirname, '..', 'server', '.env.test');
+  if (existsSync(envPath)) {
+    for (const line of readFileSync(envPath, 'utf8').split('\n')) {
+      const m = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*(#.*)?$/);
+      if (m) process.env[m[1]] = m[2].replace(/^["']|["']$/g, '');
+    }
+  }
 }
 
-/**
- * PostgreSQL connection pool instance
- * Uses environment variables for configuration
- * @type {Pool}
- */
+// Validasi dini: bantu user debug bila env tidak ter-load
+if (!process.env.DB_PASSWORD || typeof process.env.DB_PASSWORD !== 'string') {
+  console.warn('[db.config] DB_PASSWORD tidak terdefinisi sebagai string. Pastikan server/.env ada dan ter-load.');
+}
+
 const pool = new Pool({
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  database: process.env.DB_NAME
+  user:     process.env.DB_USER     || 'postgres',
+  password: String(process.env.DB_PASSWORD || 'postgres'),
+  host:     process.env.DB_HOST     || 'localhost',
+  port:     parseInt(process.env.DB_PORT || '5432', 10),
+  database: process.env.DB_NAME     || 'mindmap',
 });
 
-// Handle unexpected errors on idle clients
 pool.on('error', (err) => {
-  console.error('Unexpected error on idle client', err);
+  console.error('Unexpected error on idle Postgres client', err);
   process.exit(-1);
 });
 
-export default pool; 
+export default pool;

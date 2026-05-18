@@ -1,9 +1,9 @@
 {
-  "name": "pern-starter-client",
+  "name": "mind-map-otomatis-client",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "React frontend for the PERN Stack starter kit - Built with Vite and modern testing tools",
+  "description": "Frontend React (Vite) untuk Mind Map Otomatis - visualisasi D3.js + editor interaktif",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,7 +17,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "d3": "^7.8.5"
   },
   "devDependencies": {
     "@testing-library/cypress": "^10.0.1",
@@ -42,4 +43,4 @@
   "engines": {
     "node": ">=18.0.0"
   }
-} 
+}
