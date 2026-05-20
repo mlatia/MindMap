@@ -1,0 +1,49 @@
+{
+  "concept": "Prediksi Cuaca",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Machine Learning",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Random Forest",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Gradient Boosting",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Model Ensemble",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Decision Tree",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Data Utama",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Data Satelit",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Stasiun Cuaca",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

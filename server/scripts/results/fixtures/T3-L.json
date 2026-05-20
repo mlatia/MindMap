@@ -1,0 +1,70 @@
+{
+  "concept": "Sosial Pemasaran",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Digital Pandemi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Digital Pandemi Pasca",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Digital Pandemi Pasca",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Influencer Konversi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Influencer Konversi Marketing",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Influencer Konversi Marketing",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Instagram Media",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Instagram Media Memperluas",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Instagram Media Memperluas",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Dampak Dimensi Ekonomi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Adaptasi Cepat",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Berkelanjutan Daya Infrastruktur",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

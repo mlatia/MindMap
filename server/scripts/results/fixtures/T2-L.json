@@ -1,0 +1,108 @@
+{
+  "concept": "Urbanisasi Indonesia",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Pergeseran Demografi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Sejak Reformasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Migrasi Penduduk",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Dari Desa ke Kota",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Mencari Peluang Ekonomi",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Masalah Kota Besar",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Kepadatan dan Kemacetan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Tantangan Utama",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Keterbatasan Sumber Daya",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Kompleksitas Regulasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Adaptasi Teknologi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Solusi Urbanisasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Kolaborasi Multi-Pihak",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Investasi Infrastruktur",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pengembangan Kompetensi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pengukuran Dampak",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Dimensi Ekonomi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Dimensi Sosial",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Dimensi Lingkungan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

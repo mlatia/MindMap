@@ -1,0 +1,91 @@
+{
+  "concept": "Urbanisasi Indonesia",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Pergeseran Demografi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Sejak Reformasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Migrasi Penduduk",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Dari Desa ke Kota",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Mencari Peluang Ekonomi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Masalah Kota Besar",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Kepadatan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Kemacetan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Implementasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pertimbangan Teknis",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pertimbangan Eitis",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Stakeholder",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Akademisi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Praktisi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Regulator",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Masyarakat Umum",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

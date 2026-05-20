@@ -1,0 +1,38 @@
+{
+  "concept": "Pemasaran Digital",
+  "level": 0,
+  "children": [
+    {
+      "concept": "UMKM Pasca-Pandemi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Media Sosial",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Instagram",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "TikTok",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Influencer Marketing",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Konversi Tinggi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

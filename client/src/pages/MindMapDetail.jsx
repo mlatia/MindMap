@@ -1,17 +1,21 @@
 /**
  * MindMapDetail.jsx - Editor & Visualisasi Mind Map (L-05, L-06, L-07).
  *
- * Menggabungkan modul:
- *   - MFE-03 Visualisasi (Reingold-Tilford radial)
- *   - MFE-04 Perbandingan layout (toggle Force-Directed)
- *   - MFE-05 Editor (tambah / rename / hapus node)
- *   - MFE-06 Undo / Redo
- *   - MFE-08 Ekspor (PNG / PDF)
+ * Interaksi baru (UX redesign):
+ *   - Klik node      -> masuk edit mode inline (input on top of node)
+ *   - Klik kanan     -> context menu (Tambah sub-konsep, Rename, Hapus)
+ *   - Enter          -> commit edit
+ *   - Escape         -> batal
+ *   - Hover          -> outline pink
+ *   - Selected       -> pulse + warna pink-tag
+ *
+ * Toolbar atas tinggal: layout switcher, undo/redo, save, export.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import MindMapRadial from '../components/Mindmap/MindMapRadial';
 import MindMapForce from '../components/Mindmap/MindMapForce';
+import ContextMenu from '../components/Mindmap/ContextMenu';
 import { exportPNG, exportPDF } from '../components/Mindmap/exportUtils';
 import { Projects } from '../services/api';
 import useMindMap from '../state/useMindMap';
@@ -21,9 +25,6 @@ const LAYOUTS = [
   { id: 'force-directed-radial',   label: 'Force-Directed' },
 ];
 
-/**
- * Helper: ambil node by path.
- */
 function nodeAt(tree, path) {
   let cur = tree;
   for (const i of path) cur = cur?.children?.[i];
@@ -36,14 +37,15 @@ export default function MindMapDetail() {
   const [project, setProject] = useState(null);
   const [busy, setBusy] = useState(true);
   const [err, setErr] = useState('');
-  const [selectedPath, setSelectedPath] = useState([]);
+  const [selectedPath, setSelectedPath] = useState(null);
+  const [editingPath, setEditingPath] = useState(null);
+  const [ctxMenu, setCtxMenu] = useState(null); // { path, x, y }
   const [layout, setLayout] = useState('reingold-tilford-radial');
-  const [saveState, setSaveState] = useState('saved'); // saved | saving | dirty
+  const [saveState, setSaveState] = useState('saved');
   const wrapRef = useRef(null);
 
   const mm = useMindMap(null);
 
-  // ---- load project ----
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -64,7 +66,6 @@ export default function MindMapDetail() {
     // eslint-disable-next-line
   }, [id]);
 
-  // ---- mark dirty when tree changes from initial ----
   useEffect(() => {
     if (!project || !mm.tree) return;
     const serverTree = JSON.stringify(project.mindmap);
@@ -72,7 +73,10 @@ export default function MindMapDetail() {
     if (serverTree !== localTree) setSaveState('dirty');
   }, [mm.tree, project]);
 
-  const selected = useMemo(() => mm.tree ? nodeAt(mm.tree, selectedPath) : null, [mm.tree, selectedPath]);
+  const selected = useMemo(
+    () => (mm.tree && selectedPath ? nodeAt(mm.tree, selectedPath) : null),
+    [mm.tree, selectedPath]
+  );
 
   async function save() {
     if (!project) return;
@@ -87,17 +91,28 @@ export default function MindMapDetail() {
     }
   }
 
-  function addChild() {
-    mm.addChild(selectedPath, 'Konsep baru');
+  // ---- Event handlers untuk canvas ----
+  function handleEdit(path) {
+    setSelectedPath(path);
+    setEditingPath(path);
+    setCtxMenu(null);
   }
-  function deleteSelected() {
-    if (!selectedPath.length) return;
-    mm.remove(selectedPath);
-    setSelectedPath([]);
+
+  function handleContextMenu(path, x, y) {
+    setSelectedPath(path);
+    setCtxMenu({ path, x, y });
+    setEditingPath(null);
   }
-  function renameSelected() {
-    const next = prompt('Ubah concept:', selected?.concept || '');
-    if (next && next.trim()) mm.rename(selectedPath, next.trim());
+
+  function commitEdit(path, value) {
+    if (value && value.trim() && value.trim() !== nodeAt(mm.tree, path)?.concept) {
+      mm.rename(path, value.trim());
+    }
+    setEditingPath(null);
+  }
+
+  function cancelEdit() {
+    setEditingPath(null);
   }
 
   function handleExport(kind) {
@@ -107,8 +122,38 @@ export default function MindMapDetail() {
     else exportPDF(svg, project?.title || 'Mind Map');
   }
 
+  // ---- Context menu actions ----
+  function ctxAddChild() {
+    if (!ctxMenu) return;
+    mm.addChild(ctxMenu.path, 'Konsep baru');
+    // langsung masuk edit mode untuk anak yang baru ditambahkan
+    const newPath = [...ctxMenu.path, (nodeAt(mm.tree, ctxMenu.path)?.children?.length ?? 0)];
+    setSelectedPath(newPath);
+    setEditingPath(newPath);
+    setCtxMenu(null);
+  }
+  function ctxRename() {
+    if (!ctxMenu) return;
+    setEditingPath(ctxMenu.path);
+    setCtxMenu(null);
+  }
+  function ctxDelete() {
+    if (!ctxMenu) return;
+    if (ctxMenu.path.length === 0) {
+      alert('Node root tidak bisa dihapus.');
+      setCtxMenu(null);
+      return;
+    }
+    mm.remove(ctxMenu.path);
+    setSelectedPath(null);
+    setCtxMenu(null);
+  }
+
   if (busy) return <div className="container page"><p className="muted">Memuat...</p></div>;
   if (err)  return <div className="container page"><div className="alert error">{err}</div></div>;
+
+  const validationStatus = project?.meta?.validation;
+  const warnings = project?.meta?.warnings || [];
 
   return (
     <div className="container page" style={{ paddingTop: '1.4rem' }}>
@@ -130,6 +175,12 @@ export default function MindMapDetail() {
         </div>
       </div>
 
+      {validationStatus === 'warning' && warnings.length > 0 && (
+        <div className="alert" style={{ marginBottom: '0.8rem' }}>
+          ⚠ Mind map ini di-generate dengan validasi lunak. Pesan: {warnings[0]}
+        </div>
+      )}
+
       <div className="toolbar" style={{ marginBottom: '0.9rem' }}>
         <div className="row" style={{ alignItems: 'center' }}>
           <strong>Layout:</strong>
@@ -146,31 +197,59 @@ export default function MindMapDetail() {
         <span style={{ borderRight: '1.5px dashed var(--color-ink)', margin: '0 0.4rem' }} />
         <button className="secondary" onClick={mm.undo} disabled={!mm.canUndo}>↶ Undo</button>
         <button className="secondary" onClick={mm.redo} disabled={!mm.canRedo}>↷ Redo</button>
-        <span style={{ borderRight: '1.5px dashed var(--color-ink)', margin: '0 0.4rem' }} />
-        <button className="ghost" onClick={addChild}>+ Sub-konsep</button>
-        <button className="ghost" onClick={renameSelected} disabled={!selected}>Rename</button>
-        <button className="ghost" onClick={deleteSelected} disabled={!selectedPath.length}>Hapus</button>
         <span className="spacer" />
         <button className="secondary" onClick={() => handleExport('png')}>Export PNG</button>
         <button className="secondary" onClick={() => handleExport('pdf')}>Export PDF</button>
       </div>
 
+      <div className="card yellow" style={{ marginBottom: '0.8rem', padding: '0.75rem 1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+        <span className="scribble" style={{ fontSize: '1.1rem' }}>cara edit:</span>
+        <span><strong>Klik</strong> node = ubah teks · <strong>Enter</strong> simpan · <strong>Esc</strong> batal · <strong>Klik kanan</strong> = menu (tambah/hapus)</span>
+      </div>
+
       <div ref={wrapRef} className="canvas-wrap" style={{ height: '70vh' }}>
         {mm.tree ? (
           layout === 'force-directed-radial'
-            ? <MindMapForce  tree={mm.tree} onSelect={setSelectedPath} />
-            : <MindMapRadial tree={mm.tree} onSelect={setSelectedPath} selectedPath={selectedPath} />
+            ? <MindMapForce
+                tree={mm.tree}
+                onEdit={handleEdit}
+                onContextMenu={handleContextMenu}
+                selectedPath={selectedPath}
+                editingPath={editingPath}
+                onCommitEdit={commitEdit}
+                onCancelEdit={cancelEdit}
+              />
+            : <MindMapRadial
+                tree={mm.tree}
+                onEdit={handleEdit}
+                onContextMenu={handleContextMenu}
+                selectedPath={selectedPath}
+                editingPath={editingPath}
+                onCommitEdit={commitEdit}
+                onCancelEdit={cancelEdit}
+              />
         ) : (
           <div className="empty-hint">Mind map kosong</div>
         )}
       </div>
+
+      {ctxMenu && (
+        <ContextMenu
+          x={ctxMenu.x}
+          y={ctxMenu.y}
+          onAddChild={ctxAddChild}
+          onRename={ctxRename}
+          onDelete={ctxDelete}
+          onClose={() => setCtxMenu(null)}
+        />
+      )}
 
       <div className="row" style={{ marginTop: '1rem', gap: '1rem', flexWrap: 'wrap' }}>
         <div className="card" style={{ flex: '1 1 320px' }}>
           <span className="tag yellow">Node terpilih</span>
           <h3 style={{ marginTop: 8 }}>{selected ? selected.concept : '— belum ada —'}</h3>
           <p className="muted">
-            Klik node pada kanvas untuk memilih, lalu gunakan toolbar untuk edit, hapus, atau tambah sub-konsep.
+            Klik node untuk edit teksnya. Klik kanan untuk menambah anak atau menghapus node.
           </p>
         </div>
         <div className="card blue" style={{ flex: '1 1 280px' }}>

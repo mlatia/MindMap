@@ -1,0 +1,91 @@
+{
+  "concept": "Prediksi Cuaca",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Machine Learning",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Random Forest",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Gradient Boosting",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Model Ensemble",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Decision Tree",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Data Input",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Data Satelit",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Stasiun Cuaca",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Implementasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pertimbangan Teknis",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pertimbangan Etis",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Stakeholder",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Akademisi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Praktisi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Regulator",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Masyarakat Umum",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

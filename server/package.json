@@ -2,10 +2,7 @@
   "name": "pern-starter-server",
   "version": "1.0.0",
   "description": "Express server for Mind Map Otomatis (PERN + LLM + D3)",
-  "engines": {
-    "node": ">=18.20.0",
-    "npm": ">=10.8.0"
-  },
+  "engines": { "node": ">=18.20.0", "npm": ">=10.8.0" },
   "main": "src/index.js",
   "type": "module",
   "scripts": {
@@ -18,6 +15,9 @@
     "test": "mocha \"__tests__/**/*.test.js\" --recursive",
     "db:check": "node scripts/check-db.js",
     "db:seed": "node scripts/seed.js",
+    "mindmap:demo": "node scripts/mindmap-demo.js",
+    "eval:stability": "node scripts/eval-stability.js",
+    "eval:layout": "node scripts/eval-layout.js",
     "clean": "rm -rf node_modules coverage"
   },
   "dependencies": {

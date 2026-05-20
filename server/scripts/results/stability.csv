@@ -1,0 +1,7 @@
+Teks,Domain,SCS,SCS_mean,SCR,ESR,pairs,runs
+T1,"Sains dan Teknologi",1.000,0.936,20.0%,20.0%,1,10
+T2,"Humaniora dan Sosial",1.000,1.000,10.0%,10.0%,0,10
+T3,"Bisnis dan Ekonomi",1.000,1.000,10.0%,10.0%,0,10
+T4,"Kesehatan dan Kedokteran",1.000,1.000,0.0%,0.0%,0,10
+T5,"Hukum dan Kebijakan",1.000,1.000,10.0%,10.0%,0,10
+---,"Rata-rata",1.000,,10.0%,10.0%,,
