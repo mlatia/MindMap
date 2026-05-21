@@ -1,16 +1,13 @@
 /**
  * llmClient.js - Modul LLM Client (MSM-04)
  *
- * Memanggil LLM API eksternal (Anthropic Claude atau OpenAI) untuk
- * menghasilkan struktur JSON mind map berdasarkan prompt dari
- * autoCoT.buildPrompt.
+ * Memanggil LLM API eksternal untuk menghasilkan struktur JSON mind map.
  *
- * Provider dipilih melalui environment variable LLM_PROVIDER:
- *   - "anthropic"  -> Claude Opus 4.6 (default model jika LLM_MODEL kosong)
- *   - "openai"     -> GPT-4o-mini  (default model jika LLM_MODEL kosong)
- *   - "mock"       -> pipeline deterministik lokal (offline)
- *
- * Default sekarang anthropic (kualitas terbaik untuk hierarchical extraction).
+ * Provider via env LLM_PROVIDER:
+ *   - "groq"       -> Llama-3.3-70b di Groq (GRATIS, 30 req/min)
+ *   - "anthropic"  -> Claude Opus 4.6 (perlu billing console.anthropic.com)
+ *   - "openai"     -> GPT-4o-mini  (perlu billing platform.openai.com)
+ *   - "mock"       -> deterministik lokal (offline)
  */
 
 import { splitSentences, tokenize } from './preprocess.js';
@@ -21,14 +18,11 @@ const MAX_BRANCHES = 6;
 const MAX_DEPTH = 3;
 
 const DEFAULT_MODEL = {
+  groq:      'llama-3.3-70b-versatile',
   anthropic: 'claude-opus-4-6',
   openai:    'gpt-4o-mini',
-  google: 'gemini-2.0-flash',
-  groq: 'llama-3.3-70b-versatile',
-
 };
 
-/** Helper: ambil 1-3 kata kunci dari kalimat (untuk mock). */
 function toConcept(sentence, max = 3) {
   const tokens = tokenize(sentence);
   if (!tokens.length) return sentence.split(/\s+/).slice(0, max).join(' ');
@@ -36,12 +30,10 @@ function toConcept(sentence, max = 3) {
   for (const t of tokens) freq.set(t, (freq.get(t) || 0) + 1);
   const ranked = [...freq.entries()]
     .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-    .slice(0, max)
-    .map(([t]) => t);
+    .slice(0, max).map(([t]) => t);
   return ranked.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
-/** Mock generator deterministik (untuk dev offline). */
 export function mockGenerate(text) {
   const sentences = splitSentences(text);
   if (!sentences.length) return { concept: 'Mind Map', level: 0, children: [] };
@@ -52,7 +44,6 @@ export function mockGenerate(text) {
   const topTopic = ranked.length
     ? ranked.slice(0, 2).map(([w]) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     : 'Mind Map';
-
   const k = Math.min(MAX_BRANCHES, Math.max(2, Math.ceil(sentences.length / 2)));
   const { clusters, medoids } = clusterSentences(sentences, k);
   const branches = clusters
@@ -66,18 +57,20 @@ export function mockGenerate(text) {
       return { concept: toConcept(branchSentence, 2), level: 1, children };
     })
     .filter(Boolean);
-
   return { concept: topTopic, level: 0, children: branches };
 }
 
-/** Friendly error untuk error response umum. */
 function friendlyError(provider, status, body) {
   try {
     const j = typeof body === 'string' ? JSON.parse(body) : body;
     const msg = j?.error?.message || j?.message || JSON.stringify(j);
-    if (status === 401) return `${provider} API: kunci API tidak valid atau ter-revoke. Cek ${provider === 'google' ? 'GOOGLE_API_KEY' : 'OPENAI_API_KEY'} di server/.env`;
+    if (status === 401) {
+      const keyName = { groq: 'GROQ_API_KEY', anthropic: 'ANTHROPIC_API_KEY', openai: 'OPENAI_API_KEY' }[provider];
+      return `${provider} API: kunci API tidak valid atau ter-revoke. Cek ${keyName} di server/.env`;
+    }
     if (status === 429 && /quota|insufficient|billing/i.test(msg)) {
-      return `${provider} API: kredit/quota habis. Top-up di ${provider === 'google' ? 'console.google.com/settings/billing' : 'platform.openai.com/settings/organization/billing'}. Pesan asli: ${msg}`;
+      const url = { groq: 'console.groq.com', anthropic: 'console.anthropic.com/settings/billing', openai: 'platform.openai.com/settings/organization/billing' }[provider];
+      return `${provider} API: kredit/quota habis. Cek di ${url}. Pesan asli: ${msg}`;
     }
     if (status === 429) return `${provider} API: rate-limit. Tunggu sebentar lalu coba lagi.`;
     if (status >= 500) return `${provider} API down (${status}). Coba lagi nanti.`;
@@ -87,86 +80,48 @@ function friendlyError(provider, status, body) {
   }
 }
 
-async function callAnthropic(prompt) {
-  const apiKey = process.env.GOOGLE_API_KEY;
-  if (!apiKey) throw new Error('GOOGLE_API_KEY belum diset di server/.env');
+/** Groq menggunakan endpoint OpenAI-compatible. */
+async function callGroq(prompt) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) throw new Error('GROQ_API_KEY belum diset di server/.env. Daftar gratis di console.groq.com');
   const model = process.env.LLM_MODEL || DEFAULT_MODEL.groq;
-  const res = await fetch('https://api.google.com/v1/messages', {
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      'x-api-key': apiKey,
-      'groq-version': '2023-06-01'
-    },
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({
       model,
-      max_tokens: 2048,
-      temperature: 0,
+      response_format: { type: 'json_object' },
+      temperature: 0.1,
+      max_tokens: 4096,
+      messages: [
+        { role: 'system', content: prompt.system },
+        { role: 'user',   content: prompt.user }
+      ]
+    })
+  });
+  if (!res.ok) throw new Error(friendlyError('groq', res.status, await res.text()));
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || '';
+}
+
+async function callAnthropic(prompt) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) throw new Error('ANTHROPIC_API_KEY belum diset di server/.env');
+  const model = process.env.LLM_MODEL || DEFAULT_MODEL.anthropic;
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+    body: JSON.stringify({
+      model, max_tokens: 4096, temperature: 0,
       system: prompt.system,
       messages: [{ role: 'user', content: prompt.user }]
     })
   });
-  if (!res.ok) throw new Error(friendlyError('Anthropic', res.status, await res.text()));
+  if (!res.ok) throw new Error(friendlyError('anthropic', res.status, await res.text()));
   const data = await res.json();
   return (data.content && data.content[0] && data.content[0].text) || '';
 }
-async function callGoogle(prompt) {
-  const apiKey = process.env.GOOGLE_API_KEY;
-  if (!apiKey) throw new Error('GOOGLE_API_KEY belum diset di server/.env');
-  const model = process.env.LLM_MODEL || 'gemini-2.0-flash';
 
-  // Handle prompt object (format Anthropic) atau string biasa
-  const systemText = prompt.system || '';
-  const userText = prompt.user || prompt.toString();
-  const fullText = systemText ? `${systemText}\n\n${userText}` : userText;
-
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      contents: [{ 
-        parts: [{ text: fullText }]
-      }],
-      generationConfig: { temperature: 0.7 }
-    })
-  });
-
-  const body = await res.text();
-  if (!res.ok) throw new Error(`Google API error ${res.status}: ${body}`);
-  
-  const data = JSON.parse(body);
-  return data.candidates[0].content.parts[0].text;
-}
-async function callGroq(prompt) {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) throw new Error('GROQ_API_KEY belum diset');
-  const model = process.env.LLM_MODEL || 'llama-3.3-70b-versatile';
-
-  const systemText = prompt.system || '';
-  const userText = prompt.user || String(prompt);
-
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model,
-      messages: [
-        { role: 'system', content: systemText },
-        { role: 'user', content: userText }
-      ],
-      temperature: 0.7
-    })
-  });
-
-  const body = await res.text();
-  if (!res.ok) throw new Error(`Groq API error ${res.status}: ${body}`);
-
-  const data = JSON.parse(body);
-  return data.choices[0].message.content;
-}
 async function callOpenAI(prompt) {
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) throw new Error('OPENAI_API_KEY belum diset di server/.env');
@@ -175,40 +130,35 @@ async function callOpenAI(prompt) {
     method: 'POST',
     headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
     body: JSON.stringify({
-      model,
-      response_format: { type: 'json_object' },
-      temperature: 0,
+      model, response_format: { type: 'json_object' }, temperature: 0,
       messages: [
         { role: 'system', content: prompt.system },
         { role: 'user',   content: prompt.user }
       ]
     })
   });
-  if (!res.ok) throw new Error(friendlyError('OpenAI', res.status, await res.text()));
+  if (!res.ok) throw new Error(friendlyError('openai', res.status, await res.text()));
   const data = await res.json();
   return data.choices?.[0]?.message?.content || '';
 }
 
-/** Parse JSON tolerant: strip fence, ambil substring antar {} terluar. */
 function safeJsonParse(raw) {
   if (!raw) throw new Error('Output LLM kosong');
   let text = raw.trim();
-  if (text.startsWith('```')) {
-    text = text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '');
-  }
+  if (text.startsWith('```')) text = text.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '');
   const first = text.indexOf('{');
   const last = text.lastIndexOf('}');
   if (first !== -1 && last !== -1) text = text.slice(first, last + 1);
   return JSON.parse(text);
 }
 
-/** Public API: hasilkan struktur mind map. */
 export async function generateMindMap(prompt, text) {
   if (PROVIDER === 'mock') return mockGenerate(text);
   let raw;
-  if (PROVIDER === 'groq') raw = await callGroq(prompt);
-  else if (PROVIDER === 'openai') raw = await callOpenAI(prompt);
-  else throw new Error(`LLM_PROVIDER tidak dikenali: ${PROVIDER}`);
+  if (PROVIDER === 'groq')      raw = await callGroq(prompt);
+  else if (PROVIDER === 'anthropic') raw = await callAnthropic(prompt);
+  else if (PROVIDER === 'openai')    raw = await callOpenAI(prompt);
+  else throw new Error(`LLM_PROVIDER tidak dikenali: ${PROVIDER}. Pilihan: groq | anthropic | openai | mock`);
   return safeJsonParse(raw);
 }
 

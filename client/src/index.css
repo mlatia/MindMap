@@ -225,6 +225,7 @@ input:focus, textarea:focus, select:focus {
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 4px 4px 0 var(--color-ink);
+  min-height: 78vh;
 }
 
 .empty-hint {

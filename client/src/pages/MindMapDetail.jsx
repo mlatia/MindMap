@@ -41,6 +41,7 @@ export default function MindMapDetail() {
   const [editingPath, setEditingPath] = useState(null);
   const [ctxMenu, setCtxMenu] = useState(null); // { path, x, y }
   const [layout, setLayout] = useState('reingold-tilford-radial');
+  const [spacing, setSpacing] = useState(1.0);
   const [saveState, setSaveState] = useState('saved');
   const wrapRef = useRef(null);
 
@@ -125,11 +126,15 @@ export default function MindMapDetail() {
   // ---- Context menu actions ----
   function ctxAddChild() {
     if (!ctxMenu) return;
+    const parent = nodeAt(mm.tree, ctxMenu.path);
+    const newIdx = parent?.children?.length ?? 0;  // anak baru di-append, index = current length
+    const targetPath = [...ctxMenu.path, newIdx];
     mm.addChild(ctxMenu.path, 'Konsep baru');
-    // langsung masuk edit mode untuk anak yang baru ditambahkan
-    const newPath = [...ctxMenu.path, (nodeAt(mm.tree, ctxMenu.path)?.children?.length ?? 0)];
-    setSelectedPath(newPath);
-    setEditingPath(newPath);
+    // tunda set edit supaya state tree sudah update dulu
+    setTimeout(() => {
+      setSelectedPath(targetPath);
+      setEditingPath(targetPath);
+    }, 0);
     setCtxMenu(null);
   }
   function ctxRename() {
@@ -197,6 +202,20 @@ export default function MindMapDetail() {
         <span style={{ borderRight: '1.5px dashed var(--color-ink)', margin: '0 0.4rem' }} />
         <button className="secondary" onClick={mm.undo} disabled={!mm.canUndo}>↶ Undo</button>
         <button className="secondary" onClick={mm.redo} disabled={!mm.canRedo}>↷ Redo</button>
+        <span style={{ borderRight: '1.5px dashed var(--color-ink)', margin: '0 0.4rem' }} />
+        <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', fontWeight: 600 }}>
+          Jarak node:
+          <input
+            type="range"
+            min="0.5"
+            max="2.5"
+            step="0.1"
+            value={spacing}
+            onChange={(e) => setSpacing(parseFloat(e.target.value))}
+            style={{ width: 110 }}
+          />
+          <span className="muted" style={{ minWidth: 32 }}>{spacing.toFixed(1)}x</span>
+        </label>
         <span className="spacer" />
         <button className="secondary" onClick={() => handleExport('png')}>Export PNG</button>
         <button className="secondary" onClick={() => handleExport('pdf')}>Export PDF</button>
@@ -207,7 +226,7 @@ export default function MindMapDetail() {
         <span><strong>Klik</strong> node = ubah teks · <strong>Enter</strong> simpan · <strong>Esc</strong> batal · <strong>Klik kanan</strong> = menu (tambah/hapus)</span>
       </div>
 
-      <div ref={wrapRef} className="canvas-wrap" style={{ height: '70vh' }}>
+      <div ref={wrapRef} className="canvas-wrap">
         {mm.tree ? (
           layout === 'force-directed-radial'
             ? <MindMapForce
@@ -218,6 +237,7 @@ export default function MindMapDetail() {
                 editingPath={editingPath}
                 onCommitEdit={commitEdit}
                 onCancelEdit={cancelEdit}
+                spacing={spacing}
               />
             : <MindMapRadial
                 tree={mm.tree}
@@ -227,6 +247,7 @@ export default function MindMapDetail() {
                 editingPath={editingPath}
                 onCommitEdit={commitEdit}
                 onCancelEdit={cancelEdit}
+                spacing={spacing}
               />
         ) : (
           <div className="empty-hint">Mind map kosong</div>

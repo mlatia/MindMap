@@ -1,78 +1,87 @@
 /**
  * autoCoT.js - Modul Auto-CoT Generator (MSM-03)
  *
- * Menyusun prompt akhir untuk LLM berdasarkan empat elemen (Wei et al. 2022,
- * Zhang et al. 2023):
- *   1. Deskripsi tugas (task description)
- *   2. Instruksi reasoning Auto-CoT (chain-of-thought guidance)
- *   3. Spesifikasi JSON schema output (format spec)
- *   4. Demonstrasi few-shot yang dihasilkan otomatis melalui
- *      question-clustering + kalimat representatif (lihat embedding.js).
+ * Menyusun prompt akhir untuk LLM (Wei et al. 2022, Zhang et al. 2023):
+ *   1. Deskripsi tugas
+ *   2. Reasoning Auto-CoT
+ *   3. JSON schema
+ *   4. Few-shot demonstrasi via question-clustering
  *
- * Output: { system, user } string yang siap dikirim ke LLM client.
+ * Update: prompt sekarang meminta MIND MAP YANG KOMPREHENSIF dengan
+ * kedalaman 3-4 level untuk teks panjang, bukan cuma 2 level.
  */
 
 import { splitSentences } from './preprocess.js';
 import { clusterSentences } from './embedding.js';
 
-// ---- JSON schema yang WAJIB diikuti LLM ----
 const JSON_SCHEMA = `{
   "concept": "string (frasa pendek 1-4 kata, BUKAN kalimat panjang)",
   "level":   "integer (root = 0, anak = parent.level + 1)",
   "children": [ /* array node anak dengan struktur sama */ ]
 }`;
 
-// ---- System prompt: aturan ketat ----
 const SYSTEM_PROMPT = `Anda adalah asisten ahli yang mengubah teks naratif menjadi mind map hierarkis bergaya Tony Buzan.
 Selalu balas dengan JSON valid sesuai schema. Gunakan bahasa yang SAMA dengan teks input.
 
 ATURAN STRUKTURAL (WAJIB):
-1. Kedalaman maksimal 10 level (root level=0, sub-level 1, 2, 3). JANGAN buat level 4 atau lebih.
-2. Cabang langsung dari root MAKSIMAL 7. Pilih 3-7 cabang utama yang paling representatif.
-3. Setiap "concept" adalah KATA KUNCI atau frasa pendek (1-4 kata). BUKAN kalimat lengkap.
-4. Properti "level" HARUS konsisten dengan kedalaman (root=0, anak root=1, cucu root=2, dst).
-5. Setiap concept HARUS berakar pada teks sumber (hindari halusinasi). Gunakan istilah dari teks.
-6. Hindari redundansi: jangan tulis concept yang sama di dua cabang berbeda.
-7. Susun secara hierarkis: ide besar di level 1-3, detail di level 4-10.
-8. PENTING: gunakan ISTILAH PERSIS yang muncul di teks sumber untuk setiap "concept". Hindari sinonim atau parafrase. Contoh: jika teks mengatakan "Tony Buzan", tulis "Tony Buzan", BUKAN "penemu mind map". Ini memudahkan validasi kelengkapan.
+1. Bangun struktur KOMPREHENSIF dengan kedalaman 3-4 level (root level=0, sub-level 1, 2, 3).
+   - Teks pendek (<500 char): minimal 2 level (root + cabang)
+   - Teks sedang (500-2000 char): minimal 3 level (root + cabang + sub-konsep)
+   - Teks panjang (>2000 char): WAJIB 4 level penuh dengan detail
+2. Cabang langsung dari root: 4-7 cabang utama yang representatif (jangan kurang dari 4 kalau ada cukup materi).
+3. Setiap cabang level-1 sebaiknya punya 2-4 anak (level-2), dan level-2 bisa punya 1-3 detail (level-3).
+4. Setiap "concept" adalah KATA KUNCI atau frasa pendek (1-4 kata). BUKAN kalimat lengkap.
+5. Properti "level" HARUS konsisten dengan kedalaman.
+6. Setiap concept HARUS berakar pada teks sumber (hindari halusinasi).
+7. PENTING: gunakan ISTILAH PERSIS yang muncul di teks sumber. Hindari sinonim atau parafrase.
+8. Hindari redundansi: jangan tulis concept yang sama di dua cabang berbeda.
+9. Susun secara hierarkis-semantik: kategori besar di level 1, sub-kategori di level 2, detail/contoh di level 3.
 
 OUTPUT: HANYA JSON valid, tanpa markdown fence (jangan kasih backtick), tanpa komentar, tanpa teks tambahan.`;
 
-// ---- Contoh demonstrasi (Auto-CoT few-shot) ----
-const FEW_SHOT_EXAMPLE = `Contoh:
-TEKS: "Mind mapping adalah teknik visualisasi yang dikembangkan Tony Buzan. Teknik ini memetakan konsep dari pusat ke cabang radial. Penelitian menunjukkan mind map efektif meningkatkan retensi memori siswa. Pembuatan manual butuh 20-30 menit per dokumen."
+const FEW_SHOT_EXAMPLE = `Contoh untuk teks SEDANG (~800 karakter):
+TEKS: "Machine learning adalah cabang AI yang fokus pada algoritma yang belajar dari data. Tiga pendekatan utama: supervised learning menggunakan data berlabel untuk klasifikasi dan regresi. Unsupervised learning menemukan pola tersembunyi seperti clustering K-Means dan DBSCAN. Reinforcement learning melatih agen melalui reward signal, seperti pada robot dan game AI. Algoritma populer termasuk decision tree, random forest, dan neural network. Evaluasi model menggunakan metrik akurasi, precision, dan recall."
 
-REASONING (jangan ditulis di output, hanya panduan internal):
-- Topik utama: Mind Mapping
-- Cabang utama: (a) penemu Tony Buzan, (b) struktur radial, (c) manfaat memori, (d) hambatan waktu
-- Tiap cabang punya 1-2 sub-konsep dari detail teks
-
-OUTPUT JSON:
+OUTPUT JSON (depth 3 - KOMPREHENSIF):
 {
-  "concept": "Mind Mapping",
+  "concept": "Machine Learning",
   "level": 0,
   "children": [
-    { "concept": "Tony Buzan", "level": 1, "children": [
-      { "concept": "Teknik Visualisasi", "level": 2, "children": [] }
+    { "concept": "Supervised Learning", "level": 1, "children": [
+      { "concept": "Data Berlabel", "level": 2, "children": [
+        { "concept": "Klasifikasi", "level": 3, "children": [] },
+        { "concept": "Regresi", "level": 3, "children": [] }
+      ]}
     ]},
-    { "concept": "Struktur Radial", "level": 1, "children": [
-      { "concept": "Pusat ke Cabang", "level": 2, "children": [] }
+    { "concept": "Unsupervised Learning", "level": 1, "children": [
+      { "concept": "Clustering", "level": 2, "children": [
+        { "concept": "K-Means", "level": 3, "children": [] },
+        { "concept": "DBSCAN", "level": 3, "children": [] }
+      ]},
+      { "concept": "Pola Tersembunyi", "level": 2, "children": [] }
     ]},
-    { "concept": "Retensi Memori", "level": 1, "children": [
-      { "concept": "Efektif untuk Siswa", "level": 2, "children": [] }
+    { "concept": "Reinforcement Learning", "level": 1, "children": [
+      { "concept": "Reward Signal", "level": 2, "children": [] },
+      { "concept": "Aplikasi", "level": 2, "children": [
+        { "concept": "Robot", "level": 3, "children": [] },
+        { "concept": "Game AI", "level": 3, "children": [] }
+      ]}
     ]},
-    { "concept": "Pembuatan Manual", "level": 1, "children": [
-      { "concept": "20-30 Menit", "level": 2, "children": [] }
+    { "concept": "Algoritma", "level": 1, "children": [
+      { "concept": "Decision Tree", "level": 2, "children": [] },
+      { "concept": "Random Forest", "level": 2, "children": [] },
+      { "concept": "Neural Network", "level": 2, "children": [] }
+    ]},
+    { "concept": "Evaluasi Model", "level": 1, "children": [
+      { "concept": "Akurasi", "level": 2, "children": [] },
+      { "concept": "Precision", "level": 2, "children": [] },
+      { "concept": "Recall", "level": 2, "children": [] }
     ]}
   ]
-}`;
+}
 
-/**
- * Susun kalimat representatif via question-clustering (Auto-CoT).
- * @param {string} text - teks input pengguna
- * @param {number} demos - jumlah contoh yang dimasukkan ke prompt
- * @returns {string[]}
- */
+Perhatikan: ada 5 cabang utama, sebagian besar memiliki 2-3 anak, beberapa memiliki cucu (level-3 detail). Ini struktur yang KOMPREHENSIF, bukan dangkal.`;
+
 function buildDemonstrations(text, demos = 3) {
   const sentences = splitSentences(text);
   if (sentences.length < 2) return [];
@@ -82,35 +91,36 @@ function buildDemonstrations(text, demos = 3) {
 }
 
 /**
- * Bangun pasangan { system, user } prompt untuk LLM.
- *
- * @param {string} text - teks sumber yang akan dipetakan
- * @param {Object} [options]
- * @param {number} [options.demos=3] - jumlah kalimat representatif dari clustering
- * @param {string} [options.previousError] - pesan error validasi sebelumnya (untuk retry)
- * @returns {{system:string, user:string}}
+ * Bangun prompt {system, user}.
+ * @param {string} text
+ * @param {{ demos?:number, previousError?:string, targetDepth?:number }} [options]
  */
 export function buildPrompt(text, options = {}) {
-  const { demos = 3, previousError } = options;
+  const { demos = 3, previousError, targetDepth } = options;
   const samples = buildDemonstrations(text, demos);
+  const len = text.length;
+  const inferDepth = len > 2000 ? 4 : (len > 500 ? 3 : 2);
+  const depth = targetDepth || inferDepth;
 
   const reasoning = `LAKUKAN REASONING AUTO-COT SECARA INTERNAL (jangan tulis di output):
 Langkah 1: Identifikasi TOPIK UTAMA dari teks (1 frasa pendek) -> root level=0.
-Langkah 2: Tentukan 3-7 CABANG UTAMA (level=1) yang merepresentasikan kategori besar di teks.
-Langkah 3: Untuk tiap cabang utama, tentukan 1-3 SUB-KONSEP (level=2) berdasarkan detail teks.
-Langkah 4: Jika ada detail lebih spesifik, tambahkan level=3 (jangan lebih dalam).
-Langkah 5: Verifikasi setiap concept berasal dari teks input, tidak redundan, dan level konsisten.`;
+Langkah 2: Tentukan 4-7 CABANG UTAMA (level=1) yang merepresentasikan kategori besar di teks.
+Langkah 3: Untuk SETIAP cabang utama, tentukan 2-4 SUB-KONSEP (level=2) berdasarkan detail teks.
+Langkah 4: Untuk sub-konsep yang punya detail spesifik (contoh, jenis, atribut), tambahkan 1-3 DETAIL (level=3).
+Langkah 5: TARGET KEDALAMAN: ${depth} level. Teks ini panjangnya ${len} karakter sehingga butuh struktur ${depth >= 3 ? 'komprehensif (3-4 level)' : 'dasar (2 level)'}.
+Langkah 6: Verifikasi setiap concept berasal dari teks input, tidak redundan, dan level konsisten.`;
 
   const demoBlock = samples.length
     ? `\nKALIMAT REPRESENTATIF DARI TEKS (hasil semantic clustering, untuk panduan):\n${samples.map((s, i) => `${i + 1}. ${s}`).join('\n')}`
     : '';
 
   const retryBlock = previousError
-    ? `\nPERHATIAN: percobaan sebelumnya GAGAL validasi dengan alasan: "${previousError}".
+    ? `\nPERHATIAN: percobaan sebelumnya GAGAL validasi: "${previousError}".
 PERBAIKI di iterasi ini. Cek ulang level konsistensi, kedalaman, jumlah cabang, dan apakah concept berakar pada teks.`
     : '';
 
   const user = `TUGAS: Ekstrak struktur hierarkis mind map dari teks berikut.
+JADIKAN KOMPREHENSIF DENGAN TARGET ${depth} LEVEL HIERARKI - JANGAN cuma 2 level kalau teksnya kaya informasi.
 
 SCHEMA JSON OUTPUT (wajib diikuti):
 ${JSON_SCHEMA}
@@ -118,15 +128,16 @@ ${JSON_SCHEMA}
 ${reasoning}
 
 ${FEW_SHOT_EXAMPLE}
+
 ${demoBlock}
 ${retryBlock}
 
-TEKS INPUT YANG HARUS DIPETAKAN:
+TEKS INPUT YANG HARUS DIPETAKAN (${len} karakter):
 """
 ${text.trim()}
 """
 
-Balas HANYA dengan JSON valid sesuai schema. Tanpa markdown fence, tanpa penjelasan, tanpa komentar.`;
+Balas HANYA dengan JSON valid sesuai schema, dengan struktur SEDALAM mungkin (target ${depth} level). Tanpa markdown fence, tanpa penjelasan.`;
 
   return { system: SYSTEM_PROMPT, user };
 }
