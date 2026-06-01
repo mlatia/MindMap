@@ -332,3 +332,113 @@ input:focus, textarea:focus, select:focus {
 }
 .alert.error { background: #FFC9C9; }
 .alert.ok    { background: var(--note-mint); }
+
+/* ============================================================
+ *  MOBILE RESPONSIVE - fix toolbar overflow + canvas potongan
+ * ============================================================ */
+
+@media (max-width: 768px) {
+  .container { padding: 0 1rem; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.1rem; }
+
+  /* Topbar lebih kompak */
+  .topbar {
+    padding: 0.8rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .brand { font-size: 1rem; }
+  .brand svg { width: 18px; height: 18px; }
+  .nav-links { gap: 0.75rem; font-size: 0.9rem; }
+  .nav-links button { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+
+  /* Header MindMapDetail stack vertikal */
+  .row.spread {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0.6rem !important;
+  }
+  .row.spread .row { flex-wrap: wrap; }
+
+  /* Toolbar - stack vertikal */
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.6rem 0.75rem;
+    gap: 0.5rem;
+  }
+  .toolbar > .row {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.4rem !important;
+    justify-content: flex-start;
+  }
+  .toolbar button {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
+    flex: 1 1 auto;
+    min-width: 80px;
+  }
+  /* Hapus separator vertikal di mobile */
+  .toolbar > span[style*="borderRight"] { display: none; }
+  .toolbar .spacer { display: none; }
+  /* Slider jarak node full-width */
+  .toolbar label {
+    width: 100%;
+    justify-content: space-between;
+    font-size: 0.85rem;
+  }
+  .toolbar input[type="range"] {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  /* Card cara edit padat */
+  .card.yellow {
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem !important;
+  }
+  .card.yellow .scribble { font-size: 0.95rem !important; }
+
+  /* Canvas mind map: lebih tinggi proporsional viewport mobile */
+  .canvas-wrap {
+    min-height: 70vh;
+    border-radius: 12px;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+  .canvas-wrap svg {
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Bottom info cards stack vertikal */
+  .row[style*="gap"][style*="1rem"] {
+    flex-direction: column;
+  }
+
+  /* Project grid 1 kolom */
+  .project-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  /* Auth panel padding lebih kecil */
+  .auth-shell .panel { padding: 1.5rem 1rem; }
+
+  /* Context menu lebih ringkas */
+  [role="menu"] {
+    min-width: 170px !important;
+    font-size: 0.9rem;
+  }
+}
+
+/* Small phones (< 480px) */
+@media (max-width: 480px) {
+  .container { padding: 0 0.75rem; }
+  h1 { font-size: 1.6rem; }
+  .toolbar button { font-size: 0.8rem; padding: 0.45rem 0.7rem; }
+  .canvas-wrap { min-height: 65vh; }
+  .nav-links a, .nav-links button { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+}
