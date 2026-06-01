@@ -124,6 +124,60 @@ app.get('/api/health', (_req, res) => res.json({
   llm: process.env.LLM_PROVIDER || 'mock',
 }));
 
+// Diagnostic endpoint: cek koneksi DB + tabel
+app.get('/api/health/db', async (_req, res) => {
+  const out = {
+    env: {
+      DB_USER: process.env.DB_USER || '(unset)',
+      DB_HOST: process.env.DB_HOST || '(unset)',
+      DB_PORT: process.env.DB_PORT || '(unset)',
+      DB_NAME: process.env.DB_NAME || '(unset)',
+      DB_PASSWORD: process.env.DB_PASSWORD ? '***set***' : '(unset!)',
+      SUPABASE_POOLER: process.env.SUPABASE_POOLER || '(unset)',
+    }
+  };
+  try {
+    const pool = (await import('./db.js')).default;
+    const ver = await pool.query('SELECT version()');
+    out.connected = true;
+    out.pgVersion = ver.rows[0].version.split(',')[0];
+    const tables = await pool.query(
+      "SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename"
+    );
+    out.tables = tables.rows.map(r => r.tablename);
+    out.missingTables = ['users','projects','mindmap_revisions']
+      .filter(t => !out.tables.includes(t));
+    if (out.missingTables.length) {
+      out.hint = 'Jalankan database/init.sql di Supabase SQL Editor untuk membuat tabel.';
+    } else {
+      const userCount = await pool.query('SELECT COUNT(*)::int AS n FROM users');
+      out.userCount = userCount.rows[0].n;
+    }
+    res.json(out);
+  } catch (err) {
+    out.connected = false;
+    out.error = err.message;
+    out.hint = 'Cek env DB_* di Vercel Settings, dan pastikan pakai Supabase Transaction Pooler (port 6543).';
+    res.status(500).json(out);
+  }
+});
+
+// Vercel Cron: ping ringan ke DB supaya Supabase Free tidak ke-pause.
+// Dipanggil otomatis lewat schedule di vercel.json. Endpoint diproteksi
+// dengan header X-Vercel-Cron-Signature secara default kalau pakai
+// crons di Hobby plan; di sini cukup return 200 dan log ke console.
+app.get('/api/cron/keepalive', async (_req, res) => {
+  try {
+    const pool = (await import('./db.js')).default;
+    const r = await pool.query('SELECT NOW() AS now, COUNT(*)::int AS users FROM users');
+    console.log('[cron] keepalive ok:', r.rows[0]);
+    res.json({ ok: true, at: r.rows[0].now, users: r.rows[0].users });
+  } catch (err) {
+    console.error('[cron] keepalive error:', err.message);
+    res.status(500).json({ ok: false, error: err.message });
+  }
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/counter', counterRoutes);
 app.use('/api/projects', projectsRoutes);

@@ -11,5 +11,11 @@
     { "source": "/api/(.*)", "destination": "/api/index" },
     { "source": "/",          "destination": "/api/index" },
     { "source": "/(.*)",      "destination": "/api/index" }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/keepalive",
+      "schedule": "0 3 * * *"
+    }
   ]
 }
