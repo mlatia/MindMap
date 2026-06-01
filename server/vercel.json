@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "buildCommand": "echo 'no build needed'",
+  "installCommand": "npm install",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/",          "destination": "/api/index" },
+    { "source": "/(.*)",      "destination": "/api/index" }
+  ]
+}

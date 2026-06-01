@@ -13,7 +13,7 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import bcrypt from 'bcryptjs';
-import pool from '../../../database/db.config.js';
+import pool from '../db.js';
 
 /**
  * Retrieves a user by username from the database

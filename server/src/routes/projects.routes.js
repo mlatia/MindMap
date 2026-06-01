@@ -14,7 +14,7 @@
  */
 
 import express from 'express';
-import pool from '../../../database/db.config.js';
+import pool from '../db.js';
 import { requireAuth } from '../middleware/auth.middleware.js';
 
 const router = express.Router();

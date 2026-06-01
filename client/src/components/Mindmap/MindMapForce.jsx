@@ -1,11 +1,19 @@
 /**
- * MindMapForce.jsx - Force-Directed + konstrain radial.
+ * MindMapForce.jsx - Force-Directed dengan konstrain radial (v2 improved).
  *
- * Fitur:
- *   - Force simulation dengan radial constraint per depth
- *   - Drag node → fx/fy fixed (simulation honors), atau click (kalau distance < 5px)
- *   - Klik kanan → context menu
- *   - Slider spacing kontrol radius & collide
+ * Perbaikan dari versi sebelumnya:
+ *   1. INITIAL SEEDING — tiap node ditempatkan di posisi polar sesuai
+ *      Reingold-Tilford layout BEFORE simulation, supaya tidak random.
+ *   2. FORCE BALANCE — radial > link > collide > charge (urutan strength
+ *      dibalik supaya hierarki radial dominan, link cuma adjuster).
+ *   3. ANGULAR SIBLING SEPARATION — custom force yang spread anak-anak
+ *      dari parent sama secara angular (wedge per child).
+ *   4. ROOT PINNED — root selalu di (0,0) dengan fx/fy.
+ *   5. EXTENDED CONVERGENCE — alpha decay lebih lambat + alpha awal
+ *      lebih tinggi → simulasi lebih lama → keluar dari local minima.
+ *
+ * Interaksi tetap sama: klik node = edit, klik kanan = context menu,
+ * drag = pindah individual (zoom-aware).
  */
 
 import { useEffect, useRef } from 'react';
@@ -23,12 +31,80 @@ function arrEq(a, b) {
   return true;
 }
 
-function flatten(node, parentId = null, list = [], links = [], path = []) {
-  const id = path.join('.') || 'root';
-  list.push({ id, data: node, depth: node.level ?? 0, path });
-  if (parentId !== null) links.push({ source: parentId, target: id });
-  (node.children || []).forEach((c, i) => flatten(c, id, list, links, [...path, i]));
-  return { nodes: list, links };
+/**
+ * Flatten + computed initial polar positions (Reingold-Tilford radial).
+ * Output: nodes (dengan x,y init), links, parentMap.
+ */
+function flattenWithSeed(tree, radiusStep) {
+  // Pakai d3.tree untuk dapat initial polar positions deterministik
+  const root = d3.hierarchy(tree, d => d.children);
+  const sepFn = (a, b) => (a.parent === b.parent ? 1 : 1.6) / Math.max(a.depth, 1);
+  d3.tree().size([2 * Math.PI, radiusStep * 3]).separation(sepFn)(root);
+
+  const nodes = [];
+  const links = [];
+  const parentMap = new Map();
+
+  root.descendants().forEach((n) => {
+    const path = n.ancestors().reverse().slice(1).map(a =>
+      a.parent.children.indexOf(a)
+    );
+    const id = path.join('.') || 'root';
+    // Konversi polar → cartesian sebagai INITIAL position
+    const initX = n.depth === 0 ? 0 : Math.cos(n.x - Math.PI / 2) * n.y;
+    const initY = n.depth === 0 ? 0 : Math.sin(n.x - Math.PI / 2) * n.y;
+    nodes.push({
+      id,
+      data: n.data,
+      depth: n.depth,
+      path,
+      x: initX, y: initY,                  // seed posisi awal
+      angularTarget: n.depth === 0 ? 0 : n.x,  // target sudut untuk angular force
+    });
+    if (n.parent) {
+      const parentPath = n.parent.ancestors().reverse().slice(1).map(a =>
+        a.parent.children.indexOf(a)
+      );
+      const parentId = parentPath.join('.') || 'root';
+      links.push({ source: parentId, target: id });
+      parentMap.set(id, parentId);
+    }
+  });
+  return { nodes, links, parentMap };
+}
+
+/**
+ * Custom force: angular sibling separation.
+ * Mendorong anak dari parent sama agar sudut relatif terhadap parent merata.
+ */
+function forceAngularSiblings(nodes, parentMap, strength = 0.08) {
+  // Cluster siblings by parent
+  const siblings = new Map();
+  for (const n of nodes) {
+    const p = parentMap.get(n.id);
+    if (!p) continue;
+    if (!siblings.has(p)) siblings.set(p, []);
+    siblings.get(p).push(n);
+  }
+  const nodeById = new Map(nodes.map(n => [n.id, n]));
+
+  return function (alpha) {
+    for (const [parentId, kids] of siblings) {
+      if (kids.length < 2) continue;
+      const parent = nodeById.get(parentId);
+      if (!parent) continue;
+      const baseAngle = Math.atan2(parent.y, parent.x) || 0;
+      const wedge = Math.PI * (kids.length >= 4 ? 1.4 : 0.9);
+      kids.forEach((k, i) => {
+        const targetAngle = baseAngle - wedge / 2 + (i + 0.5) * wedge / kids.length;
+        const dist = Math.hypot(k.x - parent.x, k.y - parent.y) || 1;
+        const tx = parent.x + Math.cos(targetAngle) * dist;
+        const ty = parent.y + Math.sin(targetAngle) * dist;
+        k.vx += (tx - k.x) * strength * alpha;
+        k.vy += (ty - k.y) * strength * alpha;
+      });
+    }
+  };
 }
 
 export default function MindMapForce({
@@ -39,26 +115,32 @@ export default function MindMapForce({
 
   useEffect(() => {
     if (!tree) return;
-    const radiusStep = 150 * spacing;
-    const { nodes, links } = flatten(tree);
+    const radiusStep = 140 * spacing;
+    const { nodes, links, parentMap } = flattenWithSeed(tree, radiusStep);
 
+    // Hitung ukuran tiap node untuk collide radius
     nodes.forEach(n => {
       const fontSize = n.depth === 0 ? 16 : (n.depth === 1 ? 13 : 11);
       const len = (n.data.concept || '').length;
       n.w = Math.max(80, len * (fontSize * 0.55) + 24);
       n.h = Math.max(28, fontSize + 16);
-      n.r = Math.hypot(n.w / 2, n.h / 2) + 8;
+      n.r = Math.hypot(n.w / 2, n.h / 2) + 6;
     });
+    // Pin root di pusat
+    const root = nodes.find(n => n.id === 'root');
+    if (root) { root.fx = 0; root.fy = 0; }
 
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
+    const initSize = Math.max(900, radiusStep * 4.5);
+    svg.attr('viewBox',
+      `${-initSize / 2} ${-initSize / 2} ${initSize} ${initSize}`);
 
     svg.append('defs').append('style').text(`
       .node-rect { transition: stroke 180ms ease, stroke-width 180ms ease; }
       .node-group:hover .node-rect { stroke: var(--pink-strong); }
       .node-group.selected .node-rect {
-        stroke: var(--pink-strong);
-        stroke-width: 3.5;
+        stroke: var(--pink-strong); stroke-width: 3.5;
         animation: mm-pulse 1.4s ease-in-out infinite;
       }
       @keyframes mm-pulse {
@@ -66,35 +148,25 @@ export default function MindMapForce({
         50%      { filter: drop-shadow(0 0 8px var(--pink-strong)); }
       }
       .node-edit-input {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 700;
-        text-align: center;
-        border: 2px solid var(--pink-strong);
-        border-radius: 10px;
-        padding: 4px 8px;
-        outline: none;
-        background: white;
-        color: var(--color-ink);
+        font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+        text-align: center; border: 2px solid var(--pink-strong);
+        border-radius: 10px; padding: 4px 8px; outline: none;
+        background: white; color: var(--color-ink);
       }
     `);
 
     const g = svg.append('g');
 
     const linkSel = g.append('g')
-      .selectAll('line')
-      .data(links)
-      .join('line')
+      .selectAll('line').data(links).join('line')
       .attr('stroke', d => {
         const sNode = nodes.find(n => n.id === d.source);
         return BRANCH_COLORS[(sNode?.depth || 0) % BRANCH_COLORS.length];
       })
-      .attr('stroke-width', 1.6)
-      .attr('opacity', 0.7);
+      .attr('stroke-width', 1.6).attr('opacity', 0.7);
 
     const nodeSel = g.append('g')
-      .selectAll('g.node-group')
-      .data(nodes)
-      .join('g')
+      .selectAll('g.node-group').data(nodes).join('g')
       .attr('class', d => 'node-group' + (arrEq(d.path, selectedPath) ? ' selected' : ''))
       .style('cursor', 'pointer');
 
@@ -113,7 +185,7 @@ export default function MindMapForce({
         .attr('x', -d.w / 2).attr('y', -d.h / 2).attr('rx', 14)
         .attr('width', d.w).attr('height', d.h)
         .attr('fill', isSelected ? 'var(--pink-tag)'
-                                 : (d.depth === 0 ? '#fff' : BRANCH_COLORS[(d.depth - 1) % BRANCH_COLORS.length]))
+              : (d.depth === 0 ? '#fff' : BRANCH_COLORS[(d.depth - 1) % BRANCH_COLORS.length]))
         .attr('stroke', isSelected ? 'var(--pink-strong)' : 'var(--color-ink)')
         .attr('stroke-width', isSelected ? 3 : 1.5);
 
@@ -121,8 +193,7 @@ export default function MindMapForce({
         grp.append('foreignObject')
           .attr('x', -d.w / 2 + 2).attr('y', -d.h / 2 + 2)
           .attr('width', d.w - 4).attr('height', d.h - 4)
-          .append('xhtml:input')
-          .attr('class', 'node-edit-input')
+          .append('xhtml:input').attr('class', 'node-edit-input')
           .attr('style', `width:100%;height:100%;font-size:${fontSize}px`)
           .attr('value', label)
           .on('keydown', function(e) {
@@ -132,29 +203,42 @@ export default function MindMapForce({
           })
           .on('click', e => e.stopPropagation())
           .on('blur', function() { if (onCommitEdit) onCommitEdit(d.path, this.value); })
-          .each(function() { setTimeout(() => { this.focus(); this.select(); }, 0); });
+          .each(function() {
+            setTimeout(() => {
+              this.focus();
+              const len = this.value.length;
+              try { this.setSelectionRange(len, len); } catch (_) {}
+            }, 0);
+          });
       } else {
         grp.append('text').attr('class', 'node-text')
-          .attr('text-anchor', 'middle')
-          .attr('dominant-baseline', 'central')
+          .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
           .attr('font-family', "'Plus Jakarta Sans', sans-serif")
-          .attr('font-weight', 700)
-          .attr('fill', 'var(--color-ink)')
-          .style('font-size', `${fontSize}px`)
-          .text(label);
+          .attr('font-weight', 700).attr('fill', 'var(--color-ink)')
+          .style('font-size', `${fontSize}px`).text(label);
       }
     });
 
+    // ---- IMPROVED FORCE SIMULATION ----
     const sim = d3.forceSimulation(nodes)
+      // RADIAL paling DOMINAN supaya hierarki ring jelas
+      .force('radial', d3.forceRadial(d => d.depth * radiusStep, 0, 0).strength(0.95))
+      // LINK lemah, cuma untuk koneksi visual (bukan structural anchor)
       .force('link', d3.forceLink(links)
         .id(d => d.id)
-        .distance(d => (110 + d.target.depth * 30) * spacing)
-        .strength(0.85))
-      .force('charge', d3.forceManyBody().strength(-320 * spacing))
-      .force('center', d3.forceCenter(0, 0))
-      .force('radial', d3.forceRadial(d => d.depth * radiusStep, 0, 0).strength(0.55))
-      .force('collide', d3.forceCollide().radius(d => d.r * spacing).iterations(3))
-      .alphaDecay(0.02);
+        .distance(d => 60 + d.target.depth * 25)
+        .strength(0.25))
+      // CHARGE lemah supaya tidak chaos
+      .force('charge', d3.forceManyBody().strength(-80))
+      // COLLIDE iterasi tinggi untuk anti-overlap
+      .force('collide', d3.forceCollide().radius(d => d.r + 4).iterations(6))
+      // ANGULAR sibling separation (custom)
+      .force('angular', forceAngularSiblings(nodes, parentMap, 0.15))
+      // Convergence parameters
+      .alpha(0.9)
+      .alphaMin(0.001)
+      .alphaDecay(0.012)
+      .velocityDecay(0.45);
 
     sim.on('tick', () => {
       linkSel
@@ -166,43 +250,34 @@ export default function MindMapForce({
     sim.on('end', () => {
       try {
         const bbox = g.node().getBBox();
-        const pad = 50;
+        const pad = 60;
         svg.attr('viewBox',
           `${bbox.x - pad} ${bbox.y - pad} ${bbox.width + pad * 2} ${bbox.height + pad * 2}`);
       } catch (e) { /* ignore */ }
     });
 
-    // ---- Drag handler (zoom-aware, smooth, ikut kursor) ----
-    // subject=datum -> drag relatif posisi node; container=g -> koordinat
-    // event sudah di local SVG (zoom-aware). alphaTarget kecil (0.05) saat
-    // drag supaya simulation tidak agresif menarik node ke posisi radial
-    // ("muter ke bawah dulu" disebabkan oleh alphaTarget 0.25).
+    // ---- Drag handler (zoom-aware, alpha kalem) ----
     const drag = d3.drag()
       .subject(function(_e, d) { return { x: d.x, y: d.y }; })
       .container(function() { return g.node(); })
       .on('start', function(e, d) {
         d.__dragStart = { x: e.x, y: e.y, moved: false };
         if (!e.active) sim.alphaTarget(0.05).restart();
-        d.fx = d.x;
-        d.fy = d.y;
+        if (d.id !== 'root') { d.fx = d.x; d.fy = d.y; }
       })
       .on('drag', function(e, d) {
         const dx = e.x - d.__dragStart.x;
         const dy = e.y - d.__dragStart.y;
         if (!d.__dragStart.moved && Math.hypot(dx, dy) < 5) return;
         d.__dragStart.moved = true;
-        // langsung set posisi node ke koordinat kursor (sudah zoom-aware
-        // karena container=g)
-        d.fx = e.x;
-        d.fy = e.y;
+        if (d.id !== 'root') { d.fx = e.x; d.fy = e.y; }
       })
       .on('end', function(e, d) {
         if (!e.active) sim.alphaTarget(0);
         if (!d.__dragStart.moved) {
-          d.fx = null; d.fy = null;
+          if (d.id !== 'root') { d.fx = null; d.fy = null; }
           if (onEdit) onEdit(d.path);
         }
-        // node tetap di-pin di posisi drag akhir supaya tidak melesat
       });
     nodeSel.call(drag);
 
@@ -211,10 +286,9 @@ export default function MindMapForce({
       if (onContextMenu) onContextMenu(d.path, e.pageX, e.pageY);
     });
 
-    const zoom = d3.zoom().scaleExtent([0.3, 3])
+    svg.call(d3.zoom().scaleExtent([0.3, 3])
       .filter(e => !e.target.closest('input') && !e.target.closest('.node-group'))
-      .on('zoom', e => g.attr('transform', e.transform));
-    svg.call(zoom);
+      .on('zoom', e => g.attr('transform', e.transform)));
 
     return () => sim.stop();
   }, [tree, selectedPath, editingPath, onEdit, onContextMenu, onCommitEdit, onCancelEdit, spacing]);

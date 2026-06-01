@@ -15,6 +15,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import MindMapRadial from '../components/Mindmap/MindMapRadial';
 import MindMapForce from '../components/Mindmap/MindMapForce';
+import MindMapCluster from '../components/Mindmap/MindMapCluster';
 import ContextMenu from '../components/Mindmap/ContextMenu';
 import { exportPNG, exportPDF } from '../components/Mindmap/exportUtils';
 import { Projects } from '../services/api';
@@ -23,6 +24,7 @@ import useMindMap from '../state/useMindMap';
 const LAYOUTS = [
   { id: 'reingold-tilford-radial', label: 'Reingold-Tilford' },
   { id: 'force-directed-radial',   label: 'Force-Directed' },
+  { id: 'radial-cluster',          label: 'Radial Cluster' },
 ];
 
 function nodeAt(tree, path) {
@@ -230,6 +232,17 @@ export default function MindMapDetail() {
         {mm.tree ? (
           layout === 'force-directed-radial'
             ? <MindMapForce
+                tree={mm.tree}
+                onEdit={handleEdit}
+                onContextMenu={handleContextMenu}
+                selectedPath={selectedPath}
+                editingPath={editingPath}
+                onCommitEdit={commitEdit}
+                onCancelEdit={cancelEdit}
+                spacing={spacing}
+              />
+            : layout === 'radial-cluster'
+            ? <MindMapCluster
                 tree={mm.tree}
                 onEdit={handleEdit}
                 onContextMenu={handleContextMenu}

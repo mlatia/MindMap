@@ -41,10 +41,20 @@ export default function MindMapRadial({
   useEffect(() => {
     if (!tree) return;
     annotatePath(tree);
+    // Clear posisi override hasil drag sebelumnya supaya layout fresh
+    // saat tree berubah (project switch, layout switch, atau spacing).
+    dragOverrideRef.current = new Map();
     const baseRadius = 380 * spacing;
 
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
+    // Set initial viewBox SEBELUM render konten -> mencegah konten muncul
+    // di pojok kiri-atas saat switch dari Force-Directed ke Reingold-Tilford
+    // (default SVG viewBox 0,0,300,150 membuat layout radial yang centered
+    // di (0,0) ter-crop di kuadran kanan-bawah dari viewport).
+    const initialSize = baseRadius * 2.5;
+    svg.attr('viewBox',
+      `${-initialSize / 2} ${-initialSize / 2} ${initialSize} ${initialSize}`);
 
     const defs = svg.append('defs');
     defs.append('style').text(`
@@ -170,7 +180,15 @@ export default function MindMapRadial({
           })
           .on('click', e => e.stopPropagation())
           .on('blur', function() { if (onCommitEdit) onCommitEdit(d.data.__path, this.value); })
-          .each(function() { setTimeout(() => { this.focus(); this.select(); }, 0); });
+          .each(function() {
+            setTimeout(() => {
+              this.focus();
+              // taruh cursor di AKHIR teks, jangan select-all
+              // supaya user bisa menambahkan/edit huruf tanpa harus tulis ulang
+              const len = this.value.length;
+              try { this.setSelectionRange(len, len); } catch (_) {}
+            }, 0);
+          });
       } else {
         grp.append('text').attr('class', 'node-text')
           .attr('text-anchor', 'middle')
