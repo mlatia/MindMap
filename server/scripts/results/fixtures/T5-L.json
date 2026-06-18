@@ -1,0 +1,59 @@
+{
+  "concept": "Undang Data",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Lingkungan Pengukuran",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Perlindungan Melindungi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Perlindungan Melindungi Disahkan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Data Perlindungan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Regulasi Controller",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Regulasi Controller Kewajiban",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Tahunan Persen",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Data Regulasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Data Regulasi Controller",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Sumber Daya",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

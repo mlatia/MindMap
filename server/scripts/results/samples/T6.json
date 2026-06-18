@@ -1,0 +1,33 @@
+{
+  "concept": "Persen Inflasi",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Transportasi Pengeluaran",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Inflasi Indonesia",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Inflasi Indonesia Statistik",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Indonesia",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Inflasi Tertinggi",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

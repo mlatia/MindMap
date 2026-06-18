@@ -35,10 +35,9 @@ const app = express();
 // ---- Trust proxy (Vercel/Render butuh ini untuk req.ip + secure cookie) ----
 app.set('trust proxy', 1);
 
-// ---- Keamanan ----
-app.use(securityMiddleware);
-
-// ---- CORS dinamis ----
+// ---- CORS dinamis (DIPASANG PALING AWAL, sebelum keamanan/rate-limit) ----
+// Penting: CORS harus jalan sebelum rate-limit agar preflight OPTIONS tidak
+// pernah ke-block oleh limiter (penyebab error "No Access-Control-Allow-Origin").
 const allowedOrigins = (process.env.API_URL || 'http://localhost:5173')
   .split(',')
   .map(s => s.trim())
@@ -68,6 +67,9 @@ app.use(cors({
 
 // Handle preflight semua route (express 4 perlu eksplisit)
 app.options('*', cors({ origin: corsOriginCheck, credentials: true }));
+
+// ---- Keamanan (helmet + rate-limit) setelah CORS ----
+app.use(securityMiddleware);
 
 // ---- Body & cookie parser ----
 app.use(express.json({ limit: '1mb' }));

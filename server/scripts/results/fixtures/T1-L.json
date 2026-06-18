@@ -1,108 +1,67 @@
 {
-  "concept": "Prediksi Cuaca",
+  "concept": "Cuaca Utama",
   "level": 0,
   "children": [
     {
-      "concept": "Machine Learning",
+      "concept": "Utama Satelit",
       "level": 1,
       "children": [
         {
-          "concept": "Random Forest",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Gradient Boosting",
+          "concept": "Utama Satelit Stasiun",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Model Ensemble",
+      "concept": "Sumber Daya",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Decision Ensemble",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Menggabungkan Decision",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Mempertimbangkan Lingkungan",
       "level": 1,
       "children": [
         {
-          "concept": "Decision Tree",
+          "concept": "Mempertimbangkan Lingkungan Pengukuran",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Data Input",
+      "concept": "Merevolusi Boosting",
       "level": 1,
       "children": [
         {
-          "concept": "Data Satelit",
+          "concept": "Merevolusi Boosting Gradient",
           "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Stasiun Cuaca",
-          "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Boosting",
+              "level": 3,
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
-      "concept": "Tantangan",
+      "concept": "Daya Berkelanjutan",
       "level": 1,
       "children": [
         {
-          "concept": "Keterbatasan Sumber Daya",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Kompleksitas Regulasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Adaptasi Cepat",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Solusi",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Kolaborasi Multi-Pihak",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Investasi Infrastruktur",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pengembangan Kompetensi",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Pengukuran Dampak",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Dimensi Ekonomi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Dimensi Sosial",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Dimensi Lingkungan",
+          "concept": "Sumber Daya Berkelanjutan",
           "level": 2,
           "children": []
         }

@@ -84,9 +84,12 @@ describe('IT-10..IT-15 [MBE-01 + MSM-*] /api/mindmap/generate', () => {
     expect(r1.payload.mindmap).to.deep.equal(r2.payload.mindmap);
   });
 
-  it('IT-15 mindmap memenuhi constraint TA (depth<=3, branches<=7)', async () => {
+  it('IT-15 mindmap memenuhi batas PENGAMAN (bukan paksaan keseimbangan)', async () => {
+    // Revisi: tidak ada lagi target depth<=3 / branches<=7. Yang dicek hanya
+    // batas pengaman longgar (depth<=12, branches<=24) + bentuk terdeskripsi.
     const r = await call('/api/mindmap/generate', { text: SAMPLE_TEXT }, token());
-    expect(r.payload.meta.stats.depth).to.be.at.most(3);
-    expect(r.payload.meta.stats.branchesRoot).to.be.at.most(7);
+    expect(r.payload.meta.stats.depth).to.be.at.most(12);
+    expect(r.payload.meta.stats.branchesRoot).to.be.at.most(24);
+    expect(r.payload.meta.stats).to.have.property('shape');
   });
 });

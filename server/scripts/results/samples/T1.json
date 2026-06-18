@@ -1,0 +1,66 @@
+{
+  "concept": "Prediksi Cuaca",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Menggabungkan Meningkatkan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Model Menggabungkan Meningkatkan",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Menggabungkan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Pengambilan Dashboard",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Merevolusi Algoritma",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Data Historis",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Preprocessing Engineering",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Data Preprocessing Engineering",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Model Tensorflow",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Tensorflow Framework Cluster",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Tensorflow",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

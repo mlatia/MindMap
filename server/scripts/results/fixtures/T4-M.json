@@ -1,0 +1,76 @@
+{
+  "concept": "Gula Diabetes",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Stakeholder Masyarakat",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Stakeholder Masyarakat Akademisi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Resistensi Metabolik",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Meliputi Obesitas",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Obesitas Faktor Risiko",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Diagnosis Melalui",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pemeriksaan Diagnosis Melalui",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Pemeriksaan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Pemeriksaan Diagnosis",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Implementasi Pertimbangan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Metabolik Diabetes",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Obesitas Faktor",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Meliputi Obesitas Faktor",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

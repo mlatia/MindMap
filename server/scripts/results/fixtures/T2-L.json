@@ -1,104 +1,54 @@
 {
-  "concept": "Urbanisasi Indonesia",
+  "concept": "Kota Ekonomi",
   "level": 0,
   "children": [
     {
-      "concept": "Pergeseran Demografi",
+      "concept": "Kemacetan Kepadatan",
       "level": 1,
       "children": [
         {
-          "concept": "Sejak Reformasi",
+          "concept": "Menghadapi Kemacetan Kepadatan",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Migrasi Penduduk",
+      "concept": "Menghadapi Kemacetan",
       "level": 1,
-      "children": [
-        {
-          "concept": "Dari Desa ke Kota",
-          "level": 2,
-          "children": [
-            {
-              "concept": "Mencari Peluang Ekonomi",
-              "level": 3,
-              "children": []
-            }
-          ]
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Masalah Kota Besar",
+      "concept": "Menunjukkan Pergeseran",
       "level": 1,
-      "children": [
-        {
-          "concept": "Kepadatan dan Kemacetan",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Tantangan Utama",
+      "concept": "Bermigrasi Penduduk",
       "level": 1,
-      "children": [
-        {
-          "concept": "Keterbatasan Sumber Daya",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Kompleksitas Regulasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Adaptasi Teknologi",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Solusi Urbanisasi",
+      "concept": "Sumber Daya",
       "level": 1,
-      "children": [
-        {
-          "concept": "Kolaborasi Multi-Pihak",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Investasi Infrastruktur",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pengembangan Kompetensi",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Pengukuran Dampak",
+      "concept": "Ekonomi Bermigrasi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Mempertimbangkan Lingkungan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pergeseran Urbanisasi",
       "level": 1,
       "children": [
         {
-          "concept": "Dimensi Ekonomi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Dimensi Sosial",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Dimensi Lingkungan",
+          "concept": "Pergeseran Urbanisasi Demografi",
           "level": 2,
           "children": []
         }

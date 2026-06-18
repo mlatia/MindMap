@@ -1,0 +1,499 @@
+{
+  "generatedAt": "2026-06-18T13:23:23.419Z",
+  "provider": "sim",
+  "N": 10,
+  "metricRef": "Wang dkk. (2025) STED & Consistency Score (Eq.1, Eq.4, lambda=0.1, Hungarian)",
+  "targets": {
+    "SCS": ">=0.70",
+    "ESR": ">=90%"
+  },
+  "summary": {
+    "meanSCS": 0.878,
+    "meanSCR": 97.1,
+    "meanESR": 100
+  },
+  "perText": [
+    {
+      "id": "T1",
+      "domain": "Sains dan Teknologi",
+      "SCS": 0.873,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 12,
+      "depth": 3,
+      "maxBranch": 6,
+      "shapeDistribution": {
+        "breadth-heavy": 10
+      },
+      "sample": {
+        "concept": "Prediksi Cuaca",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Menggabungkan Meningkatkan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Model Menggabungkan Meningkatkan",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Menggabungkan",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Pengambilan Dashboard",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Merevolusi Algoritma",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Data Historis",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Preprocessing Engineering",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Data Preprocessing Engineering",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Model Tensorflow",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Tensorflow Framework Cluster",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Tensorflow",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "T2",
+      "domain": "Humaniora dan Sosial",
+      "SCS": 0.879,
+      "SCR": "90.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 9,
+      "depth": 2,
+      "maxBranch": 7,
+      "shapeDistribution": {
+        "breadth-heavy": 10
+      },
+      "sample": {
+        "concept": "Kota Penduduk",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Penduduk Bermigrasi",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Pembangunan Pemerataan",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Mempengaruhi Jaringan",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Penduduk Menghadapi",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Pengembangan Pemerintah",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Pergeseran Signifikan",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Sosial Munculnya",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Munculnya Tantangan Kawasan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "T3",
+      "domain": "Bisnis dan Ekonomi",
+      "SCS": 0.86,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 15,
+      "depth": 3,
+      "maxBranch": 7,
+      "shapeDistribution": {
+        "breadth-heavy": 10
+      },
+      "sample": {
+        "concept": "Marketing Strategi",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Penjualan Konversi",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Influencer Penjualan Konversi",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Penjualan",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Visibilitas Membantu",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Analytics Seperti",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Analytics Seperti Digunakan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Strategi Keberhasilan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Strategi Keberhasilan Acquisition",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Strategi Pemasaran",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Strategi Pemasaran Digital",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Seperti Memperluas",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Seperti Memperluas Penggunaan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Personalisasi Meningkatkan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Personalisasi Meningkatkan Pelanggan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "T4",
+      "domain": "Kesehatan dan Kedokteran",
+      "SCS": 0.874,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 10,
+      "depth": 3,
+      "maxBranch": 6,
+      "shapeDistribution": {
+        "breadth-heavy": 10
+      },
+      "sample": {
+        "concept": "Gula Meliputi",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Komplikasi Retinopati",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Resistensi Merupakan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Resistensi Merupakan Metabolik",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Resistensi",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Darah Pemeriksaan",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Farmakologi Membutuhkan",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Aktivitas Obesitas",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Monitoring Mengenai",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Mengenai Edukasi Glucose",
+                "level": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "T5",
+      "domain": "Hukum dan Kebijakan",
+      "SCS": 0.884,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 11,
+      "depth": 3,
+      "maxBranch": 7,
+      "shapeDistribution": {
+        "breadth-heavy": 10
+      },
+      "sample": {
+        "concept": "Data Undang",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Hak Portabilitas",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Administratif Pendapatan",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Tahun Perlindungan",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Undang Lembaga",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Pengolahan Kewajiban",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Controller Pengolahan Kewajiban",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Controller",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Tahun Pelanggaran",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Pelanggaran Kebocoran Dipidana",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Lembaga Sosialisasi",
+            "level": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "T7",
+      "domain": "Proses / Sebab-Akibat (Sains)",
+      "SCS": 0.897,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "balanced",
+      "nodes": 7,
+      "depth": 3,
+      "maxBranch": 2,
+      "shapeDistribution": {
+        "balanced": 2,
+        "depth-heavy": 8
+      },
+      "sample": {
+        "concept": "Energi Kemudian",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Fotosintesis Klorofil",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Kemudian Ion",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Ion Karbondioksida",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Tersebut Glukosa",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Glukosa Tumbuhan",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Digunakan Disimpan",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "T6",
+      "domain": "Statistik / Data Angka (BPS)",
+      "SCS": 0.88,
+      "SCR": "90.0%",
+      "ESR": "100.0%",
+      "bentuk": "balanced",
+      "nodes": 6,
+      "depth": 3,
+      "maxBranch": 3,
+      "shapeDistribution": {
+        "balanced": 7,
+        "breadth-heavy": 3
+      },
+      "sample": {
+        "concept": "Persen Inflasi",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Transportasi Pengeluaran",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Inflasi Indonesia",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Inflasi Indonesia Statistik",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Indonesia",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Inflasi Tertinggi",
+            "level": 1,
+            "children": []
+          }
+        ]
+      }
+    }
+  ]
+}

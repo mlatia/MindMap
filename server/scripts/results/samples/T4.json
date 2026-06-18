@@ -1,0 +1,54 @@
+{
+  "concept": "Gula Meliputi",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Komplikasi Retinopati",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Resistensi Merupakan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Resistensi Merupakan Metabolik",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Resistensi",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Darah Pemeriksaan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Farmakologi Membutuhkan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Aktivitas Obesitas",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Monitoring Mengenai",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Mengenai Edukasi Glucose",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

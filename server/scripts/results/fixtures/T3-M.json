@@ -3,78 +3,36 @@
   "level": 0,
   "children": [
     {
-      "concept": "UMKM Pasca-Pandemi",
+      "concept": "Pandemi Pasca",
       "level": 1,
       "children": []
     },
     {
-      "concept": "Media Sosial",
+      "concept": "Memperluas Instagram",
       "level": 1,
       "children": [
         {
-          "concept": "Instagram",
+          "concept": "Marketing Konversi",
           "level": 2,
-          "children": []
-        },
-        {
-          "concept": "TikTok",
-          "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Digital Pandemi",
+              "level": 3,
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
-      "concept": "Influencer Marketing",
+      "concept": "Implementasi Pertimbangan",
       "level": 1,
-      "children": [
-        {
-          "concept": "Konversi Tinggi",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Implementasi",
+      "concept": "Masyarakat Akademisi",
       "level": 1,
-      "children": [
-        {
-          "concept": "Pertimbangan Teknis",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pertimbangan Etis",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Stakeholder",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Akademisi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Praktisi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Regulator",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Masyarakat Umum",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     }
   ]
 }

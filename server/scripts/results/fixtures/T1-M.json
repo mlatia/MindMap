@@ -1,91 +1,59 @@
 {
-  "concept": "Prediksi Cuaca",
+  "concept": "Cuaca Machine",
   "level": 0,
   "children": [
     {
-      "concept": "Machine Learning",
+      "concept": "Menggabungkan Decision",
       "level": 1,
       "children": [
         {
-          "concept": "Random Forest",
+          "concept": "Menggabungkan Decision Ensemble",
           "level": 2,
-          "children": []
-        },
+          "children": [
+            {
+              "concept": "Menggabungkan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Merevolusi Boosting",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Masyarakat Akademisi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Boosting Gradient",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pertimbangan Membutuhkan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Decision Ensemble",
+      "level": 1,
+      "children": [
         {
-          "concept": "Gradient Boosting",
+          "concept": "Decision Ensemble Akurasi",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Model Ensemble",
+      "concept": "Satelit Stasiun",
       "level": 1,
-      "children": [
-        {
-          "concept": "Decision Tree",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Data Input",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Data Satelit",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Stasiun Cuaca",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Implementasi",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Pertimbangan Teknis",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pertimbangan Etis",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Stakeholder",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Akademisi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Praktisi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Regulator",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Masyarakat Umum",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     }
   ]
 }

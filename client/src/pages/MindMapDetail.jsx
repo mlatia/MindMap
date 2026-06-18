@@ -22,7 +22,7 @@ import { Projects } from '../services/api';
 import useMindMap from '../state/useMindMap';
 
 const LAYOUTS = [
-  { id: 'reingold-tilford-radial', label: 'Reingold-Tilford' },
+  { id: 'reingold-tilford-radial', label: 'Reingold-Tilford radial' },
   { id: 'force-directed-radial',   label: 'Force-Directed' },
   { id: 'radial-cluster',          label: 'Radial Cluster' },
 ];
@@ -45,6 +45,14 @@ export default function MindMapDetail() {
   const [layout, setLayout] = useState('reingold-tilford-radial');
   const [spacing, setSpacing] = useState(1.0);
   const [saveState, setSaveState] = useState('saved');
+  // Hint sekali-jalan soal slider "Jarak node" (node sering overlap di awal)
+  const [showSpacingHint, setShowSpacingHint] = useState(() => {
+    try { return !localStorage.getItem('mm_hint_spacing'); } catch (_) { return true; }
+  });
+  const dismissSpacingHint = () => {
+    try { localStorage.setItem('mm_hint_spacing', '1'); } catch (_) {}
+    setShowSpacingHint(false);
+  };
   const wrapRef = useRef(null);
 
   const mm = useMindMap(null);
@@ -209,6 +217,7 @@ export default function MindMapDetail() {
           Jarak node:
           <input
             type="range"
+            title="Geser untuk merenggangkan jarak antar node biar tidak overlap"
             min="0.5"
             max="2.5"
             step="0.1"
@@ -222,6 +231,18 @@ export default function MindMapDetail() {
         <button className="secondary" onClick={() => handleExport('png')}>Export PNG</button>
         <button className="secondary" onClick={() => handleExport('pdf')}>Export PDF</button>
       </div>
+
+      {showSpacingHint && mm.tree && (
+        <div className="spacing-hint">
+          <span className="spacing-hint-icon" aria-hidden="true">✦</span>
+          <span>
+            <strong>Tips:</strong> kalau node saling menumpuk, geser{' '}
+            <strong>“Jarak node”</strong> di toolbar untuk merenggangkannya.
+            Kamu juga bisa menyeret tiap node satu per satu.
+          </span>
+          <button className="spacing-hint-close" onClick={dismissSpacingHint}>Mengerti</button>
+        </div>
+      )}
 
       <div className="card yellow" style={{ marginBottom: '0.8rem', padding: '0.75rem 1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
         <span className="scribble" style={{ fontSize: '1.1rem' }}>cara edit:</span>

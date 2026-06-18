@@ -1,7 +1,9 @@
-Teks,Domain,SCS,SCS_mean,SCR,ESR,pairs,runs
-T1,"Sains dan Teknologi",1.000,0.936,20.0%,20.0%,1,10
-T2,"Humaniora dan Sosial",1.000,1.000,10.0%,10.0%,0,10
-T3,"Bisnis dan Ekonomi",1.000,1.000,10.0%,10.0%,0,10
-T4,"Kesehatan dan Kedokteran",1.000,1.000,0.0%,0.0%,0,10
-T5,"Hukum dan Kebijakan",1.000,1.000,10.0%,10.0%,0,10
----,"Rata-rata",1.000,,10.0%,10.0%,,
+Teks,Domain,SCS,SCR,ESR,bentuk,nodes,depth,maxBranch,pairs,runs
+T1,"Sains dan Teknologi",0.873,100.0%,100.0%,breadth-heavy,12,3,6,45,10
+T2,"Humaniora dan Sosial",0.879,90.0%,100.0%,breadth-heavy,9,2,7,45,10
+T3,"Bisnis dan Ekonomi",0.860,100.0%,100.0%,breadth-heavy,15,3,7,45,10
+T4,"Kesehatan dan Kedokteran",0.874,100.0%,100.0%,breadth-heavy,10,3,6,45,10
+T5,"Hukum dan Kebijakan",0.884,100.0%,100.0%,breadth-heavy,11,3,7,45,10
+T7,"Proses / Sebab-Akibat (Sains)",0.897,100.0%,100.0%,balanced,7,3,2,45,10
+T6,"Statistik / Data Angka (BPS)",0.880,90.0%,100.0%,balanced,6,3,3,45,10
+---,"Rata-rata",0.878,97.1%,100.0%,,,,,,

@@ -3,32 +3,16 @@
   "level": 0,
   "children": [
     {
-      "concept": "UMKM Pasca-Pandemi",
+      "concept": "Pandemi Pasca",
       "level": 1,
       "children": []
     },
     {
-      "concept": "Media Sosial",
+      "concept": "Instagram Seperti",
       "level": 1,
       "children": [
         {
-          "concept": "Instagram",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "TikTok",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Influencer Marketing",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Konversi Tinggi",
+          "concept": "Influencer Marketing",
           "level": 2,
           "children": []
         }

@@ -2,6 +2,7 @@
  * Landing.jsx - Halaman publik dengan style portofolio "Melati".
  */
 import { Link } from 'react-router-dom';
+import Mascot from '../components/Mascot';
 
 export default function Landing() {
   return (
@@ -19,7 +20,8 @@ export default function Landing() {
           <p style={{ maxWidth: 520 }}>
             Sistem berbasis Generative AI dengan strategi <em>Auto-CoT prompting</em>{' '}
             mengekstraksi struktur hierarkis konsep dari teks, lalu memvisualisasikannya
-            menggunakan algoritma <strong>Reingold-Tilford radial</strong> dan <strong>Force-Directed</strong>.
+            dengan tiga layout: <strong>Reingold-Tilford radial</strong>,{' '}
+            <strong>Force-Directed</strong>, dan <strong>Radial Cluster</strong>.
           </p>
           <div className="row">
             <Link to="/register"><button className="pink">Mulai gratis</button></Link>
@@ -27,26 +29,27 @@ export default function Landing() {
           </div>
           <div className="row" style={{ marginTop: '0.4rem', gap: '0.4rem', flexWrap: 'wrap' }}>
             <span className="tag yellow">Auto-CoT</span>
-            <span className="tag blue">D3.js</span>
-            <span className="tag mint">Validation Layer</span>
+            <span className="tag blue">3 Layout</span>
+            <span className="tag mint">Tema Warna</span>
             <span className="tag">Editor Interaktif</span>
           </div>
         </div>
-        <div className="col" style={{ gap: '1rem' }}>
+        <div className="col" style={{ gap: '1rem', alignItems: 'center' }}>
+          <Mascot size={150} className="mascot-float" style={{ alignSelf: 'center' }} />
           <div className="card yellow" style={{ transform: 'rotate(-2deg)' }}>
-            <span className="scribble" style={{ fontSize: '1.4rem' }}>Pen / Paper</span>
-            <h3>User Research Design</h3>
-            <p>Riset kebutuhan pengguna saat membuat mind map manual.</p>
+            <span className="scribble" style={{ fontSize: '1.4rem' }}>Tempel teks</span>
+            <h3>Dari Teks ke Peta</h3>
+            <p>Tempel artikel, catatan kuliah, atau materi apa pun langsung jadi mind map terstruktur.</p>
           </div>
           <div className="card blue" style={{ transform: 'rotate(1deg)' }}>
-            <span className="scribble" style={{ fontSize: '1.4rem' }}>Figma</span>
-            <h3>UI &amp; Product Design</h3>
-            <p>Antarmuka clean, intuitif, dengan visual sticky-note pastel.</p>
+            <span className="scribble" style={{ fontSize: '1.4rem' }}>3 Layout</span>
+            <h3>Pilih Gaya Visualisasi</h3>
+            <p>Reingold-Tilford radial, Force-Directed, atau Radial Cluster pilih yang paling pas dengan isi teksmu.</p>
           </div>
           <div className="card pink" style={{ transform: 'rotate(-1deg)' }}>
-            <span className="scribble" style={{ fontSize: '1.4rem' }}>No-code</span>
-            <h3>LLM + D3.js</h3>
-            <p>Auto-generate dari teks, edit, ekspor PNG/PDF.</p>
+            <span className="scribble" style={{ fontSize: '1.4rem' }}>Custom</span>
+            <h3>Ganti Tema Warna</h3>
+            <p>Pink, biru, atau mint—ubah nuansa petamu sesuka hati, lalu ekspor ke PNG/PDF.</p>
           </div>
         </div>
       </div>

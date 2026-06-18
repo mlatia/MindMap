@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Auth, setToken } from '../services/api';
+import Mascot from '../components/Mascot';
 
 export default function Register() {
   const [form, setForm] = useState({ username: '', email: '', password: '' });
@@ -61,6 +62,7 @@ export default function Register() {
         </div>
       </div>
       <div className="accent">
+        <Mascot size={150} mood="wink" className="mascot-float" style={{ marginBottom: '1rem' }} />
         <div className="card yellow" style={{ transform: 'rotate(2deg)', maxWidth: 320 }}>
           <span className="scribble" style={{ fontSize: '1.4rem' }}>Let&apos;s start ✦</span>
           <h3 style={{ marginTop: 8 }}>Mind map otomatis</h3>

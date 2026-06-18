@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Projects } from '../services/api';
+import Mascot from '../components/Mascot';
 
 export default function Dashboard() {
   const [list, setList] = useState([]);
@@ -47,6 +48,7 @@ export default function Dashboard() {
 
       {!busy && list.length === 0 && (
         <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
+          <Mascot size={120} mood="wink" className="mascot-float" style={{ margin: '0 auto 0.5rem' }} />
           <span className="scribble" style={{ fontSize: '1.4rem' }}>belum ada proyek</span>
           <p style={{ marginTop: 8 }}>Buat mind map pertamamu untuk memulai.</p>
           <div style={{ marginTop: 16 }}>
@@ -59,7 +61,7 @@ export default function Dashboard() {
         {list.map((p, i) => (
           <div key={p.id} className="project-card" onClick={() => navigate(`/mindmap/${p.id}`)}>
             <span className={`tag ${['yellow','blue','mint',''][i % 4]}`}>
-              {p.layout === 'force-directed-radial' ? 'Force-Directed' : 'Reingold-Tilford'}
+              {p.layout === 'force-directed-radial' ? 'Force-Directed' : p.layout === 'radial-cluster' ? 'Radial Cluster' : 'Reingold-Tilford radial'}
             </span>
             <h3>{p.title}</h3>
             <div className="meta">

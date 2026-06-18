@@ -5,8 +5,10 @@
  *
  * Provider via env LLM_PROVIDER:
  *   - "groq"       -> Llama-3.3-70b di Groq (GRATIS, 30 req/min)
- *   - "anthropic"  -> Claude Opus 4.6 (perlu billing console.anthropic.com)
+ *   - "anthropic"  -> Claude (perlu billing console.anthropic.com)
  *   - "openai"     -> GPT-4o-mini  (perlu billing platform.openai.com)
+ *   - "sim"        -> simulator variabilitas OFFLINE (scripts/stochastic-llm.js),
+ *                     reproducible; untuk uji stabilitas tanpa jaringan.
  *   - "mock"       -> deterministik lokal (offline)
  */
 
@@ -14,12 +16,12 @@ import { splitSentences, tokenize } from './preprocess.js';
 import { clusterSentences } from './embedding.js';
 
 const PROVIDER = process.env.LLM_PROVIDER || 'mock';
-const MAX_BRANCHES = 6;
-const MAX_DEPTH = 3;
+// Pengaman longgar untuk mock generator (BUKAN aturan keseimbangan).
+const MOCK_MAX_BRANCHES = 24;
 
 const DEFAULT_MODEL = {
   groq:      'llama-3.3-70b-versatile',
-  anthropic: 'claude-opus-4-6',
+  anthropic: 'claude-sonnet-4-6',   // string model valid; override via LLM_MODEL
   openai:    'gpt-4o-mini',
 };
 
@@ -34,6 +36,17 @@ function toConcept(sentence, max = 3) {
   return ranked.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
+/**
+ * mockGenerate - generator deterministik & OFFLINE (LLM_PROVIDER=mock).
+ *
+ * Catatan: mock ini DETERMINISTIK (FR-3) sehingga tidak cocok untuk mengukur
+ * stabilitas (SCS akan = 1.0). Untuk evaluasi stabilitas gunakan provider LLM
+ * nyata, atau simulator variabilitas di scripts/stochastic-llm.js (LLM_PROVIDER=sim).
+ *
+ * Bentuk pohon di sini TIDAK dipaksa seimbang: lebar tiap cabang mengikuti
+ * ukuran cluster alami (tidak ada lagi pemotongan paksa ke 4 anak), dan
+ * jumlah cabang root mengikuti jumlah cluster konten - bukan rumus tetap.
+ */
 export function mockGenerate(text) {
   const sentences = splitSentences(text);
   if (!sentences.length) return { concept: 'Mind Map', level: 0, children: [] };
@@ -44,7 +57,9 @@ export function mockGenerate(text) {
   const topTopic = ranked.length
     ? ranked.slice(0, 2).map(([w]) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     : 'Mind Map';
-  const k = Math.min(MAX_BRANCHES, Math.max(2, Math.ceil(sentences.length / 2)));
+
+  // Jumlah cluster mengikuti keragaman konten (heuristik akar), bukan dipaksa.
+  const k = Math.min(MOCK_MAX_BRANCHES, Math.max(1, Math.round(Math.sqrt(sentences.length))));
   const { clusters, medoids } = clusterSentences(sentences, k);
   const branches = clusters
     .map((members, idx) => {
@@ -52,7 +67,7 @@ export function mockGenerate(text) {
       const branchSentence = sentences[medoids[idx]];
       const children = members
         .filter(i => i !== medoids[idx])
-        .slice(0, 4)
+        .slice(0, MOCK_MAX_BRANCHES)
         .map(i => ({ concept: toConcept(sentences[i], 3), level: 2, children: [] }));
       return { concept: toConcept(branchSentence, 2), level: 1, children };
     })
@@ -152,15 +167,22 @@ function safeJsonParse(raw) {
   return JSON.parse(text);
 }
 
+// Counter untuk seed simulator (provider=sim). Tiap panggilan beda seed.
+let _simCounter = parseInt(process.env.SIM_SEED || '1', 10);
+
 export async function generateMindMap(prompt, text) {
   if (PROVIDER === 'mock') return mockGenerate(text);
+  if (PROVIDER === 'sim') {
+    const { simulateMindMap } = await import('../../scripts/stochastic-llm.js');
+    return simulateMindMap(text, _simCounter++);
+  }
   let raw;
   if (PROVIDER === 'groq')      raw = await callGroq(prompt);
   else if (PROVIDER === 'anthropic') raw = await callAnthropic(prompt);
   else if (PROVIDER === 'openai')    raw = await callOpenAI(prompt);
-  else throw new Error(`LLM_PROVIDER tidak dikenali: ${PROVIDER}. Pilihan: groq | anthropic | openai | mock`);
+  else throw new Error(`LLM_PROVIDER tidak dikenali: ${PROVIDER}. Pilihan: groq | anthropic | openai | mock | sim`);
   return safeJsonParse(raw);
 }
 
-export const _internals = { MAX_BRANCHES, MAX_DEPTH, DEFAULT_MODEL };
+export const _internals = { MOCK_MAX_BRANCHES, DEFAULT_MODEL };
 export default { generateMindMap, mockGenerate };

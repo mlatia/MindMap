@@ -102,21 +102,43 @@ describe('UT-25..UT-30 [MSM-05] Validation Layer', () => {
     const bad = { concept: 'r', level: 0, children: [{ concept: 'a', level: 99, children: [] }] };
     expect(() => validate(bad, SAMPLE)).to.throw(/Struktural/);
   });
-  it('UT-27 validasi kendala - tolak depth > 4 level', () => {
-    const deep = { concept: 'a', level: 0, children: [
-      { concept: 'b', level: 1, children: [
-        { concept: 'c', level: 2, children: [
-          { concept: 'd', level: 3, children: [
-            { concept: 'e', level: 4, children: [] }
+  it('UT-27 TIDAK memaksa keseimbangan - pohon DALAM (depth-heavy) diterima', () => {
+    // rantai 6 level memakai istilah dari SAMPLE -> bentuk muncul alami, bukan ditolak
+    const deep = { concept: 'Mind', level: 0, children: [
+      { concept: 'Mapping', level: 1, children: [
+        { concept: 'Teknik', level: 2, children: [
+          { concept: 'Visualisasi', level: 3, children: [
+            { concept: 'Pengetahuan', level: 4, children: [
+              { concept: 'Memori', level: 5, children: [] }
+            ]}
           ]}
         ]}
       ]}
     ]};
-    expect(() => validate(deep, SAMPLE)).to.throw(/Kendala/);
+    const r = validate(deep, SAMPLE);
+    expect(r.ok).to.equal(true);
+    expect(r.stats.depth).to.equal(5);
+    expect(r.stats.shape).to.equal('depth-heavy');
   });
-  it('UT-28 validasi kendala - tolak > 7 cabang root', () => {
+  it('UT-27b safety guard - kedalaman melebihi MAX_DEPTH ditolak (Kendala)', () => {
+    // bangun rantai 14 level (melebihi pengaman 12)
+    let node = { concept: 'x', level: 13, children: [] };
+    for (let lvl = 12; lvl >= 0; lvl -= 1) node = { concept: 'mind', level: lvl, children: [node] };
+    expect(() => validate(node, SAMPLE)).to.throw(/Kendala/);
+  });
+  it('UT-28 TIDAK memaksa keseimbangan - pohon LEBAR (breadth-heavy) diterima', () => {
+    const wide = { concept: 'Mind', level: 0, children:
+      ['Mapping', 'Teknik', 'Visualisasi', 'Pengetahuan', 'Buzan', 'Informasi', 'Konsep', 'Memori', 'Kognitif']
+        .map(cpt => ({ concept: cpt, level: 1, children: [] }))
+    };
+    const r = validate(wide, SAMPLE);
+    expect(r.ok).to.equal(true);
+    expect(r.stats.branchesRoot).to.equal(9); // 9 cabang dulu DITOLAK (>7), kini diterima
+    expect(r.stats.shape).to.equal('breadth-heavy');
+  });
+  it('UT-28b safety guard - cabang melebihi MAX_BRANCH ditolak (Kendala)', () => {
     const fat = { concept: 'mind', level: 0,
-      children: Array.from({ length: 8 }, (_, i) => ({ concept: 'mind ' + i, level: 1, children: [] }))
+      children: Array.from({ length: 25 }, (_, i) => ({ concept: 'mind ' + i, level: 1, children: [] }))
     };
     expect(() => validate(fat, SAMPLE)).to.throw(/Kendala/);
   });
@@ -133,6 +155,44 @@ describe('UT-25..UT-30 [MSM-05] Validation Layer', () => {
     const s = stats(tree);
     expect(s.nodes).to.be.greaterThan(0);
     expect(s.branchesRoot).to.equal(tree.children.length);
+  });
+  it('UT-31 teks PADAT ANGKA (BPS) - concept angka tetap dianggap berakar', () => {
+    const bps = 'Inflasi tahunan Indonesia 5,51 persen pada 2022, lalu 2,61 persen pada 2023, dan 1,57 persen pada 2024. Inflasi inti 2,11 persen, harga bergejolak 0,12 persen.';
+    const tree = { concept: 'Inflasi Indonesia', level: 0, children: [
+      { concept: 'Inflasi 2022', level: 1, children: [ { concept: '5,51%', level: 2, children: [] } ] },
+      { concept: 'Inflasi 2023', level: 1, children: [ { concept: '2,61%', level: 2, children: [] } ] },
+      { concept: 'Inflasi 2024', level: 1, children: [ { concept: '1,57%', level: 2, children: [] } ] },
+      { concept: 'Inflasi Inti', level: 1, children: [ { concept: '2,11%', level: 2, children: [] } ] },
+      { concept: 'Harga Bergejolak', level: 1, children: [ { concept: '0,12%', level: 2, children: [] } ] }
+    ]};
+    const r = validate(tree, bps); // dulu sering gagal 3x; kini lolos
+    expect(r.ok).to.equal(true);
+    expect(r.stats.shape).to.equal('breadth-heavy');
+  });
+});
+
+// =============================================================
+//  UT-31b..UT-33 : MSM-03 prompt TIDAK memaksa keseimbangan (revisi)
+// =============================================================
+describe('UT-31b..UT-33 [MSM-03] Prompt faithful-to-text (tanpa paksaan bentuk)', () => {
+  it('UT-31b prompt TIDAK lagi menargetkan kedalaman / "sedalam mungkin" / "komprehensif"', () => {
+    const longText = SAMPLE.repeat(6); // >2000 char (dulu memicu target 4 level)
+    const p = buildPrompt(longText);
+    expect(p.user).to.not.match(/sedalam mungkin/i);
+    expect(p.user).to.not.match(/komprehensif/i);
+    expect(p.user).to.not.match(/4 LEVEL/i);
+    expect(p.system).to.not.match(/3-4 level/i);
+  });
+  it('UT-32 prompt menekankan kesetiaan pada teks & bentuk alami', () => {
+    const p = buildPrompt(SAMPLE);
+    expect(p.user).to.match(/MUNCUL ALAMI|mengikuti struktur teks/i);
+    expect(p.system).to.match(/FAITHFUL TO TEXT|MENGIKUTI ISI/i);
+    expect(p.system).to.match(/ANTI-DUPLIKASI/i);
+  });
+  it('UT-33 prompt panjang & pendek menghasilkan instruksi struktural yang SAMA (tak tergantung panjang)', () => {
+    const pShort = buildPrompt('Mind map teknik visualisasi. Dikembangkan Tony Buzan.');
+    const pLong = buildPrompt(SAMPLE.repeat(6));
+    expect(pShort.system).to.equal(pLong.system); // system prompt identik, tak ada target depth by length
   });
 });
 

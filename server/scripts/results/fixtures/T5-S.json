@@ -1,0 +1,21 @@
+{
+  "concept": "Undang Data",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Data Perlindungan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Controller Kewajiban",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Tahunan Persen",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

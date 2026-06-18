@@ -1,0 +1,47 @@
+{
+  "concept": "Kota Penduduk",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Penduduk Bermigrasi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pembangunan Pemerataan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Mempengaruhi Jaringan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Penduduk Menghadapi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pengembangan Pemerintah",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pergeseran Signifikan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Sosial Munculnya",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Munculnya Tantangan Kawasan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

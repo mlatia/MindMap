@@ -1,0 +1,59 @@
+{
+  "concept": "Data Undang",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Hak Portabilitas",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Administratif Pendapatan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Tahun Perlindungan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Undang Lembaga",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pengolahan Kewajiban",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Controller Pengolahan Kewajiban",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Controller",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Tahun Pelanggaran",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pelanggaran Kebocoran Dipidana",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Lembaga Sosialisasi",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

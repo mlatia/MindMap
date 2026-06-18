@@ -5,66 +5,50 @@
     {
       "concept": "Digital Pandemi",
       "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Memperluas Instagram",
+      "level": 1,
       "children": [
         {
-          "concept": "Digital Pandemi Pasca",
+          "concept": "Marketing Konversi",
           "level": 2,
-          "children": []
-        },
+          "children": [
+            {
+              "concept": "Pemasaran Digital",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Instagram Seperti",
+      "level": 1,
+      "children": [
         {
-          "concept": "Digital Pandemi Pasca",
+          "concept": "Influencer Marketing",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Influencer Konversi",
+      "concept": "Daya Keterbatasan",
       "level": 1,
-      "children": [
-        {
-          "concept": "Influencer Konversi Marketing",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Influencer Konversi Marketing",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Instagram Media",
+      "concept": "Sumber Daya",
       "level": 1,
-      "children": [
-        {
-          "concept": "Instagram Media Memperluas",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Instagram Media Memperluas",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Dampak Dimensi Ekonomi",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Adaptasi Cepat",
+      "concept": "Lingkungan Pengukuran",
       "level": 1,
-      "children": [
-        {
-          "concept": "Berkelanjutan Daya Infrastruktur",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     }
   ]
 }

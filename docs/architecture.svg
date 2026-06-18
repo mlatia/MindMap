@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 940" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font-size:26px;font-weight:700;fill:#0f172a}
+      .sub{font-size:13px;fill:#64748b}
+      .lane{font-size:13px;font-weight:700;fill:#1e293b;letter-spacing:.5px}
+      .box{font-size:13px;font-weight:600;fill:#0f172a}
+      .small{font-size:11px;fill:#475569}
+      .tag{font-size:10.5px;fill:#7c3aed;font-weight:700}
+      .ref{font-size:11px;fill:#0369a1;font-style:italic}
+      .flow{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arr)}
+      .flowback{stroke:#e11d48;stroke-width:2;fill:none;stroke-dasharray:6 4;marker-end:url(#arr)}
+    </style>
+  </defs>
+
+  <rect width="1180" height="940" fill="#f8fafc"/>
+  <text x="40" y="46" class="title">Arsitektur Sistem - Generator Mind Map Otomatis (Auto-CoT + LLM + D3)</text>
+  <text x="40" y="68" class="sub">PERN stack. Pipeline Auto-CoT mengubah teks -> JSON pohon -> visualisasi radial. Bentuk pohon (depth/breadth/balanced) MUNCUL ALAMI dari isi teks, bukan dipaksa.</text>
+
+  <!-- ================= CLIENT LANE ================= -->
+  <rect x="30" y="90" width="1120" height="150" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="48" y="114" class="lane">FRONTEND  -  React + Vite + D3 (MFE)</text>
+
+  <rect x="48" y="126" width="150" height="96" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="60" y="150" class="box">Pengguna</text>
+  <text x="60" y="170" class="small">input teks /</text>
+  <text x="60" y="185" class="small">paste dokumen</text>
+  <text x="60" y="205" class="small">edit &amp; ekspor</text>
+
+  <rect x="220" y="126" width="210" height="96" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="232" y="150" class="box">Pages</text>
+  <text x="232" y="170" class="small">NewMindMap, MindMapDetail,</text>
+  <text x="232" y="185" class="small">Dashboard, Login/Register</text>
+  <text x="232" y="206" class="small">state: useMindMap.js</text>
+
+  <rect x="452" y="126" width="300" height="96" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="464" y="150" class="box">Visualisasi (komponen layout)</text>
+  <text x="464" y="170" class="small">MindMapRadial  -  Reingold-Tilford radial</text>
+  <text x="464" y="185" class="small">MindMapCluster (dendrogram), MindMapForce</text>
+  <text x="464" y="206" class="tag">Buchheim dkk. 2002 - separation anti-tabrakan</text>
+
+  <rect x="774" y="126" width="160" height="96" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="786" y="150" class="box">exportUtils</text>
+  <text x="786" y="170" class="small">PNG / PDF / JSON</text>
+  <text x="786" y="190" class="small">drag reposisi,</text>
+  <text x="786" y="205" class="small">zoom/pan</text>
+
+  <rect x="956" y="126" width="178" height="96" rx="9" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="968" y="150" class="box">services/api.js</text>
+  <text x="968" y="170" class="small">Axios + JWT Bearer</text>
+  <text x="968" y="190" class="small">POST /mindmap/</text>
+  <text x="968" y="205" class="small">generate</text>
+
+  <!-- ================= API LANE ================= -->
+  <rect x="30" y="262" width="1120" height="120" rx="12" fill="#f0fdf4" stroke="#bbf7d0"/>
+  <text x="48" y="286" class="lane">BACKEND API  -  Express (MBE)</text>
+
+  <rect x="48" y="298" width="220" height="72" rx="9" fill="#ffffff" stroke="#86efac"/>
+  <text x="60" y="322" class="box">Auth Middleware</text>
+  <text x="60" y="342" class="small">JWT verify, Passport,</text>
+  <text x="60" y="357" class="small">Helmet, rate-limit</text>
+
+  <rect x="288" y="298" width="270" height="72" rx="9" fill="#ffffff" stroke="#86efac"/>
+  <text x="300" y="322" class="box">Routes</text>
+  <text x="300" y="342" class="small">auth, projects, counter,</text>
+  <text x="300" y="357" class="small">mindmap.routes -&gt; POST /generate</text>
+
+  <rect x="578" y="298" width="556" height="72" rx="9" fill="#ffffff" stroke="#86efac"/>
+  <text x="590" y="322" class="box">Orkestrasi /generate  -  retry maks 3x + DEGRADASI ANGGUN</text>
+  <text x="590" y="342" class="small">Bentuk pohon sehat (struktural+kendala) TETAP dikembalikan walau cek lunak gagal,</text>
+  <text x="590" y="357" class="small">sehingga teks padat angka tidak lagi gagal total (422). Tidak ada paksaan keseimbangan.</text>
+
+  <!-- ================= PIPELINE LANE ================= -->
+  <rect x="30" y="404" width="1120" height="246" rx="12" fill="#fef2f9" stroke="#fbcfe8"/>
+  <text x="48" y="428" class="lane">PIPELINE AUTO-CoT  (MSM-01 .. MSM-05)</text>
+
+  <rect x="48" y="442" width="150" height="92" rx="9" fill="#ffffff" stroke="#f9a8d4"/>
+  <text x="60" y="464" class="box">1. Preprocess</text>
+  <text x="60" y="483" class="small">cleanText,</text>
+  <text x="60" y="498" class="small">splitSentences,</text>
+  <text x="60" y="513" class="small">tokenize (stopword)</text>
+  <text x="60" y="528" class="tag">MSM-01</text>
+
+  <rect x="214" y="442" width="166" height="92" rx="9" fill="#ffffff" stroke="#f9a8d4"/>
+  <text x="226" y="464" class="box">2. Embedding</text>
+  <text x="226" y="483" class="small">TF-IDF vector,</text>
+  <text x="226" y="498" class="small">k-medoids clustering</text>
+  <text x="226" y="513" class="small">(deterministik, FR-3)</text>
+  <text x="226" y="528" class="tag">MSM-02</text>
+
+  <rect x="396" y="442" width="190" height="92" rx="9" fill="#ffffff" stroke="#f9a8d4"/>
+  <text x="408" y="464" class="box">3. Build Prompt</text>
+  <text x="408" y="483" class="small">Auto-CoT reasoning +</text>
+  <text x="408" y="498" class="small">3 few-shot KONTRAS</text>
+  <text x="408" y="513" class="small">(depth/breadth/balanced)</text>
+  <text x="408" y="528" class="tag">MSM-03</text>
+
+  <rect x="602" y="442" width="176" height="92" rx="9" fill="#ffffff" stroke="#f9a8d4"/>
+  <text x="614" y="464" class="box">4. LLM Client</text>
+  <text x="614" y="483" class="small">groq | anthropic |</text>
+  <text x="614" y="498" class="small">openai | sim | mock</text>
+  <text x="614" y="513" class="small">parse JSON aman</text>
+  <text x="614" y="528" class="tag">MSM-04</text>
+
+  <rect x="794" y="442" width="340" height="92" rx="9" fill="#ffffff" stroke="#f9a8d4"/>
+  <text x="806" y="464" class="box">5. Validation Layer (4 tahap)</text>
+  <text x="806" y="483" class="small">Struktural -&gt; Kendala (PENGAMAN longgar, bukan keseimbangan)</text>
+  <text x="806" y="498" class="small">-&gt; Semantik (anti-halusinasi, toleran angka) -&gt; Kelengkapan</text>
+  <text x="806" y="513" class="small">depth&lt;=12, cabang&lt;=24 (hanya pengaman runaway)</text>
+  <text x="806" y="528" class="tag">MSM-05</text>
+
+  <!-- few-shot note -->
+  <rect x="396" y="556" width="738" height="78" rx="9" fill="#fdf4ff" stroke="#e9d5ff"/>
+  <text x="408" y="578" class="box">Prinsip prompt (revisi): BENTUK MENGIKUTI ISI (faithful-to-text)</text>
+  <text x="408" y="598" class="small">Tidak ada lagi target "3-4 level", "4-7 cabang", atau "sedalam mungkin". Parent-child hanya jika ada keterkaitan jelas;</text>
+  <text x="408" y="614" class="small">anti-duplikasi; angka dikelompokkan apa adanya. Depth-heavy / breadth-heavy / balanced muncul alami dari teks.</text>
+  <text x="408" y="630" class="ref">Wei dkk. 2022 (CoT) - Zhang dkk. 2023 (Auto-CoT, question clustering)</text>
+
+  <!-- retry loop note -->
+  <rect x="48" y="556" width="330" height="78" rx="9" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="60" y="578" class="box">Loop retry (maks 3x)</text>
+  <text x="60" y="598" class="small">Jika validasi gagal: pesan error</text>
+  <text x="60" y="614" class="small">disisipkan ke prompt berikutnya.</text>
+  <text x="60" y="630" class="small">Gagal total -&gt; degradasi anggun.</text>
+
+  <!-- ================= DATA + EVAL LANE ================= -->
+  <rect x="30" y="672" width="546" height="232" rx="12" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="48" y="696" class="lane">PERSISTENSI</text>
+  <rect x="48" y="710" width="510" height="80" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="60" y="734" class="box">PostgreSQL</text>
+  <text x="60" y="754" class="small">users (auth), projects / mindmaps (JSON pohon tersimpan),</text>
+  <text x="60" y="769" class="small">counter. Init via database/init.sql, docker-compose.</text>
+  <rect x="48" y="800" width="510" height="86" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="60" y="824" class="box">Output JSON pohon  {concept, level, children}</text>
+  <text x="60" y="844" class="small">dikirim balik ke klien untuk dirender D3 (radial),</text>
+  <text x="60" y="860" class="small">diedit pengguna, lalu diekspor (PNG/PDF/JSON).</text>
+  <text x="60" y="878" class="small">FR-3: input identik -&gt; output deterministik (mock).</text>
+
+  <rect x="592" y="672" width="558" height="232" rx="12" fill="#ecfeff" stroke="#a5f3fc"/>
+  <text x="610" y="696" class="lane">SUBSISTEM EVALUASI &amp; PENGUJIAN STABILITAS</text>
+
+  <rect x="610" y="710" width="262" height="84" rx="9" fill="#ffffff" stroke="#67e8f9"/>
+  <text x="622" y="734" class="box">STED + Consistency Score</text>
+  <text x="622" y="753" class="small">Hungarian per-level, lambda=0.1,</text>
+  <text x="622" y="768" class="small">C(O)=rata-rata pairwise STED</text>
+  <text x="622" y="785" class="ref">Wang dkk. 2025</text>
+
+  <rect x="888" y="710" width="246" height="84" rx="9" fill="#ffffff" stroke="#67e8f9"/>
+  <text x="900" y="734" class="box">Metrik Layout</text>
+  <text x="900" y="753" class="small">NOR, ECN, LC, WKL, ELV</text>
+  <text x="900" y="768" class="small">headless RT = d3.tree asli</text>
+  <text x="900" y="785" class="ref">Purchase 2002</text>
+
+  <rect x="610" y="802" width="524" height="86" rx="9" fill="#ffffff" stroke="#67e8f9"/>
+  <text x="622" y="826" class="box">Skrip eval (npm run eval:stability / eval:layout)</text>
+  <text x="622" y="846" class="small">SCS &gt;= 0.70 dan ESR &gt;= 90% (NF-2). Provider sim = variabilitas offline reproducible.</text>
+  <text x="622" y="862" class="small">Output: stability.csv, stability-report.json, samples/&lt;id&gt;.json (contoh pohon),</text>
+  <text x="622" y="878" class="small">distribusi bentuk antar-run sebagai bukti bentuk MUNCUL ALAMI (tidak dipaksa).</text>
+
+  <!-- ============ FLOW ARROWS ============ -->
+  <!-- client internal -->
+  <path class="flow" d="M198,174 L218,174"/>
+  <path class="flow" d="M430,174 L450,174"/>
+  <path class="flow" d="M752,174 L772,174"/>
+  <path class="flow" d="M934,174 L954,174"/>
+  <!-- api to client (request down) -->
+  <path class="flow" d="M1045,222 L1045,298"/>
+  <text x="1052" y="262" class="small">HTTPS/JWT</text>
+  <!-- routes->orchestration -->
+  <path class="flow" d="M558,334 L576,334"/>
+  <!-- orchestration down to pipeline -->
+  <path class="flow" d="M300,382 L300,440"/>
+  <text x="306" y="400" class="small">teks</text>
+  <!-- pipeline chain -->
+  <path class="flow" d="M198,488 L212,488"/>
+  <path class="flow" d="M380,488 L394,488"/>
+  <path class="flow" d="M586,488 L600,488"/>
+  <path class="flow" d="M778,488 L792,488"/>
+  <!-- validation back to orchestration (retry) -->
+  <path class="flowback" d="M964,442 C964,405 720,392 640,382"/>
+  <text x="700" y="420" class="small" fill="#e11d48">retry (error -&gt; prompt)</text>
+  <!-- pipeline result to DB -->
+  <path class="flow" d="M120,534 L120,708"/>
+  <text x="126" y="660" class="small">JSON valid</text>
+  <!-- DB/result to eval -->
+  <path class="flow" d="M560,820 L606,820"/>
+
+  <text x="40" y="928" class="sub">Catatan: garis merah putus-putus = jalur retry (pesan error validasi disisipkan ke prompt berikutnya). Maks 3x, lalu degradasi anggun.</text>
+</svg>

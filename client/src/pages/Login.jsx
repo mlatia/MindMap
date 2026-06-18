@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Auth, setToken } from '../services/api';
+import Mascot from '../components/Mascot';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -55,6 +56,7 @@ export default function Login() {
         </div>
       </div>
       <div className="accent">
+        <Mascot size={150} className="mascot-float" style={{ marginBottom: '1rem' }} />
         <div className="card" style={{ transform: 'rotate(-2deg)', maxWidth: 320 }}>
           <span className="scribble" style={{ fontSize: '1.4rem' }}>Welcome back ✦</span>
           <h3 style={{ marginTop: 8 }}>Lanjutkan proyek mind map-mu.</h3>

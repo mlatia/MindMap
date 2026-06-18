@@ -1,45 +1,23 @@
 {
-  "concept": "Prediksi Cuaca",
+  "concept": "Cuaca Machine",
   "level": 0,
   "children": [
     {
-      "concept": "Machine Learning",
+      "concept": "Satelit Stasiun",
       "level": 1,
-      "children": [
-        {
-          "concept": "Random Forest",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Gradient Boosting",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Model Ensemble",
+      "concept": "Boosting Gradient",
       "level": 1,
-      "children": [
-        {
-          "concept": "Decision Tree",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Data Utama",
+      "concept": "Menggabungkan Decision",
       "level": 1,
       "children": [
         {
-          "concept": "Data Satelit",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Stasiun Cuaca",
+          "concept": "Menggabungkan Decision Ensemble",
           "level": 2,
           "children": []
         }

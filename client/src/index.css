@@ -275,8 +275,10 @@ input:focus, textarea:focus, select:focus {
     radial-gradient(circle at 1px 1px, #E5E5E5 1px, transparent 1px) 0 0/22px 22px,
     var(--note-pink);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 }
 @media (max-width: 768px) {
   .auth-shell { grid-template-columns: 1fr; }
@@ -441,4 +443,98 @@ input:focus, textarea:focus, select:focus {
   .toolbar button { font-size: 0.8rem; padding: 0.45rem 0.7rem; }
   .canvas-wrap { min-height: 65vh; }
   .nav-links a, .nav-links button { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+}
+
+/* ============================================================
+ *  TEMA WARNA (pink default / biru / mint) - ThemeSwitcher
+ *  Mengganti accent + urutan warna cabang mind map.
+ * ============================================================ */
+:root[data-theme="blue"] {
+  --pink-tag:    #BFE3F7;
+  --pink-strong: #3DA8E0;
+  --branch-1: #9EDDF3; --branch-2: #BFE9C5; --branch-3: #FFE45C;
+  --branch-4: #D9C7FF; --branch-5: #FFB8E0; --branch-6: #FFD2A6;
+}
+:root[data-theme="mint"] {
+  --pink-tag:    #CDEFD5;
+  --pink-strong: #3FB985;
+  --branch-1: #BFE9C5; --branch-2: #9EDDF3; --branch-3: #FFE45C;
+  --branch-4: #FFB8E0; --branch-5: #D9C7FF; --branch-6: #FFD2A6;
+}
+
+/* ---- Theme switcher (titik warna di topbar) ---- */
+.theme-switcher { display: inline-flex; gap: 6px; align-items: center; margin-right: 4px; }
+.theme-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--color-ink); padding: 0; cursor: pointer;
+  box-shadow: 1px 1px 0 var(--color-ink); transition: transform .12s ease;
+}
+.theme-dot:hover { transform: translateY(-1px) scale(1.08); }
+.theme-dot.active { outline: 2px solid var(--color-ink); outline-offset: 2px; }
+
+/* ---- Maskot ---- */
+.mascot { display: block; }
+.mascot-float { animation: mascot-bob 3.2s ease-in-out infinite; }
+@keyframes mascot-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+/* ============================================================
+ *  KANVAS PENUH + RESPONSIVE (fix tampil "setengah" di mobile)
+ * ============================================================ */
+.canvas-wrap { display: flex; }
+.canvas-wrap > svg { flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; display: block; }
+
+@media (max-width: 768px) {
+  /* gunakan dynamic viewport height supaya kanvas benar2 penuh di mobile
+     (memperhitungkan address bar browser) dan konten mengisi penuh */
+  .canvas-wrap { min-height: 72dvh; height: 72dvh; }
+  /* Pisahkan: titik tema warna di KIRI, link Login/Register di KANAN */
+  .nav-links { width: 100%; justify-content: flex-end; align-items: center; }
+  .theme-switcher { margin-right: auto; order: -1; }
+  .mascot { width: 96px; height: 96px; }
+}
+@media (max-width: 480px) {
+  .canvas-wrap { min-height: 68dvh; height: 68dvh; }
+}
+
+/* ---- Nav items (ikon + label, tidak membungkus) ---- */
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.nav-item svg { display: block; }
+.nav-links { align-items: center; flex-wrap: wrap; }
+
+/* Layar kecil: tampilkan ikon saja untuk nav login (hemat ruang, tetap rapi) */
+@media (max-width: 560px) {
+  .nav-links .nav-item span { display: none; }
+  .nav-item { padding-left: 0.55rem; padding-right: 0.55rem; }
+}
+
+/* ---- Hint sekali-jalan: slider "Jarak node" ---- */
+.spacing-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: -0.2rem 0 0.8rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--note-mint);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--color-ink);
+  font-size: 0.9rem;
+  animation: hint-pop .35s ease;
+}
+.spacing-hint-icon { font-size: 1.1rem; color: var(--pink-strong); }
+.spacing-hint-close {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.82rem;
+}
+@keyframes hint-pop { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 768px) {
+  .spacing-hint { flex-wrap: wrap; }
+  .spacing-hint-close { margin-left: 0; width: 100%; }
 }

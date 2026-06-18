@@ -1,87 +1,63 @@
 {
-  "concept": "Urbanisasi Indonesia",
+  "concept": "Kota Urbanisasi",
   "level": 0,
   "children": [
     {
-      "concept": "Pergeseran Demografi",
+      "concept": "Bermigrasi Penduduk",
       "level": 1,
       "children": [
         {
-          "concept": "Sejak Reformasi",
+          "concept": "Bermigrasi Penduduk Ekonomi",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Migrasi Penduduk",
+      "concept": "Menghadapi Kemacetan",
       "level": 1,
       "children": [
         {
-          "concept": "Dari Desa ke Kota",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Mencari Peluang Ekonomi",
+          "concept": "Menghadapi Kemacetan Kepadatan",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Masalah Kota Besar",
+      "concept": "Implementasi Pertimbangan",
       "level": 1,
       "children": [
         {
-          "concept": "Kepadatan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Kemacetan",
+          "concept": "Implementasi Pertimbangan Membutuhkan",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Implementasi",
+      "concept": "Pergeseran Urbanisasi",
       "level": 1,
       "children": [
         {
-          "concept": "Pertimbangan Teknis",
+          "concept": "Menunjukkan Pergeseran Urbanisasi",
           "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pertimbangan Eitis",
-          "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Pergeseran",
+              "level": 3,
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
-      "concept": "Stakeholder",
+      "concept": "Stakeholder Masyarakat",
       "level": 1,
       "children": [
         {
-          "concept": "Akademisi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Praktisi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Regulator",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Masyarakat Umum",
+          "concept": "Masyarakat Akademisi Regulator",
           "level": 2,
           "children": []
         }

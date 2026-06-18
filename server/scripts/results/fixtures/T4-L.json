@@ -1,0 +1,105 @@
+{
+  "concept": "Gula Meliputi",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Obesitas Faktor",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Resistensi Metabolik",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Meliputi Sumber",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pemeriksaan Diagnosis",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Diagnosis Melalui Darah",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Lingkungan Pengukuran",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Lingkungan Pengukuran Dimensi",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Lingkungan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Daya Berkelanjutan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Daya Berkelanjutan Infrastruktur",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Sumber",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Meliputi Obesitas",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Meliputi Obesitas Faktor",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Diagnosis Melalui",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pemeriksaan Diagnosis Melalui",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Diagnosis",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Metabolik Diabetes",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Resistensi Metabolik Diabetes",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

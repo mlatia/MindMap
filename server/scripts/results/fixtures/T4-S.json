@@ -1,40 +1,35 @@
 {
-  "concept": "Diabetes Melitus Tipe 2",
+  "concept": "Gula Diabetes",
   "level": 0,
   "children": [
     {
-      "concept": "Penyakit Metabolik",
+      "concept": "Resistensi Metabolik",
       "level": 1,
       "children": [
         {
-          "concept": "Resistensi Insulin",
+          "concept": "Resistensi Metabolik Diabetes",
           "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Metabolik",
+              "level": 3,
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
-      "concept": "Faktor Risiko",
+      "concept": "Diagnosis Melalui",
       "level": 1,
-      "children": [
-        {
-          "concept": "Obesitas",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pola Makan Tinggi Gula",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     },
     {
-      "concept": "Diagnosis",
+      "concept": "Meliputi Obesitas",
       "level": 1,
       "children": [
         {
-          "concept": "Pemeriksaan Gula Darah",
+          "concept": "Obesitas Faktor Risiko",
           "level": 2,
           "children": []
         }

@@ -1,0 +1,55 @@
+{
+  "concept": "Undang Data",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Pendapatan Tahunan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pertimbangan Membutuhkan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Implementasi Pertimbangan Membutuhkan",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Pertimbangan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Controller Kewajiban",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Data Controller Kewajiban",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Data",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Perlindungan Melindungi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Stakeholder Masyarakat",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

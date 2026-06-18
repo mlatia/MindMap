@@ -1,0 +1,83 @@
+{
+  "concept": "Marketing Strategi",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Penjualan Konversi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Influencer Penjualan Konversi",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Penjualan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Visibilitas Membantu",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Analytics Seperti",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Analytics Seperti Digunakan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Strategi Keberhasilan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Strategi Keberhasilan Acquisition",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Strategi Pemasaran",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Strategi Pemasaran Digital",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Seperti Memperluas",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Seperti Memperluas Penggunaan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Personalisasi Meningkatkan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Personalisasi Meningkatkan Pelanggan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

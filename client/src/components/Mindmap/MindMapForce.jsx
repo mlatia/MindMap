@@ -251,8 +251,17 @@ export default function MindMapForce({
       try {
         const bbox = g.node().getBBox();
         const pad = 60;
-        svg.attr('viewBox',
-          `${bbox.x - pad} ${bbox.y - pad} ${bbox.width + pad * 2} ${bbox.height + pad * 2}`);
+        let vx = bbox.x - pad, vy = bbox.y - pad;
+        let vw = bbox.width + pad * 2, vh = bbox.height + pad * 2;
+        // Isi penuh kanvas (cegah konten tampil 'setengah'/letterbox di mobile):
+        // perlebar viewBox agar rasionya = kontainer, konten tetap di tengah.
+        const _r = svgRef.current && svgRef.current.getBoundingClientRect();
+        if (_r && _r.width && _r.height) {
+          const cA = _r.width / _r.height, vA = vw / vh;
+          if (cA > vA) { const nw = vh * cA; vx -= (nw - vw) / 2; vw = nw; }
+          else { const nh = vw / cA; vy -= (nh - vh) / 2; vh = nh; }
+        }
+        svg.attr('viewBox', `${vx} ${vy} ${vw} ${vh}`);
       } catch (e) { /* ignore */ }
     });
 

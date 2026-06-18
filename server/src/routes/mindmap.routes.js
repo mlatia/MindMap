@@ -9,24 +9,31 @@
  * Mengintegrasikan pipeline Auto-CoT:
  *   preprocess -> embedding/clustering -> buildPrompt -> LLM -> validation
  *
- * Strategi retry yang TERPRESERVASI:
- *   - Maks 3 retry dengan pesan error sebelumnya ditambahkan ke prompt
- *   - Jika semua retry gagal validasi semantik/kelengkapan TAPI struktur valid,
- *     kembalikan hasil terakhir dengan warning (degradasi anggun).
- *   - Hanya kegagalan struktural / kendala yang benar-benar memicu 422.
+ * Strategi retry (TERPRESERVASI, lebih tahan banting):
+ *   - Maks 3 retry dengan pesan error sebelumnya ditambahkan ke prompt.
+ *   - DEGRADASI ANGGUN: selama pohon TERAKHIR berbentuk sehat (struktural +
+ *     kendala pengaman lolos), kembalikan dengan warning daripada 422 total.
+ *     Ini mencegah teks padat angka / relasi tak eksplisit gagal 3x hanya
+ *     karena cek lunak (semantik/kelengkapan).
+ *   - Hanya kegagalan total (tidak ada pohon valid sama sekali) yang memicu 422.
  */
 
 import express from 'express';
 import { requireAuth } from '../middleware/auth.middleware.js';
 import { buildPrompt } from '../mindmap/autoCoT.js';
 import { generateMindMap } from '../mindmap/llmClient.js';
-import { validate, stats } from '../mindmap/validation.js';
+import { validate, validateShape, stats } from '../mindmap/validation.js';
 import { summarize } from '../mindmap/preprocess.js';
 
 const router = express.Router();
 router.use(requireAuth);
 
 const MAX_ATTEMPTS = 3;
+
+/** True jika pohon berbentuk sehat (struktural + kendala pengaman). */
+function shapeOk(tree) {
+  try { return validateShape(tree); } catch { return false; }
+}
 
 router.post('/generate', async (req, res) => {
   const { text, demos } = req.body || {};
@@ -36,8 +43,6 @@ router.post('/generate', async (req, res) => {
   const startedAt = Date.now();
   let lastError = null;
   let lastTree = null;
-  let lastErrorType = null;
-  let lastValStats = null;
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
@@ -48,7 +53,6 @@ router.post('/generate', async (req, res) => {
       const tree = await generateMindMap(prompt, text);
       lastTree = tree;
       const validation = validate(tree, text);
-      lastValStats = validation.stats;
       return res.json({
         mindmap: tree,
         meta: {
@@ -62,14 +66,12 @@ router.post('/generate', async (req, res) => {
       });
     } catch (err) {
       lastError = err.message;
-      lastErrorType = err.message.split(':')[0]; // "Struktural", "Kendala", "Semantik", "Kelengkapan"
       console.warn(`[mindmap] attempt ${attempt} failed:`, err.message);
     }
   }
 
-  // ---- Degradasi anggun: jika sebelumnya berhasil struktural tapi gagal semantik/kelengkapan,
-  // kembalikan tree terakhir dengan warning daripada 422 total.
-  if (lastTree && (lastErrorType === 'Semantik' || lastErrorType === 'Kelengkapan')) {
+  // ---- Degradasi anggun: bentuk sehat tetap dikembalikan (dengan warning).
+  if (lastTree && shapeOk(lastTree)) {
     try {
       const fallbackStats = stats(lastTree);
       return res.json({
@@ -91,7 +93,7 @@ router.post('/generate', async (req, res) => {
     message: 'Gagal menghasilkan mind map setelah retry maksimal',
     lastError,
     attempts: MAX_ATTEMPTS,
-    hint: 'Coba teks yang lebih jelas/terstruktur, atau pastikan LLM_PROVIDER dan OPENAI_API_KEY sudah benar.'
+    hint: 'Coba teks yang lebih jelas/terstruktur, atau pastikan LLM_PROVIDER dan kunci API sudah benar.'
   });
 });
 

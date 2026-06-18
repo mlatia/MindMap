@@ -1,0 +1,40 @@
+{
+  "concept": "Energi Kemudian",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Fotosintesis Klorofil",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Kemudian Ion",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Ion Karbondioksida",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Tersebut Glukosa",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Glukosa Tumbuhan",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Digunakan Disimpan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

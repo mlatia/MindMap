@@ -1,44 +1,28 @@
 {
-  "concept": "Urbanisasi Indonesia",
+  "concept": "Kota Urbanisasi",
   "level": 0,
   "children": [
     {
-      "concept": "Pergeseran Demografi",
+      "concept": "Penduduk Ekonomi",
       "level": 1,
       "children": [
         {
-          "concept": "Sejak Reformasi",
+          "concept": "Bermigrasi Penduduk Ekonomi",
           "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Bermigrasi",
+              "level": 3,
+              "children": []
+            }
+          ]
         }
       ]
     },
     {
-      "concept": "Migrasi Desa",
+      "concept": "Menunjukkan Pergeseran",
       "level": 1,
-      "children": [
-        {
-          "concept": "Mencari Peluang Ekonomi",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Kota Besar",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Kepadatan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Kemacetan",
-          "level": 2,
-          "children": []
-        }
-      ]
+      "children": []
     }
   ]
 }
