@@ -246,7 +246,7 @@ export default function MindMapDetail() {
 
       <div className="card yellow" style={{ marginBottom: '0.8rem', padding: '0.75rem 1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
         <span className="scribble" style={{ fontSize: '1.1rem' }}>cara edit:</span>
-        <span><strong>Klik</strong> node = edit teks · <strong>Enter</strong> simpan · <strong>Esc</strong> batal · <strong>Klik kanan</strong> = menu (tambah/hapus)</span>
+        <span><strong>Klik</strong> node untuk edit teks · <strong>Enter</strong> untuk simpan · <strong>Esc</strong> untuk batal · <strong>Klik kanan</strong> untuk akses menu (tambah/hapus)</span>
       </div>
 
       <div ref={wrapRef} className="canvas-wrap">
