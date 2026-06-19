@@ -214,7 +214,7 @@ export default function MindMapDetail() {
         <button className="secondary" onClick={mm.redo} disabled={!mm.canRedo}>↷ Redo</button>
         <span style={{ borderRight: '1.5px dashed var(--color-ink)', margin: '0 0.4rem' }} />
         <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', fontWeight: 600 }}>
-          Jarak node:
+          Ukuran node:
           <input
             type="range"
             title="Geser untuk merenggangkan jarak antar node biar tidak overlap"
@@ -236,8 +236,8 @@ export default function MindMapDetail() {
         <div className="spacing-hint">
           <span className="spacing-hint-icon" aria-hidden="true">✦</span>
           <span>
-            <strong>Tips:</strong> kalau node saling menumpuk, geser{' '}
-            <strong>“Jarak node”</strong> di toolbar untuk merenggangkannya.
+            <strong>Tips:</strong> kalau node saling menumpuk, geser/klik{' '}
+            <strong>“Ukuran node”</strong> di toolbar untuk merenggangkannya.
             Kamu juga bisa menyeret tiap node satu per satu.
           </span>
           <button className="spacing-hint-close" onClick={dismissSpacingHint}>Mengerti</button>
@@ -246,7 +246,7 @@ export default function MindMapDetail() {
 
       <div className="card yellow" style={{ marginBottom: '0.8rem', padding: '0.75rem 1rem', display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
         <span className="scribble" style={{ fontSize: '1.1rem' }}>cara edit:</span>
-        <span><strong>Klik</strong> node = ubah teks · <strong>Enter</strong> simpan · <strong>Esc</strong> batal · <strong>Klik kanan</strong> = menu (tambah/hapus)</span>
+        <span><strong>Klik</strong> node = edit teks · <strong>Enter</strong> simpan · <strong>Esc</strong> batal · <strong>Klik kanan</strong> = menu (tambah/hapus)</span>
       </div>
 
       <div ref={wrapRef} className="canvas-wrap">
