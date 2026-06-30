@@ -130,10 +130,10 @@ export default function MindMapForce({
 
     // Hitung ukuran tiap node untuk collide radius
     nodes.forEach(n => {
-      const fontSize = n.depth === 0 ? 16 : (n.depth === 1 ? 13 : 11);
+      const fontSize = n.depth === 0 ? 20 : (n.depth === 1 ? 13 : 11);
       const len = (n.data.concept || '').length;
-      n.w = Math.max(80, len * (fontSize * 0.55) + 24);
-      n.h = Math.max(28, fontSize + 16);
+      n.w = Math.max(80, len * (fontSize * 0.55) + (n.depth === 0 ? 40 : 24));
+      n.h = Math.max(28, fontSize + (n.depth === 0 ? 24 : 16));
       n.r = Math.hypot(n.w / 2, n.h / 2) + 6;
     });
     // Pin root di pusat
@@ -193,7 +193,7 @@ export default function MindMapForce({
     nodeSel.each(function(d) {
       const grp = d3.select(this);
       const label = d.data.concept || '';
-      const fontSize = d.depth === 0 ? 16 : (d.depth === 1 ? 13 : 11);
+      const fontSize = d.depth === 0 ? 20 : (d.depth === 1 ? 13 : 11);
       const isEditing = arrEq(d.path, editingPath);
       const isSelected = arrEq(d.path, selectedPath);
 
@@ -205,9 +205,9 @@ export default function MindMapForce({
         .attr('x', -d.w / 2).attr('y', -d.h / 2).attr('rx', 14)
         .attr('width', d.w).attr('height', d.h)
         .attr('fill', isSelected ? PINK_TAG
-              : (d.depth === 0 ? ROOT_FILL : BRANCH[(d.depth - 1) % BRANCH.length]))
-        .attr('stroke', isSelected ? PINK_STRONG : INK)
-        .attr('stroke-width', isSelected ? 3 : 1.5);
+              : (d.depth === 0 ? PINK_TAG : BRANCH[(d.depth - 1) % BRANCH.length]))
+        .attr('stroke', isSelected ? PINK_STRONG : (d.depth === 0 ? ROOT_FILL : INK))
+        .attr('stroke-width', isSelected ? 3 : (d.depth === 0 ? 2 : 1.5));
 
       if (isEditing) {
         grp.append('foreignObject')

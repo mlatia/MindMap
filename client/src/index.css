@@ -780,3 +780,79 @@ input:focus, textarea:focus, select:focus {
   --note-mint:   #A9E5C5;   /* hijau */
   --note-lilac:  #CFE8D8;
 }
+
+/* ============================================================
+ *  DETAIL v4 - Help jadi MODAL (anti kepotong) + rapikan mobile
+ * ============================================================ */
+/* Download di kiri, sisanya (undo/redo+perbesar, Help) ke kanan */
+.canvas-controls .dl-wrap { margin-right: auto; }
+
+.help-modal {
+  position: relative;
+  width: 100%; max-width: 430px;
+  max-height: 80vh; overflow: auto;
+  background: #fff; border: 1.5px solid var(--color-ink);
+  border-radius: 16px; box-shadow: 5px 5px 0 var(--color-ink);
+  padding: 1rem 1.1rem;
+}
+.help-modal h4 { margin: 0 0 0.5rem; font-size: 1.05rem; }
+.help-modal ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.help-modal li { font-size: 0.9rem; color: var(--color-ink-soft); }
+.help-modal .close-x { position: absolute; top: 8px; right: 12px; cursor: pointer; font-weight: 800; font-size: 1rem; }
+
+@media (max-width: 768px) {
+  .canvas-controls { flex-wrap: wrap; align-items: center; }
+  /* Baris 1: Download (kiri) + Help "?" (kanan) */
+  .canvas-controls .dl-wrap { order: 1; margin-right: auto; }
+  .ct-help { order: 2; padding: 0.45rem 0.7rem; border-radius: 999px; }
+  .ct-help .hl { display: none; }            /* mobile: tampilkan "?" saja */
+  /* Baris 2: undo/redo + Perbesar (lebar penuh) */
+  .canvas-controls .ct-group:not(.dl-wrap) { order: 3; flex: 1 1 100%; justify-content: flex-start; }
+  /* Help modal jadi bottom sheet di mobile */
+  .help-modal { border-radius: 16px 16px 0 0; max-width: 560px; }
+}
+
+/* ---- Help: desktop = dropdown TEPAT di bawah tombol (bukan modal tengah) ---- */
+.help-wrap { position: relative; display: inline-flex; }
+.help-dd {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 60;
+  width: 330px; max-width: 80vw;
+  max-height: 62vh; overflow: auto;
+  background: #fff;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--color-ink);
+  padding: 0.9rem 1rem;
+  animation: hint-pop .18s ease;
+}
+.help-dd h4 { margin: 0 0 0.5rem; font-size: 1rem; }
+.help-dd ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.help-dd li { font-size: 0.88rem; color: var(--color-ink-soft); }
+.help-dd .close-x { position: absolute; top: 8px; right: 12px; cursor: pointer; font-weight: 800; }
+
+/* ============================================================
+ *  DETAIL v5 - kontrol mengalir satu urutan: Download -> Perbesar -> Help
+ *  (reset margin & pemaksaan baris-2 dari aturan sebelumnya)
+ * ============================================================ */
+.canvas-controls { justify-content: flex-start; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.canvas-controls .dl-wrap { margin-right: 0; order: 0; }
+.canvas-controls .ct-group:not(.dl-wrap) { order: 0; flex: 0 1 auto; }
+.canvas-controls .help-wrap { order: 0; }
+@media (max-width: 768px) {
+  .canvas-controls { gap: 0.4rem; }
+  .canvas-controls .dl-wrap { order: 0; margin-right: 0; flex: 0 0 auto; }
+  .canvas-controls .ct-group:not(.dl-wrap) { order: 0; flex: 1 1 auto; }
+  .canvas-controls .help-wrap { order: 0; flex: 0 0 auto; }
+  .canvas-controls .ct-group input[type="range"] { width: 56px; }
+  .ct-group .icon-btn { padding: 0.3rem 0.45rem; }
+}
+
+/* Desktop/tablet besar: kembalikan layout TERPISAH (Download kiri, sisanya kanan).
+   Urutan mengalir (Download->Perbesar->Help) hanya berlaku di mobile (<=768px). */
+@media (min-width: 769px) {
+  .canvas-controls .dl-wrap { margin-right: auto; }
+  .canvas-controls .ct-group:not(.dl-wrap) { flex: 0 0 auto; }
+}

@@ -131,8 +131,8 @@ export default function MindMapCluster({
     nodeSel.each(function(d) {
       const grp = d3.select(this);
       const label = d.data.concept || '';
-      const fontSize = d.depth === 0 ? 18 : (d.depth === 1 ? 14 : 12);
-      const padX = 14, padY = 8;
+      const fontSize = d.depth === 0 ? 22 : (d.depth === 1 ? 14 : 12);
+      const padX = d.depth === 0 ? 20 : 14, padY = d.depth === 0 ? 12 : 8;
       const isEditing = arrEq(d.data.__path, editingPath);
 
       const tmp = grp.append('text').attr('text-anchor', 'middle')
@@ -145,7 +145,7 @@ export default function MindMapCluster({
       d.__w = w; d.__h = h;
 
       const isSelected = arrEq(d.data.__path, selectedPath);
-      const fill = d.depth === 0 ? ROOT_FILL : BRANCH[(d.depth - 1) % BRANCH.length];
+      const fill = d.depth === 0 ? PINK_TAG : BRANCH[(d.depth - 1) % BRANCH.length];
 
       grp.append('rect').attr('class', 'node-shadow')
         .attr('x', -w / 2 + 3).attr('y', -h / 2 + 3).attr('rx', 14)
@@ -155,8 +155,8 @@ export default function MindMapCluster({
         .attr('x', -w / 2).attr('y', -h / 2).attr('rx', 14)
         .attr('width', w).attr('height', h)
         .attr('fill', isSelected ? PINK_TAG : fill)
-        .attr('stroke', isSelected ? PINK_STRONG : INK)
-        .attr('stroke-width', isSelected ? 3 : 1.5);
+        .attr('stroke', isSelected ? PINK_STRONG : (d.depth === 0 ? ROOT_FILL : INK))
+        .attr('stroke-width', isSelected ? 3 : (d.depth === 0 ? 2 : 1.5));
 
       if (isEditing) {
         grp.append('foreignObject')

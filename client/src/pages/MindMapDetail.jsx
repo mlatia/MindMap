@@ -203,6 +203,22 @@ export default function MindMapDetail() {
     selectedPath, editingPath, onCommitEdit: commitEdit, onCancelEdit: cancelEdit, spacing,
   };
 
+  const helpBody = (
+    <>
+      <span className="close-x" onClick={() => setShowHelp(false)}>{'✕'}</span>
+      <h4>Cara pakai</h4>
+      <ul>
+        <li><strong>Pilih node</strong>: klik/tap node lalu pakai panel "Node terpilih" di bawah canvas.</li>
+        <li><strong>Rename</strong>: klik tombol Rename atau klik node. Enter simpan, Esc batal.</li>
+        <li><strong>Tambah subnode</strong>: klik tombol "+ Subnode" pada node terpilih.</li>
+        <li><strong>Hapus</strong>: klik tombol Hapus (root tidak bisa dihapus).</li>
+        <li><strong>Perbesar</strong>: geser slider jika node menumpuk.</li>
+        <li><strong>Zoom/geser</strong>: scroll atau cubit; seret node untuk memindah.</li>
+        <li><strong>Download</strong>: tombol Download lalu pilih PNG / PDF.</li>
+      </ul>
+    </>
+  );
+
   return (
     <div className="container page" style={{ paddingTop: '0.4rem' }}>
       <div ref={headRef} className="detail-head row spread" style={{ alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
@@ -250,7 +266,6 @@ export default function MindMapDetail() {
               </div>
             )}
           </div>
-          <span className="ct-spacer" />
           <div className="ct-group">
             <button className="secondary icon-btn" onClick={mm.undo} disabled={!mm.canUndo} title="Undo">{'↶'}</button>
             <button className="secondary icon-btn" onClick={mm.redo} disabled={!mm.canRedo} title="Redo">{'↷'}</button>
@@ -262,7 +277,12 @@ export default function MindMapDetail() {
               <span className="spacing-val">{spacing.toFixed(1)}×</span>
             </label>
           </div>
-          <button className="ct-help" onClick={() => setShowHelp(s => !s)} title="Bantuan">? Help</button>
+          <div className="help-wrap">
+            <button className="ct-help" onClick={() => setShowHelp(s => !s)} title="Bantuan"><span className="qm">?</span><span className="hl"> Help</span></button>
+            {showHelp && !isMobile && (
+              <div className="help-dd" onClick={(e) => e.stopPropagation()}>{helpBody}</div>
+            )}
+          </div>
         </div>
 
         {mm.tree ? (
@@ -275,21 +295,6 @@ export default function MindMapDetail() {
           <div className="empty-hint">Mind map kosong</div>
         )}
 
-        {showHelp && (
-          <div className="help-pop in-canvas" style={{ top: headH + 60 }}>
-            <span className="close-x" onClick={() => setShowHelp(false)}>{'✕'}</span>
-            <h4>Cara pakai</h4>
-            <ul>
-              <li><strong>Pilih node</strong>: klik/tap node lalu pakai panel "Node terpilih" di bawah.</li>
-              <li><strong>Rename</strong>: tombol Rename atau klik node. Enter simpan, Esc batal.</li>
-              <li><strong>Tambah subnode</strong>: tombol "+ Subnode" pada node terpilih.</li>
-              <li><strong>Hapus</strong>: tombol Hapus (root tidak bisa dihapus).</li>
-              <li><strong>Perbesar</strong>: geser slider jika node menumpuk.</li>
-              <li><strong>Zoom/geser</strong>: scroll atau cubit; seret node untuk memindah.</li>
-              <li><strong>Download</strong>: tombol Download lalu pilih PNG / PDF.</li>
-            </ul>
-          </div>
-        )}
       </div>
 
       {ctxMenu && (
@@ -320,6 +325,12 @@ export default function MindMapDetail() {
           </p>
         </div>
       </div>
+
+      {showHelp && isMobile && (
+        <div className="sheet-backdrop" onClick={() => setShowHelp(false)}>
+          <div className="help-modal" onClick={(e) => e.stopPropagation()}>{helpBody}</div>
+        </div>
+      )}
 
       {sheet && (
         <div className="sheet-backdrop" onClick={() => setSheet(null)}>

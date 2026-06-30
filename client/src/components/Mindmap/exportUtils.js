@@ -100,6 +100,21 @@ function buildExportSvg(svgEl, padding = 50) {
   bg.setAttribute('fill', '#FFFFFF');
   clone.insertBefore(bg, clone.firstChild);
 
+  // Pastikan SEMUA garis cabang (edge) HITAM persis seperti tampilan visualisasi,
+  // apa pun algoritma yang dipilih (node tetap mengikuti warna di tampilan).
+  // Edge selalu berupa <path>/<line> dengan fill="none" atau berkelas "link".
+  clone.querySelectorAll('path, line').forEach((el) => {
+    if (el.classList.contains('link') || el.getAttribute('fill') === 'none') {
+      el.setAttribute('stroke', '#0A0A0A');
+      el.setAttribute('opacity', '0.85');
+    }
+  });
+  // Node pada hasil unduhan dibuat PUTIH semua (bukan berwarna). Stroke tetap
+  // (root tetap memakai stroke berwarna + lebih tebal sebagai penanda pusat).
+  clone.querySelectorAll('rect.node-rect').forEach((r) => {
+    r.setAttribute('fill', '#FFFFFF');
+  });
+
   return { svgString: inlineCssVars(new XMLSerializer().serializeToString(clone)), W, H };
 }
 
