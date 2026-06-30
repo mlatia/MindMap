@@ -60,7 +60,7 @@ export default function Login() {
         <div className="card" style={{ transform: 'rotate(-2deg)', maxWidth: 320 }}>
           <span className="scribble" style={{ fontSize: '1.4rem' }}>Welcome back ✦</span>
           <h3 style={{ marginTop: 8 }}>Lanjutkan proyek mind map-mu.</h3>
-          <p>Akun-mu menyimpan semua mind map dan revisinya.</p>
+          <p>Akunmu menyimpan semua mind map dan revisinya.</p>
         </div>
       </div>
     </div>

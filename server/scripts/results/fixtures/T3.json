@@ -1,0 +1,191 @@
+{
+  "concept": "Learning Data",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Lapisan Tersembunyi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Model Berbasis Boosting",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Mempelajari Kecerdasan Algoritma",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Tugas Klasifikasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Melalui Kontainerisasi Deployment",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Regularisasi Overfitting Validasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Model Melalui Kontainerisasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Model Memakai Tensorflow",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Model Tugas",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Melalui Tersembunyi Seperti",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Mempelajari Kecerdasan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Preprocessing Normalisasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Model Tugas Memanfaatkan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Memakai Tensorflow Framework",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Tersembunyi Seperti Unsupervised",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Network Seperti Neural",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Reinforcement Lingkungan Dinamis",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Melalui Reinforcement Lingkungan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Melalui Reinforcement",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Memakai Evaluasi Performa",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Lapisan Tersembunyi Jaringan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Tersembunyi Jaringan Terdiri",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Berbasis Boosting",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Network Neural Convolutional",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Neural Convolutional Pengolahan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Overfitting Validasi Diatasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Preprocessing Normalisasi Imputasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Model Memakai",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Data Network Seperti",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Berbasis Boosting Decision",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Tugas Klasifikasi Menggunakan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Network Seperti",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Evaluasi Performa Akurasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Model Melalui",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Preprocessing Normalisasi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Model Berbasis",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

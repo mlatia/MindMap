@@ -70,7 +70,6 @@ router.post('/generate', async (req, res) => {
     }
   }
 
-  // ---- Degradasi anggun: bentuk sehat tetap dikembalikan (dengan warning).
   if (lastTree && shapeOk(lastTree)) {
     try {
       const fallbackStats = stats(lastTree);
@@ -86,7 +85,7 @@ router.post('/generate', async (req, res) => {
           warnings: [lastError]
         }
       });
-    } catch (_) { /* fall through */ }
+    } catch (_) { }
   }
 
   return res.status(422).json({

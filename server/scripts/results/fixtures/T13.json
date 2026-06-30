@@ -1,0 +1,101 @@
+{
+  "concept": "Data Undang",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Kebocoran Dipidana",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Mendokumentasikan Akuntabilitas Kepatuhannya",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pelanggaran Administratif Dikenakan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosialisasi Masyarakat Dilakukan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pengendali Pengolahan Kewajiban",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pribadi Persetujuan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Lembaga Independen Pengawasan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Memenuhi Transfer Standar",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pelanggaran Kebocoran Dipidana",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Transparansi Keabsahan Keadilan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pemrosesan Perlindungan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Penghapusan Mencakup Koreksi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Perlindungan Pribadi Melindungi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pemrosesan Transparansi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pelindungan Kepatuhan Mengawasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Administratif Dikenakan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Portabilitas Penghapusan Mencakup",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pribadi Persetujuan Eksplisit",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

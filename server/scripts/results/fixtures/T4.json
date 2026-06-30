@@ -1,0 +1,106 @@
+{
+  "concept": "Kota Sosial",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Menunjukkan Pergeseran",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Penduduk Menghadapi Kemacetan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemerintah Tantangan Munculnya",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemerintah Merespons Perumahan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Budaya Memengaruhi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Desa Bermigrasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Kebijakan Desentralisasi Pembangunan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Mempercepat Pendidikan Informasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Individualistis Transformasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Sosial Pemerintah",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Tantangan Budaya Globalisasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Membentuk Kolonial Struktur",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Kebijakan Desa",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Berpartisipasi Berinteraksi Masyarakat",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Desa Bermigrasi Ekonomi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Sosial Lingkungan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Lingkungan Pendatang Perkotaan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Indonesia Menunjukkan Pergeseran",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Merespons Perumahan Program",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

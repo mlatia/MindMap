@@ -112,11 +112,21 @@ export default function MindMapForce({
   onCommitEdit, onCancelEdit, spacing = 1.0
 }) {
   const svgRef = useRef(null);
+  // cache posisi node antar-render supaya tidak re-simulasi tiap pilih/edit
+  const posRef = useRef({ sig: null, pos: new Map(), vb: null });
 
   useEffect(() => {
     if (!tree) return;
     const radiusStep = 140 * spacing;
     const { nodes, links, parentMap } = flattenWithSeed(tree, radiusStep);
+
+    const _css = getComputedStyle(document.documentElement);
+    const cv = (n, fb) => (_css.getPropertyValue(n).trim() || fb);
+    const INK = cv('--color-ink', '#0A0A0A');
+    const ROOT_FILL = cv('--root-fill', '#FF7AC4');
+    const PINK_TAG = cv('--pink-tag', '#FFB7DE');
+    const PINK_STRONG = cv('--pink-strong', '#FF7AC4');
+    const BRANCH = [1,2,3,4,5,6].map(i => cv(`--branch-${i}`, '#ddd'));
 
     // Hitung ukuran tiap node untuk collide radius
     nodes.forEach(n => {
@@ -130,11 +140,24 @@ export default function MindMapForce({
     const root = nodes.find(n => n.id === 'root');
     if (root) { root.fx = 0; root.fy = 0; }
 
+    // STABILITAS: kalau struktur sama (mis. hanya pilih/rename node),
+    // pakai posisi tersimpan + pin semua node supaya TIDAK ber-simulasi ulang
+    // (mencegah node "muter-muter" sehingga sulit diedit di Force-Directed).
+    const sig = nodes.length + '|' + spacing.toFixed(2);
+    const reuse = posRef.current.sig === sig && posRef.current.pos.size > 0;
+    if (reuse) {
+      nodes.forEach(n => {
+        const pp = posRef.current.pos.get(n.id);
+        if (pp) { n.x = pp.x; n.y = pp.y; n.fx = pp.x; n.fy = pp.y; }
+      });
+    }
+
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
     const initSize = Math.max(900, radiusStep * 4.5);
-    svg.attr('viewBox',
-      `${-initSize / 2} ${-initSize / 2} ${initSize} ${initSize}`);
+    svg.attr('viewBox', reuse && posRef.current.vb
+      ? posRef.current.vb
+      : `${-initSize / 2} ${-initSize / 2} ${initSize} ${initSize}`);
 
     svg.append('defs').append('style').text(`
       .node-rect { transition: stroke 180ms ease, stroke-width 180ms ease; }
@@ -159,11 +182,8 @@ export default function MindMapForce({
 
     const linkSel = g.append('g')
       .selectAll('line').data(links).join('line')
-      .attr('stroke', d => {
-        const sNode = nodes.find(n => n.id === d.source);
-        return BRANCH_COLORS[(sNode?.depth || 0) % BRANCH_COLORS.length];
-      })
-      .attr('stroke-width', 1.6).attr('opacity', 0.7);
+      .attr('stroke', INK)
+      .attr('stroke-width', 1.6).attr('opacity', 0.85);
 
     const nodeSel = g.append('g')
       .selectAll('g.node-group').data(nodes).join('g')
@@ -180,13 +200,13 @@ export default function MindMapForce({
       grp.append('rect').attr('class', 'node-shadow')
         .attr('x', -d.w / 2 + 3).attr('y', -d.h / 2 + 3).attr('rx', 14)
         .attr('width', d.w).attr('height', d.h)
-        .attr('fill', 'var(--color-ink)').attr('opacity', 0.9);
+        .attr('fill', INK).attr('opacity', 0.9);
       grp.append('rect').attr('class', 'node-rect')
         .attr('x', -d.w / 2).attr('y', -d.h / 2).attr('rx', 14)
         .attr('width', d.w).attr('height', d.h)
-        .attr('fill', isSelected ? 'var(--pink-tag)'
-              : (d.depth === 0 ? '#fff' : BRANCH_COLORS[(d.depth - 1) % BRANCH_COLORS.length]))
-        .attr('stroke', isSelected ? 'var(--pink-strong)' : 'var(--color-ink)')
+        .attr('fill', isSelected ? PINK_TAG
+              : (d.depth === 0 ? ROOT_FILL : BRANCH[(d.depth - 1) % BRANCH.length]))
+        .attr('stroke', isSelected ? PINK_STRONG : INK)
         .attr('stroke-width', isSelected ? 3 : 1.5);
 
       if (isEditing) {
@@ -214,10 +234,13 @@ export default function MindMapForce({
         grp.append('text').attr('class', 'node-text')
           .attr('text-anchor', 'middle').attr('dominant-baseline', 'central')
           .attr('font-family', "'Plus Jakarta Sans', sans-serif")
-          .attr('font-weight', 700).attr('fill', 'var(--color-ink)')
+          .attr('font-weight', 700).attr('fill', INK)
           .style('font-size', `${fontSize}px`).text(label);
       }
     });
+
+    // Posisi awal eksplisit supaya node langsung tampil di tempat tersimpan.
+    nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
 
     // ---- IMPROVED FORCE SIMULATION ----
     const sim = d3.forceSimulation(nodes)
@@ -235,7 +258,7 @@ export default function MindMapForce({
       // ANGULAR sibling separation (custom)
       .force('angular', forceAngularSiblings(nodes, parentMap, 0.15))
       // Convergence parameters
-      .alpha(0.9)
+      .alpha(reuse ? 0 : 0.9)
       .alphaMin(0.001)
       .alphaDecay(0.012)
       .velocityDecay(0.45);
@@ -248,20 +271,24 @@ export default function MindMapForce({
     });
 
     sim.on('end', () => {
+      // simpan posisi akhir + signature untuk dipakai render berikutnya
+      posRef.current.sig = sig;
+      posRef.current.pos = new Map(nodes.map(n => [n.id, { x: n.x, y: n.y }]));
+      if (reuse) return; // jangan reset framing saat hanya pilih/edit
       try {
         const bbox = g.node().getBBox();
         const pad = 60;
         let vx = bbox.x - pad, vy = bbox.y - pad;
         let vw = bbox.width + pad * 2, vh = bbox.height + pad * 2;
-        // Isi penuh kanvas (cegah konten tampil 'setengah'/letterbox di mobile):
-        // perlebar viewBox agar rasionya = kontainer, konten tetap di tengah.
         const _r = svgRef.current && svgRef.current.getBoundingClientRect();
         if (_r && _r.width && _r.height) {
           const cA = _r.width / _r.height, vA = vw / vh;
           if (cA > vA) { const nw = vh * cA; vx -= (nw - vw) / 2; vw = nw; }
           else { const nh = vw / cA; vy -= (nh - vh) / 2; vh = nh; }
         }
-        svg.attr('viewBox', `${vx} ${vy} ${vw} ${vh}`);
+        const vb = `${vx} ${vy} ${vw} ${vh}`;
+        posRef.current.vb = vb;
+        svg.attr('viewBox', vb);
       } catch (e) { /* ignore */ }
     });
 
@@ -284,8 +311,9 @@ export default function MindMapForce({
       .on('end', function(e, d) {
         if (!e.active) sim.alphaTarget(0);
         if (!d.__dragStart.moved) {
-          if (d.id !== 'root') { d.fx = null; d.fy = null; }
           if (onEdit) onEdit(d.path);
+        } else {
+          posRef.current.pos.set(d.id, { x: d.x, y: d.y });
         }
       });
     nodeSel.call(drag);

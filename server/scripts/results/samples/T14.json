@@ -1,0 +1,177 @@
+{
+  "concept": "Data Undang",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Portabilitas Penghapusan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Perlindungan Pemrosesan Diperlukan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Mendokumentasikan Akuntabilitas Kepatuhannya",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Lembaga Sosialisasi Masyarakat",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemrosesan Diperlukan Penilaian",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemrosesan Transparansi Keabsahan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Akuntabilitas Kepatuhannya Mewajibkan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Penghapusan Mencakup Koreksi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Harmonisasi Kepercayaan Mendukung",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Portabilitas Penghapusan Mencakup",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Administratif Dikenakan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pelindungan Kepatuhan Mengawasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Regulasi Harmonisasi Kepercayaan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Undang Lembaga Independen",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Undang Perlindungan Pribadi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Administratif Dikenakan Berupa",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Perlindungan Pribadi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pengendali Pengolahan Kewajiban",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Kebocoran Dipidana Penjara",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Regulasi Pengendali Pengolahan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Perlindungan Memenuhi Transfer",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pelanggaran Administratif Dikenakan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Memenuhi Transfer Standar",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Lembaga Sosialisasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pribadi Persetujuan Eksplisit",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Perlindungan Pribadi Melindungi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Lembaga Independen Pengawasan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Transparansi Keabsahan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Sosialisasi Masyarakat Dilakukan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemrosesan Pribadi Persetujuan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pribadi Persetujuan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pelanggaran Kebocoran Dipidana",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pelindungan Kepatuhan",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

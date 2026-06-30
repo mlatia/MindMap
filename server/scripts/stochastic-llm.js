@@ -88,9 +88,6 @@ export function simulateMindMap(text, seed = 1) {
     ? ranked.slice(0, 2).map(([w]) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
     : 'Mind Map';
 
-  // ---- DETEKSI BENTUK DARI ISI (bukan dipaksa) ----
-  // Teks RUNTUT/SEBAB-AKIBAT (banyak konektif) -> dirangkai DALAM (depth-heavy).
-  // Teks DAFTAR/PARALEL -> melebar (breadth-heavy). Sisanya -> balanced.
   const SEQ = /\b(lalu|kemudian|setelah|selanjutnya|sehingga|akibatnya|akhirnya|maka|membentuk|menjadi|diubah|hingga|diikuti|menyebabkan|mengakibatkan|berikutnya|sebab|disimpan)\b/i;
   const linked = sentences.map((sent, i) => i > 0 && SEQ.test(sent.slice(0, Math.ceil(sent.length * 0.65))));
   const linkRatio = sentences.length > 1 ? linked.filter(Boolean).length / (sentences.length - 1) : 0;
@@ -105,15 +102,14 @@ export function simulateMindMap(text, seed = 1) {
   };
 
   if (linkRatio >= 0.4 && sentences.length >= 3) {
-    // ----- MODE RANTAI (depth-heavy muncul alami) -----
     const children = [];
-    let cursor = null;           // node terakhir di rantai
+    let cursor = null;          
     let level = 1;
     for (let i = 0; i < sentences.length; i += 1) {
       const cc = addConcept(sentences[i], 2);
       if (!cc) continue;
       const node = { concept: cc, level, children: [] };
-      const breakChain = i === 0 || !linked[i] || rnd() < 0.1; // variasi: kadang putus
+      const breakChain = i === 0 || !linked[i] || rnd() < 0.1; 
       if (breakChain || !cursor) {
         node.level = 1; children.push(node); cursor = node; level = 2;
       } else {
@@ -123,12 +119,34 @@ export function simulateMindMap(text, seed = 1) {
     return { concept: topTopic, level: 0, children };
   }
 
-  // ----- MODE SIBLING (breadth-heavy / balanced muncul alami) -----
+  // ----- MODE SIBLING / BERKELOMPOK (breadth-heavy / balanced muncul alami) -----
   let branchSentences = shuffle(sentences.map((s, i) => ({ s, i })), rnd);
   const drop = rnd() < 0.5 ? 1 : 0; // sesekali buang 1 cabang
   if (branchSentences.length - drop >= 2) branchSentences = branchSentences.slice(0, branchSentences.length - drop);
 
+  // Teks panjang: kelompokkan kalimat ke beberapa cabang utama (seperti LLM
+  // mengorganisasi banyak informasi) agar tidak melebar tak wajar. Cabang root
+  // dibatasi MAX_ROOT; sisanya jadi sub-konsep (level 2/3).
+  const MAX_ROOT = 8;
   const children = [];
+  if (branchSentences.length > MAX_ROOT) {
+    const G = Math.max(4, Math.min(MAX_ROOT, Math.round(Math.sqrt(branchSentences.length))));
+    const groups = Array.from({ length: G }, () => []);
+    branchSentences.forEach((bs, i) => groups[i % G].push(bs.s)); // sebar merata
+    for (const grp of groups) {
+      if (!grp.length) continue;
+      const head = addConcept(grp[0], 2);
+      if (!head) continue;
+      const kids = [];
+      for (let i = 1; i < grp.length; i += 1) {
+        const sub = addConcept(grp[i], 3);
+        if (sub) kids.push({ concept: sub, level: 2, children: [] });
+      }
+      children.push({ concept: head, level: 1, children: kids });
+    }
+    return { concept: topTopic, level: 0, children };
+  }
+
   for (const { s } of branchSentences) {
     const concept = addConcept(s, 2);
     if (!concept) continue;

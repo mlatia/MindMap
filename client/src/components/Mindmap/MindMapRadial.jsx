@@ -46,6 +46,15 @@ export default function MindMapRadial({
     dragOverrideRef.current = new Map();
     const baseRadius = 380 * spacing;
 
+    // Resolve CSS var -> hex (var() di ATRIBUT SVG tak di-resolve browser).
+    const _css = getComputedStyle(document.documentElement);
+    const cv = (n, fb) => (_css.getPropertyValue(n).trim() || fb);
+    const INK = cv('--color-ink', '#0A0A0A');
+    const ROOT_FILL = cv('--root-fill', '#FF7AC4');
+    const PINK_TAG = cv('--pink-tag', '#FFB7DE');
+    const PINK_STRONG = cv('--pink-strong', '#FF7AC4');
+    const BRANCH = [1,2,3,4,5,6].map(i => cv(`--branch-${i}`, '#ddd'));
+
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
     // Set initial viewBox SEBELUM render konten -> mencegah konten muncul
@@ -117,9 +126,9 @@ export default function MindMapRadial({
       .join('path')
         .attr('class', 'link')
         .attr('fill', 'none')
-        .attr('stroke', d => BRANCH_COLORS[(d.source.depth) % BRANCH_COLORS.length])
-        .attr('stroke-width', d => Math.max(1.2, 3.5 - d.target.depth * 0.7))
-        .attr('opacity', 0.75)
+        .attr('stroke', INK)
+        .attr('stroke-width', d => Math.max(1.2, 3.2 - d.target.depth * 0.6))
+        .attr('opacity', 0.85)
         .attr('d', d => linkPath(d.source, d.target));
 
     function linkPath(src, tgt) {
@@ -152,17 +161,17 @@ export default function MindMapRadial({
       d.__w = w; d.__h = h;
 
       const isSelected = arrEq(d.data.__path, selectedPath);
-      const fill = d.depth === 0 ? '#fff' : BRANCH_COLORS[(d.depth - 1) % BRANCH_COLORS.length];
+      const fill = d.depth === 0 ? ROOT_FILL : BRANCH[(d.depth - 1) % BRANCH.length];
 
       grp.append('rect').attr('class', 'node-shadow')
         .attr('x', -w / 2 + 3).attr('y', -h / 2 + 3).attr('rx', 14)
         .attr('width', w).attr('height', h)
-        .attr('fill', 'var(--color-ink)').attr('opacity', 0.9);
+        .attr('fill', INK).attr('opacity', 0.9);
       grp.append('rect').attr('class', 'node-rect')
         .attr('x', -w / 2).attr('y', -h / 2).attr('rx', 14)
         .attr('width', w).attr('height', h)
-        .attr('fill', isSelected ? 'var(--pink-tag)' : fill)
-        .attr('stroke', isSelected ? 'var(--pink-strong)' : 'var(--color-ink)')
+        .attr('fill', isSelected ? PINK_TAG : fill)
+        .attr('stroke', isSelected ? PINK_STRONG : INK)
         .attr('stroke-width', isSelected ? 3 : 1.5);
 
       if (isEditing) {
@@ -195,7 +204,7 @@ export default function MindMapRadial({
           .attr('dominant-baseline', 'central')
           .attr('font-family', "'Plus Jakarta Sans', sans-serif")
           .attr('font-weight', 700)
-          .attr('fill', 'var(--color-ink)')
+          .attr('fill', INK)
           .style('font-size', `${fontSize}px`)
           .text(label);
       }

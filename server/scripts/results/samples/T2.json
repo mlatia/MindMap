@@ -1,43 +1,179 @@
 {
-  "concept": "Kota Penduduk",
+  "concept": "Learning Data",
   "level": 0,
   "children": [
     {
-      "concept": "Penduduk Bermigrasi",
-      "level": 1,
-      "children": []
-    },
-    {
-      "concept": "Pembangunan Pemerataan",
-      "level": 1,
-      "children": []
-    },
-    {
-      "concept": "Mempengaruhi Jaringan",
-      "level": 1,
-      "children": []
-    },
-    {
-      "concept": "Penduduk Menghadapi",
-      "level": 1,
-      "children": []
-    },
-    {
-      "concept": "Pengembangan Pemerintah",
-      "level": 1,
-      "children": []
-    },
-    {
-      "concept": "Pergeseran Signifikan",
-      "level": 1,
-      "children": []
-    },
-    {
-      "concept": "Sosial Munculnya",
+      "concept": "Melalui Kontainerisasi",
       "level": 1,
       "children": [
         {
-          "concept": "Munculnya Tantangan Kawasan",
+          "concept": "Memakai Tensorflow Framework",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Seperti Network Neural",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Lapisan Tersembunyi Jaringan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Model Melalui Kontainerisasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Tersembunyi Seperti Unsupervised",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Model Memakai Tensorflow",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Preprocessing Normalisasi Imputasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Regularisasi Overfitting Validasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Data Preprocessing",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Network Neural Convolutional",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Reinforcement Lingkungan Dinamis",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Memakai Evaluasi Performa",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Mempelajari Kecerdasan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Berbasis Boosting Decision",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Model Berbasis Boosting",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Model Tugas",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Melalui Kontainerisasi Deployment",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Seperti Network",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Tersembunyi Jaringan Terdiri",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Data Mempelajari",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Melalui Reinforcement Lingkungan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Neural Convolutional Pengolahan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Preprocessing Normalisasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Melalui Tersembunyi Seperti",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Tugas Klasifikasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Evaluasi Performa Akurasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Model Tugas",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Data Tugas",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Model Tugas Memanfaatkan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Data Tugas Klasifikasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Evaluasi Performa",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Mempelajari Kecerdasan Algoritma",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Overfitting Validasi Diatasi",
           "level": 2,
           "children": []
         }

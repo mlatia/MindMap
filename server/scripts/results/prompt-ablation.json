@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-06-24T02:45:55.154Z",
+  "provider": "groq",
+  "N": 10,
+  "summary": [
+    {
+      "Metrik": "ESR (rata-rata)",
+      "Varian A": "0.0%",
+      "Varian B": "0.0%"
+    },
+    {
+      "Metrik": "HR (rata-rata, kecil=baik)",
+      "Varian A": "-",
+      "Varian B": "-"
+    },
+    {
+      "Metrik": "SCS (rata-rata, NF-2)",
+      "Varian A": "-",
+      "Varian B": "-"
+    }
+  ],
+  "detail": [
+    {
+      "id": "T2",
+      "domain": "Sains dan Teknologi",
+      "A": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      },
+      "B": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      }
+    },
+    {
+      "id": "T5",
+      "domain": "Humaniora dan Sosial",
+      "A": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      },
+      "B": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      }
+    },
+    {
+      "id": "T8",
+      "domain": "Bisnis dan Ekonomi",
+      "A": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      },
+      "B": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      }
+    },
+    {
+      "id": "T11",
+      "domain": "Kesehatan dan Kedokteran",
+      "A": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      },
+      "B": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      }
+    },
+    {
+      "id": "T14",
+      "domain": "Hukum dan Kebijakan",
+      "A": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      },
+      "B": {
+        "ESR": 0,
+        "HR": null,
+        "SCS": null
+      }
+    }
+  ]
+}

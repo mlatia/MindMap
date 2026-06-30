@@ -1,0 +1,111 @@
+{
+  "concept": "Marketing Pasar",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Diferensiasi Kompetitor",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pengiriman Efisiensi Kecepatan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Keberhasilan Acquisition Indikator",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Memungkinkan Penargetan Segmentasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pasar Memperluas Instagram",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pasar Memungkinkan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Penjualan Konversi Tingkat",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemasaran Digital Pandemi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Strategi Keberhasilan Acquisition",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pemasaran Consideration",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Konsistensi Loyalitas Dibangun",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Membantu Visibilitas Content",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pelanggan Strategi Omnichannel",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Analytics Evaluasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Pelanggan Personalisasi Retensi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Memperluas Instagram Jangkauan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pendapatan Langganan Berbasis",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Influencer Penjualan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Visibilitas Content Organik",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Analytics Evaluasi Insights",
+          "level": 2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

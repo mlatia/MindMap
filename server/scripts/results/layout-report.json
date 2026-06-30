@@ -1,0 +1,203 @@
+{
+  "generatedAt": "2026-06-25T06:24:56.157Z",
+  "provider": "groq",
+  "metricRef": "Purchase (2002); Mooney dkk. (2024)",
+  "better": {
+    "NOR": "min",
+    "ECN": "min",
+    "LC": "max",
+    "WKL": "min",
+    "ELV": "min"
+  },
+  "analysisA": [
+    {
+      "Panjang": "short",
+      "Algoritma": "RT",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "short",
+      "Algoritma": "FD",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "short",
+      "Algoritma": "CL",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "medium",
+      "Algoritma": "RT",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "medium",
+      "Algoritma": "FD",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "medium",
+      "Algoritma": "CL",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "long",
+      "Algoritma": "RT",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "long",
+      "Algoritma": "FD",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    },
+    {
+      "Panjang": "long",
+      "Algoritma": "CL",
+      "NOR": "0.000",
+      "ECN": "0.0",
+      "LC": "0.000",
+      "WKL": "0.0",
+      "ELV": "0.000"
+    }
+  ],
+  "analysisB": [
+    {
+      "Panjang": "short",
+      "Metrik": "NOR",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "short",
+      "Metrik": "ECN",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "short",
+      "Metrik": "LC",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "short",
+      "Metrik": "WKL",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "short",
+      "Metrik": "ELV",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "medium",
+      "Metrik": "NOR",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "medium",
+      "Metrik": "ECN",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "medium",
+      "Metrik": "LC",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "medium",
+      "Metrik": "WKL",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "medium",
+      "Metrik": "ELV",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "long",
+      "Metrik": "NOR",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "long",
+      "Metrik": "ECN",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "long",
+      "Metrik": "LC",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "long",
+      "Metrik": "WKL",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    },
+    {
+      "Panjang": "long",
+      "Metrik": "ELV",
+      "RT": "0.000",
+      "FD": "0.000",
+      "Lebih baik": "FD"
+    }
+  ],
+  "observations": []
+}

@@ -38,6 +38,7 @@
   --branch-4: #BFE9C5;
   --branch-5: #D9C7FF;
   --branch-6: #FFD2A6;
+  --root-fill: #FF7AC4;
 
   /* Typography */
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, sans-serif;
@@ -128,6 +129,9 @@ input:focus, textarea:focus, select:focus {
 .tag {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
   gap: 0.25rem;
   font-weight: 700;
   font-size: 0.85rem;
@@ -223,7 +227,7 @@ input:focus, textarea:focus, select:focus {
     #fff;
   border: 1.5px solid var(--color-border);
   border-radius: 18px;
-  overflow: hidden;
+  overflow: clip;            /* clip (bukan hidden) supaya kontrol sticky bisa nempel viewport */
   box-shadow: 4px 4px 0 var(--color-ink);
   min-height: 78vh;
 }
@@ -480,7 +484,7 @@ input:focus, textarea:focus, select:focus {
 /* ============================================================
  *  KANVAS PENUH + RESPONSIVE (fix tampil "setengah" di mobile)
  * ============================================================ */
-.canvas-wrap { display: flex; }
+.canvas-wrap { display: flex; flex-direction: column; }
 .canvas-wrap > svg { flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; display: block; }
 
 @media (max-width: 768px) {
@@ -537,4 +541,242 @@ input:focus, textarea:focus, select:focus {
 @media (max-width: 768px) {
   .spacing-hint { flex-wrap: wrap; }
   .spacing-hint-close { margin-left: 0; width: 100%; }
+}
+
+/* ============================================================
+ *  DASHBOARD - hero "Buat baru" (CTA utama di atas daftar)
+ * ============================================================ */
+.create-hero {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; flex-wrap: wrap;
+  padding: 1.1rem 1.4rem; margin-bottom: 1.6rem;
+  background: var(--note-pink);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+.create-hero .ch-text { display: flex; flex-direction: column; gap: 0.15rem; }
+.create-hero h2 { font-size: 1.3rem; margin: 0; }
+.create-hero p { font-size: 0.92rem; color: var(--color-ink-soft); }
+.create-hero .pink { white-space: nowrap; font-size: 1rem; padding: 0.7rem 1.4rem; }
+.history-label { margin: 0 0 0.8rem; }
+@media (max-width: 600px) {
+  .create-hero { border-radius: 20px; padding: 1rem; }
+  .create-hero .pink { width: 100%; }
+}
+
+/* ============================================================
+ *  DETAIL - header sticky + layout bar + kontrol dalam kanvas
+ * ============================================================ */
+.detail-head {
+  position: sticky; top: 0; z-index: 30;
+  background: var(--color-bg, #fff);
+  padding: 0.9rem 0 0.7rem;
+  border-bottom: 1.5px dashed var(--color-border);
+}
+.save-pill { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+.layout-bar {
+  display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+  margin: 0.8rem 0;
+}
+.layout-bar .ll { font-weight: 700; margin-right: 0.2rem; }
+
+.canvas-wrap { position: relative; }
+.canvas-ctrl {
+  position: absolute; z-index: 12;
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 0.5rem;
+  background: rgba(255,255,255,0.94);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 var(--color-ink);
+  backdrop-filter: blur(2px);
+}
+.canvas-ctrl.tl { top: 12px; left: 12px; }
+.canvas-ctrl.tr { top: 12px; right: 12px; }
+.canvas-ctrl .icon-btn { padding: 0.35rem 0.6rem; font-size: 0.85rem; line-height: 1; }
+.canvas-ctrl .sep { width: 1px; height: 20px; background: var(--color-border); }
+.canvas-ctrl label { display: flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 600; }
+.canvas-ctrl input[type="range"] { width: 84px; }
+.btn-export-png { background: var(--branch-2); border-color: var(--color-ink); color: var(--color-ink); }
+.btn-export-pdf { background: var(--branch-1); border-color: var(--color-ink); color: var(--color-ink); }
+
+.help-fab {
+  position: absolute; z-index: 14; right: 14px; bottom: 14px;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: var(--pink-strong); color: var(--color-ink);
+  border: 1.5px solid var(--color-ink); box-shadow: 2px 2px 0 var(--color-ink);
+  font-size: 1.2rem; font-weight: 800; cursor: pointer;
+}
+.help-pop {
+  position: absolute; z-index: 15; right: 14px; bottom: 70px;
+  width: 300px; max-width: calc(100% - 28px);
+  background: #fff; border: 1.5px solid var(--color-ink);
+  border-radius: 14px; box-shadow: 4px 4px 0 var(--color-ink);
+  padding: 0.9rem 1rem; animation: hint-pop .25s ease;
+}
+.help-pop h4 { margin: 0 0 0.5rem; font-size: 1rem; }
+.help-pop ul { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.help-pop li { font-size: 0.86rem; color: var(--color-ink-soft); }
+.help-pop .close-x { position: absolute; top: 8px; right: 10px; cursor: pointer; font-weight: 800; }
+
+.node-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.7rem; }
+.node-actions button { flex: 1 1 auto; min-width: 96px; }
+.na-rename { background: var(--branch-2); color: var(--color-ink); }
+.na-add    { background: var(--branch-4); color: var(--color-ink); }
+.na-del    { background: #FF9B9B; color: var(--color-ink); }
+.node-actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.sheet-backdrop {
+  position: fixed; inset: 0; z-index: 60;
+  background: rgba(10,10,10,0.35);
+  display: flex; align-items: flex-end; justify-content: center;
+  animation: hint-pop .2s ease;
+}
+.sheet {
+  width: 100%; max-width: 520px; background: #fff;
+  border: 1.5px solid var(--color-ink); border-radius: 18px 18px 0 0;
+  box-shadow: 0 -4px 0 var(--color-ink);
+  padding: 1.1rem 1.2rem 1.4rem; animation: sheet-up .25s ease;
+}
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+.sheet h3 { margin: 0 0 0.7rem; }
+.sheet input[type="text"] {
+  width: 100%; padding: 0.7rem 0.9rem; font-size: 1rem;
+  border: 1.5px solid var(--color-ink); border-radius: 10px; outline: none;
+}
+.sheet input[type="text"]:focus { box-shadow: 0 0 0 3px var(--pink-tag); }
+.sheet .sheet-actions { display: flex; gap: 0.6rem; margin-top: 0.9rem; }
+.sheet .sheet-actions button { flex: 1; }
+@media (min-width: 769px) {
+  .sheet-backdrop { align-items: center; }
+  .sheet { border-radius: 16px; box-shadow: 5px 5px 0 var(--color-ink); }
+}
+@media (max-width: 768px) {
+  .canvas-ctrl.tl { top: 8px; left: 8px; padding: 0.3rem 0.35rem; gap: 0.25rem; }
+  .canvas-ctrl.tr { top: 8px; right: 8px; padding: 0.3rem 0.35rem; gap: 0.25rem; }
+  .canvas-ctrl input[type="range"] { width: 64px; }
+  .canvas-ctrl label span.lbl { display: none; }
+}
+
+/* ============================================================
+ *  DETAIL v2 - toolbar STICKY di atas kanvas (tidak ikut scroll)
+ *  Kiri: Download (menu PNG/PDF). Kanan: undo/redo + Perbesar + Help.
+ * ============================================================ */
+.canvas-stage { position: relative; }
+.canvas-toolbar {
+  position: sticky; top: 8px; z-index: 40;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 0.5rem; margin: 0 8px -52px; pointer-events: none;
+}
+.canvas-toolbar > * { pointer-events: auto; }
+.ct-group {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: rgba(255,255,255,0.96);
+  border: 1.5px solid var(--color-ink); border-radius: 12px;
+  box-shadow: 2px 2px 0 var(--color-ink);
+  padding: 0.4rem 0.5rem; backdrop-filter: blur(2px);
+}
+.ct-group label { display: flex; align-items: center; gap: 0.35rem; font-size: 0.8rem; font-weight: 700; }
+.ct-group input[type="range"] { width: 100px; }
+.ct-group .icon-btn { padding: 0.35rem 0.6rem; font-size: 0.85rem; line-height: 1; }
+.ct-group .sep { width: 1px; height: 20px; background: var(--color-border); }
+.spacing-val { min-width: 30px; text-align: right; font-weight: 800; font-size: 0.82rem; }
+
+.dl-wrap { position: relative; }
+.btn-download { background: var(--branch-4); color: var(--color-ink); border-color: var(--color-ink); }
+.dl-menu {
+  position: absolute; top: calc(100% + 6px); left: 0; z-index: 50;
+  display: flex; flex-direction: column; gap: 0.3rem;
+  background: #fff; border: 1.5px solid var(--color-ink); border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--color-ink); padding: 0.4rem; min-width: 140px;
+}
+.dl-menu button { width: 100%; justify-content: flex-start; text-align: left; }
+.dl-png { background: var(--branch-2); color: var(--color-ink); }
+.dl-pdf { background: var(--branch-1); color: var(--color-ink); }
+
+.btn-help { background: var(--pink-strong); color: var(--color-ink); border-color: var(--color-ink); }
+.help-pop.in-canvas { top: 62px; right: 10px; bottom: auto; }
+
+@media (max-width: 768px) {
+  .canvas-toolbar { flex-wrap: wrap; margin: 0 4px -50px; gap: 0.35rem; }
+  .ct-group { padding: 0.3rem 0.4rem; gap: 0.3rem; }
+  .ct-group input[type="range"] { width: 72px; }
+  .ct-group label .lbl { display: none; }
+}
+
+/* ============================================================
+ *  DETAIL v3 - kontrol DI DALAM kanvas (sticky, tidak nabrak header)
+ *  Kiri: Download. Kanan: undo/redo + Perbesar (1 kotak) + Help (kotak pink terpisah).
+ * ============================================================ */
+.canvas-controls {
+  position: sticky;
+  /* top di-set inline = tinggi header + 6px supaya nempel TEPAT di bawah header */
+  z-index: 25;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 8px 8px 0;
+  width: 100%;
+  flex: 0 0 auto;
+}
+.canvas-controls .ct-spacer { flex: 1 1 auto; }
+.canvas-controls .ct-group,
+.canvas-controls .btn-download,
+.canvas-controls .ct-help {
+  transform: none;          /* lurus, tidak miring */
+}
+
+/* Kotak Help terpisah & pink (seperti semula) */
+.ct-help {
+  background: var(--pink-strong);
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-ink);
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 var(--color-ink);
+  padding: 0.5rem 0.8rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+/* Indikator simpan LURUS (tidak miring seperti .tag) */
+.save-state {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-weight: 700; font-size: 0.85rem;
+  padding: 0.3rem 0.7rem; border-radius: 999px;
+  border: 1.5px solid var(--color-ink);
+  box-shadow: 1px 1px 0 var(--color-ink);
+}
+.save-state.ok    { background: var(--note-mint); }
+.save-state.dirty { background: var(--note-yellow); }
+
+@media (max-width: 768px) {
+  .canvas-controls { flex-wrap: wrap; gap: 0.35rem; padding: 6px 6px 0; }
+  .canvas-controls .ct-spacer { display: none; }
+  .canvas-controls .ct-group { padding: 0.3rem 0.4rem; gap: 0.3rem; }
+  .canvas-controls .ct-group input[type="range"] { width: 70px; }
+  .canvas-controls .ct-group label .lbl { display: none; }
+  .ct-help { padding: 0.4rem 0.6rem; }
+}
+
+/* ============================================================
+ *  TEMA: ubah JUGA kartu/aksen besar (bukan cuma tombol)
+ *  supaya tiap tema terasa beda secara keseluruhan.
+ * ============================================================ */
+:root[data-theme="blue"] {
+  --root-fill: #3DA8E0;
+  --note-yellow: #CDE7FF;   /* kartu "yellow" -> biru muda */
+  --note-blue:   #AFCBFF;   /* kartu "blue"   -> periwinkle */
+  --note-pink:   #BFE3F7;   /* kartu/akzen pink -> sky */
+  --note-mint:   #C7F0E6;   /* mint -> aqua */
+  --note-lilac:  #D9C7FF;
+}
+:root[data-theme="mint"] {
+  --root-fill: #3FB985;
+  --note-yellow: #E4F6C7;   /* lime */
+  --note-blue:   #C7F0E6;   /* aqua */
+  --note-pink:   #CDEFD5;   /* mint pucat */
+  --note-mint:   #A9E5C5;   /* hijau */
+  --note-lilac:  #CFE8D8;
 }

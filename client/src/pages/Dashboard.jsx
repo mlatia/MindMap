@@ -35,16 +35,29 @@ export default function Dashboard() {
 
   return (
     <div className="container page">
-      <div className="row spread" style={{ marginBottom: '1.5rem' }}>
-        <div className="col">
-          <span className="tag">Dashboard</span>
-          <h1 style={{ marginTop: 8 }}>Proyek mind map.</h1>
-        </div>
-        <Link to="/new"><button className="pink">+ Buat baru</button></Link>
+      <div className="col" style={{ marginBottom: '1.1rem', gap: '0.4rem' }}>
+        <span className="tag">Dashboard</span>
+        <h1 style={{ marginTop: 4 }}>Proyek mind map.</h1>
       </div>
+
+      {/* CTA utama: hanya tampil kalau sudah ada proyek (kalau kosong,
+          empty-state di bawah sudah menyediakan tombol buat baru). */}
+      {!busy && list.length > 0 && (
+        <div className="create-hero">
+          <div className="ch-text">
+            <h2>Mulai mind map barumu</h2>
+            <p>Tempel teksmu, agar AI yang menyusun struktur &amp; visualisasinya.</p>
+          </div>
+          <Link to="/new"><button className="pink">+ Buat baru</button></Link>
+        </div>
+      )}
 
       {err && <div className="alert error">{err}</div>}
       {busy && <p className="muted">Memuat...</p>}
+
+      {!busy && list.length > 0 && (
+        <h3 className="history-label scribble" style={{ fontSize: '1.3rem' }}>Riwayat mind map</h3>
+      )}
 
       {!busy && list.length === 0 && (
         <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>

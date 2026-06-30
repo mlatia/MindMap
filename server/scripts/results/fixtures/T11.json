@@ -1,0 +1,182 @@
+{
+  "concept": "Gula Darah",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Memperbaiki Sensitivitas",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Memperbaiki Sensitivitas Olahraga",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pasien Pengobatan Psikologis",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Diabetes Risiko Memperberat",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Memperbaiki Continuous Monitoring",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Mengontrol Metformin Glukosa",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Darah Mengontrol Metformin",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Penyakit Menurunkan Berisiko",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Darah Pasien Pemantauan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Insulin Memperbaiki Sensitivitas",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Meliputi Komplikasi Retinopati",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Darah Mengontrol",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Farmakoterapi Membutuhkan Pengelolaan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pengobatan Psikologis Kepatuhan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Darah Pemeriksaan Ditegakkan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Polidipsia Polifagia Mencakup",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Meliputi Risiko Aktivitas",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Penyakit Insulin Resistensi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Continuous Monitoring Teknologi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Membutuhkan Pengelolaan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Polifagia Mencakup Poliuria",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Risiko Memperberat Hipertensi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Risiko Aktivitas Obesitas",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemeriksaan Komplikasi Kardiovaskular",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Diabetes Penyakit",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Komplikasi Kardiovaskular Perburukan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pasien Pemantauan Edukasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Meliputi Komplikasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Diabetes Penyakit Insulin",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemeriksaan Ditegakkan Diagnosis",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Pemeriksaan Komplikasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Komplikasi Retinopati Nefropati",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Membutuhkan Pengelolaan Modifikasi",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Komplikasi Kardiovaskular",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

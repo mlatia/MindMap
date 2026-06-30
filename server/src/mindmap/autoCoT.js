@@ -5,8 +5,18 @@
  *   - Wei dkk. (2022) "Chain-of-Thought Prompting Elicits Reasoning in LLMs"
  *     -> reasoning bertahap (chain-of-thought) sebelum menghasilkan jawaban.
  *   - Zhang dkk. (2023, ICLR) "Automatic Chain-of-Thought Prompting in LLMs"
- *     -> demonstrasi few-shot dibentuk OTOMATIS via question-clustering
- *        (k-medoids atas embedding kalimat), bukan few-shot manual.
+ *     -> gagasan pemilihan demonstrasi via semantic clustering.
+ *
+ * CATATAN AKURASI IMPLEMENTASI (penting untuk laporan):
+ *   Modul ini MENGADAPTASI, bukan mereplikasi persis, Auto-CoT Zhang dkk. (2023).
+ *   - Auto-CoT asli: question clustering + Zero-Shot-CoT untuk MENGHASILKAN
+ *     rationale demonstrasi dari dataset (demonstration sampling).
+ *   - Implementasi ini: TIDAK ada Zero-Shot-CoT dan TIDAK ada sampling dataset.
+ *     Alurnya: splitSentences -> TF-IDF -> k-medoids (semantic clustering) ->
+ *     pilih MEDOID = kalimat representatif dari TEKS INPUT, lalu digabung dengan
+ *     contoh few-shot STATIS (hard-coded) dan instruksi penalaran (CoT) STATIS.
+ *   Jadi: instruksi reasoning & contoh few-shot bersifat statis; yang otomatis
+ *   hanya pemilihan kalimat representatif (lihat buildDemonstrations()).
  *
  * PRINSIP DESAIN PROMPT (revisi):
  *   Struktur JSON HARUS MENGIKUTI struktur informasi pada teks (faithful),
@@ -58,7 +68,7 @@ ATURAN STRUKTURAL (WAJIB):
 OUTPUT: HANYA JSON valid, tanpa markdown fence (jangan kasih backtick), tanpa komentar, tanpa teks tambahan.`;
 
 /* ---------------------------------------------------------------------------
- * Few-shot demonstrasi (Zhang dkk. 2023): sengaja DIBUAT KONTRAS agar model
+ * Few-shot demonstrasi STATIS (hard-coded): sengaja DIBUAT KONTRAS agar model
  * tidak belajar satu pola "seimbang" saja. Tiga contoh = tiga bentuk pohon
  * yang berbeda, semuanya setia pada teksnya masing-masing.
  * ------------------------------------------------------------------------- */
@@ -121,6 +131,11 @@ OUTPUT JSON:
 }
 Perhatikan: jumlah cabang & kedalaman TIDAK dipaksa sama; mengikuti banyaknya detail tiap kategori di teks.`;
 
+/**
+ * buildDemonstrations - bagian OTOMATIS satu-satunya dari prompt:
+ * pilih kalimat REPRESENTATIF dari teks input via semantic clustering
+ * (TF-IDF + k-medoids). Bukan demonstration sampling dari dataset.
+ */
 function buildDemonstrations(text, demos = 3) {
   const sentences = splitSentences(text);
   if (sentences.length < 2) return [];
@@ -139,7 +154,7 @@ export function buildPrompt(text, options = {}) {
   const samples = buildDemonstrations(text, demos);
   const len = text.length;
 
-  // Reasoning Auto-CoT: DIPANDU ISI, BUKAN target kedalaman/jumlah cabang.
+  // Reasoning Chain-of-Thought STATIS: dipandu ISI, bukan target kedalaman/jumlah cabang.
   const reasoning = `LAKUKAN REASONING AUTO-COT SECARA INTERNAL (jangan tulis di output):
 Langkah 1: Tentukan TOPIK UTAMA teks (1 frasa pendek) -> root level=0.
 Langkah 2: Daftarkan UNIT INFORMASI penting yang benar-benar ada di teks (apa adanya), tanpa menargetkan jumlah tertentu.
@@ -151,7 +166,7 @@ Langkah 5: Periksa anti-duplikasi (satu konsep satu tempat) dan pastikan setiap 
 Langkah 6: JANGAN menyamakan jumlah cabang antar node dan JANGAN menyamakan kedalaman antar cabang. Bentuk akhir mengikuti teks.`;
 
   const demoBlock = samples.length
-    ? `\nKALIMAT REPRESENTATIF DARI TEKS (hasil semantic clustering Auto-CoT, untuk panduan):\n${samples.map((s, i) => `${i + 1}. ${s}`).join('\n')}`
+    ? `\nKALIMAT REPRESENTATIF DARI TEKS (hasil semantic clustering TF-IDF + k-medoids, untuk panduan):\n${samples.map((s, i) => `${i + 1}. ${s}`).join('\n')}`
     : '';
 
   const retryBlock = previousError

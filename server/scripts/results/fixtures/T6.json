@@ -1,0 +1,189 @@
+{
+  "concept": "Kota Sosial",
+  "level": 0,
+  "children": [
+    {
+      "concept": "Sosial Individualistis",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Penduduk Menghadapi Kemacetan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemerintah Merespons Perumahan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Penduduk Desa Bermigrasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Budaya Memengaruhi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Pemerintah Tantangan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Mempercepat Pendidikan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Mempercepat Pendidikan Informasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Desentralisasi Pembangunan Pemerataan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Menghadapi Kemacetan Kepadatan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Lingkungan Pendatang",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Berpartisipasi Berinteraksi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Indonesia Membentuk Kolonial",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Berpartisipasi Berinteraksi Masyarakat",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Lingkungan Pendatang Perkotaan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Sosial Individualistis Transformasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Kebijakan Desa Ketimpangan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Budaya Globalisasi Akulturasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Merespons Perumahan Program",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Indonesia Menunjukkan Pergeseran",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Menunjukkan Pergeseran Urbanisasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Membentuk Kolonial Struktur",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Merespons Perumahan",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Kebijakan Desentralisasi Pembangunan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Tantangan Budaya Globalisasi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Pemerintah Tantangan Munculnya",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Desa Bermigrasi Ekonomi",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Budaya Memengaruhi Jaringan",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Individualistis Transformasi Menggeser",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Lingkungan Pendatang",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Individualistis Transformasi",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Desa Ketimpangan Memunculkan",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Budaya Globalisasi",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Pemerintah Tantangan",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Penduduk Desa",
+      "level": 1,
+      "children": []
+    },
+    {
+      "concept": "Menunjukkan Pergeseran",
+      "level": 1,
+      "children": []
+    }
+  ]
+}

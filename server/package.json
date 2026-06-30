@@ -21,7 +21,8 @@
     "mindmap:demo": "node scripts/mindmap-demo.js",
     "eval:stability": "node scripts/eval-stability.js",
     "eval:layout": "node scripts/eval-layout.js",
-    "clean": "rm -rf node_modules coverage"
+    "clean": "rm -rf node_modules coverage",
+    "eval:prompt": "node scripts/eval-prompt-ablation.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

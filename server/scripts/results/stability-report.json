@@ -1,316 +1,207 @@
 {
-  "generatedAt": "2026-06-18T13:23:23.419Z",
+  "generatedAt": "2026-06-24T02:54:35.884Z",
   "provider": "sim",
-  "N": 10,
+  "N": 3,
   "metricRef": "Wang dkk. (2025) STED & Consistency Score (Eq.1, Eq.4, lambda=0.1, Hungarian)",
   "targets": {
     "SCS": ">=0.70",
     "ESR": ">=90%"
   },
   "summary": {
-    "meanSCS": 0.878,
-    "meanSCR": 97.1,
+    "meanSCS": 0.799,
+    "meanSCR": 100,
     "meanESR": 100
   },
   "perText": [
     {
-      "id": "T1",
-      "domain": "Sains dan Teknologi",
-      "SCS": 0.873,
-      "SCR": "100.0%",
-      "ESR": "100.0%",
-      "bentuk": "breadth-heavy",
-      "nodes": 12,
-      "depth": 3,
-      "maxBranch": 6,
-      "shapeDistribution": {
-        "breadth-heavy": 10
-      },
-      "sample": {
-        "concept": "Prediksi Cuaca",
-        "level": 0,
-        "children": [
-          {
-            "concept": "Menggabungkan Meningkatkan",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Model Menggabungkan Meningkatkan",
-                "level": 2,
-                "children": [
-                  {
-                    "concept": "Menggabungkan",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "concept": "Pengambilan Dashboard",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Merevolusi Algoritma",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Data Historis",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Preprocessing Engineering",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Data Preprocessing Engineering",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Model Tensorflow",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Tensorflow Framework Cluster",
-                "level": 2,
-                "children": [
-                  {
-                    "concept": "Tensorflow",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
       "id": "T2",
-      "domain": "Humaniora dan Sosial",
-      "SCS": 0.879,
-      "SCR": "90.0%",
+      "domain": "Sains dan Teknologi",
+      "SCS": 0.795,
+      "SCR": "100.0%",
       "ESR": "100.0%",
       "bentuk": "breadth-heavy",
-      "nodes": 9,
+      "nodes": 35,
       "depth": 2,
-      "maxBranch": 7,
+      "maxBranch": 8,
       "shapeDistribution": {
-        "breadth-heavy": 10
+        "breadth-heavy": 3
       },
       "sample": {
-        "concept": "Kota Penduduk",
+        "concept": "Learning Data",
         "level": 0,
         "children": [
           {
-            "concept": "Penduduk Bermigrasi",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Pembangunan Pemerataan",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Mempengaruhi Jaringan",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Penduduk Menghadapi",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Pengembangan Pemerintah",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Pergeseran Signifikan",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Sosial Munculnya",
+            "concept": "Melalui Kontainerisasi",
             "level": 1,
             "children": [
               {
-                "concept": "Munculnya Tantangan Kawasan",
+                "concept": "Memakai Tensorflow Framework",
                 "level": 2,
                 "children": []
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "id": "T3",
-      "domain": "Bisnis dan Ekonomi",
-      "SCS": 0.86,
-      "SCR": "100.0%",
-      "ESR": "100.0%",
-      "bentuk": "breadth-heavy",
-      "nodes": 15,
-      "depth": 3,
-      "maxBranch": 7,
-      "shapeDistribution": {
-        "breadth-heavy": 10
-      },
-      "sample": {
-        "concept": "Marketing Strategi",
-        "level": 0,
-        "children": [
-          {
-            "concept": "Penjualan Konversi",
-            "level": 1,
-            "children": [
+              },
               {
-                "concept": "Influencer Penjualan Konversi",
+                "concept": "Seperti Network Neural",
                 "level": 2,
-                "children": [
-                  {
-                    "concept": "Penjualan",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "concept": "Visibilitas Membantu",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Analytics Seperti",
-            "level": 1,
-            "children": [
+                "children": []
+              },
               {
-                "concept": "Analytics Seperti Digunakan",
+                "concept": "Lapisan Tersembunyi Jaringan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Model Melalui Kontainerisasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Tersembunyi Seperti Unsupervised",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Model Memakai Tensorflow",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Preprocessing Normalisasi Imputasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Regularisasi Overfitting Validasi",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Strategi Keberhasilan",
+            "concept": "Data Preprocessing",
             "level": 1,
             "children": [
               {
-                "concept": "Strategi Keberhasilan Acquisition",
+                "concept": "Network Neural Convolutional",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Reinforcement Lingkungan Dinamis",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Memakai Evaluasi Performa",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Data Mempelajari Kecerdasan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Berbasis Boosting Decision",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Model Berbasis Boosting",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Strategi Pemasaran",
+            "concept": "Model Tugas",
             "level": 1,
             "children": [
               {
-                "concept": "Strategi Pemasaran Digital",
+                "concept": "Melalui Kontainerisasi Deployment",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Data Seperti Network",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Tersembunyi Jaringan Terdiri",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Seperti Memperluas",
+            "concept": "Data Mempelajari",
             "level": 1,
             "children": [
               {
-                "concept": "Seperti Memperluas Penggunaan",
+                "concept": "Melalui Reinforcement Lingkungan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Neural Convolutional Pengolahan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Data Preprocessing Normalisasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Melalui Tersembunyi Seperti",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Personalisasi Meningkatkan",
+            "concept": "Tugas Klasifikasi",
             "level": 1,
             "children": [
               {
-                "concept": "Personalisasi Meningkatkan Pelanggan",
+                "concept": "Evaluasi Performa Akurasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Data Model Tugas",
                 "level": 2,
                 "children": []
               }
             ]
-          }
-        ]
-      }
-    },
-    {
-      "id": "T4",
-      "domain": "Kesehatan dan Kedokteran",
-      "SCS": 0.874,
-      "SCR": "100.0%",
-      "ESR": "100.0%",
-      "bentuk": "breadth-heavy",
-      "nodes": 10,
-      "depth": 3,
-      "maxBranch": 6,
-      "shapeDistribution": {
-        "breadth-heavy": 10
-      },
-      "sample": {
-        "concept": "Gula Meliputi",
-        "level": 0,
-        "children": [
-          {
-            "concept": "Komplikasi Retinopati",
-            "level": 1,
-            "children": []
           },
           {
-            "concept": "Resistensi Merupakan",
+            "concept": "Data Tugas",
             "level": 1,
             "children": [
               {
-                "concept": "Resistensi Merupakan Metabolik",
+                "concept": "Model Tugas Memanfaatkan",
                 "level": 2,
-                "children": [
-                  {
-                    "concept": "Resistensi",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
+                "children": []
+              },
+              {
+                "concept": "Data Tugas Klasifikasi",
+                "level": 2,
+                "children": []
               }
             ]
           },
           {
-            "concept": "Darah Pemeriksaan",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Farmakologi Membutuhkan",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Aktivitas Obesitas",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Monitoring Mengenai",
+            "concept": "Evaluasi Performa",
             "level": 1,
             "children": [
               {
-                "concept": "Mengenai Edukasi Glucose",
+                "concept": "Mempelajari Kecerdasan Algoritma",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Overfitting Validasi Diatasi",
                 "level": 2,
                 "children": []
               }
@@ -321,60 +212,762 @@
     },
     {
       "id": "T5",
-      "domain": "Hukum dan Kebijakan",
-      "SCS": 0.884,
+      "domain": "Humaniora dan Sosial",
+      "SCS": 0.805,
       "SCR": "100.0%",
       "ESR": "100.0%",
       "bentuk": "breadth-heavy",
-      "nodes": 11,
-      "depth": 3,
-      "maxBranch": 7,
+      "nodes": 35,
+      "depth": 2,
+      "maxBranch": 9,
       "shapeDistribution": {
-        "breadth-heavy": 10
+        "breadth-heavy": 3
+      },
+      "sample": {
+        "concept": "Kota Sosial",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Penduduk Desa",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Budaya Globalisasi Akulturasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Penduduk Desa Bermigrasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Sosial Pemerintah Tantangan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Mempercepat Pendidikan Informasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Kebijakan Desentralisasi Pembangunan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Merespons Perumahan Program",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Budaya Memengaruhi Jaringan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Individualistis Transformasi Menggeser",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pemerintah Merespons Perumahan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Indonesia Membentuk",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Lingkungan Pendatang Perkotaan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Sosial Individualistis Transformasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Sosial Berpartisipasi Berinteraksi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Indonesia Membentuk Kolonial",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Indonesia Menunjukkan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Penduduk Menghadapi Kemacetan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Sosial Lingkungan Pendatang",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Desa Bermigrasi Ekonomi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Tantangan Budaya Globalisasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Sosial Mempercepat Pendidikan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Sosial Pemerintah",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Sosial Budaya Memengaruhi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pemerintah Tantangan Munculnya",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Membentuk Kolonial Struktur",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Indonesia Menunjukkan Pergeseran",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Desa Kebijakan Ketimpangan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Sosial Mempercepat",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Menunjukkan Pergeseran Urbanisasi",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Lingkungan Pendatang",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Desentralisasi Pembangunan Pemerataan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Kebijakan Ketimpangan Memunculkan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Penduduk Menghadapi",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Menghadapi Kemacetan Kepadatan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "T8",
+      "domain": "Bisnis dan Ekonomi",
+      "SCS": 0.807,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 35,
+      "depth": 2,
+      "maxBranch": 11,
+      "shapeDistribution": {
+        "breadth-heavy": 3
+      },
+      "sample": {
+        "concept": "Marketing Pemasaran",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Meningkatkan Pendapatan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Meningkatkan Pendapatan Langganan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Konsistensi Loyalitas Dibangun",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Digital Pandemi Penting",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Evaluasi Insights Kampanye",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Consideration Conversion Awareness",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Membantu Diferensiasi Kompetitor",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pasar Memungkinkan Penargetan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Meningkatkan Pelanggan Personalisasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Analytics Evaluasi Insights",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pelanggan Personalisasi Retensi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pasar Memperluas Instagram",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Memengaruhi Pengiriman",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Pengiriman Efisiensi Kecepatan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pelanggan Strategi Omnichannel",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Strategi Omnichannel Menyatukan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Influencer Penjualan Konversi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pendapatan Langganan Berbasis",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Visibilitas Content Organik",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Penjualan Konversi Tingkat",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Konsistensi Loyalitas",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Pemasaran Digital Pandemi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Memperluas Instagram Jangkauan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Memungkinkan Penargetan Segmentasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Keberhasilan Acquisition Indikator",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Loyalitas Dibangun Kualitas",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Pendapatan Langganan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Membantu Visibilitas Content",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Analytics Evaluasi",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Strategi Keberhasilan Acquisition",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Pemasaran Consideration",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Memengaruhi Pengiriman Efisiensi",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Evaluasi Insights",
+            "level": 1,
+            "children": []
+          },
+          {
+            "concept": "Memperluas Instagram",
+            "level": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "T11",
+      "domain": "Kesehatan dan Kedokteran",
+      "SCS": 0.796,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 34,
+      "depth": 2,
+      "maxBranch": 9,
+      "shapeDistribution": {
+        "breadth-heavy": 3
+      },
+      "sample": {
+        "concept": "Gula Darah",
+        "level": 0,
+        "children": [
+          {
+            "concept": "Polidipsia Polifagia",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Pasien Pengobatan Psikologis",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Diabetes Risiko Memperberat",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Meliputi Komplikasi Retinopati",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pengobatan Psikologis Kepatuhan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Darah Mengontrol Metformin",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Risiko Memperberat Hipertensi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Polifagia Mencakup Poliuria",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Continuous Monitoring Teknologi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Polidipsia Polifagia Mencakup",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Pemeriksaan Ditegakkan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Penyakit Menurunkan Berisiko",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Memperbaiki Continuous Monitoring",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Farmakoterapi Membutuhkan Pengelolaan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Diabetes Penyakit Insulin",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pemeriksaan Ditegakkan Diagnosis",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Penyakit Insulin",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Risiko Aktivitas Obesitas",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pasien Pemantauan Edukasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Meliputi Risiko Aktivitas",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pemeriksaan Komplikasi Kardiovaskular",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Darah Pemeriksaan Ditegakkan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Komplikasi Kardiovaskular Perburukan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Meliputi Komplikasi",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Memperbaiki Sensitivitas Olahraga",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Penyakit Insulin Resistensi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Membutuhkan Pengelolaan Modifikasi",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Mengontrol Metformin",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Komplikasi Retinopati Nefropati",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Insulin Memperbaiki Sensitivitas",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Memperbaiki Sensitivitas",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Darah Pasien Pemantauan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Penyakit Menurunkan",
+            "level": 1,
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "T14",
+      "domain": "Hukum dan Kebijakan",
+      "SCS": 0.793,
+      "SCR": "100.0%",
+      "ESR": "100.0%",
+      "bentuk": "breadth-heavy",
+      "nodes": 34,
+      "depth": 2,
+      "maxBranch": 9,
+      "shapeDistribution": {
+        "breadth-heavy": 3
       },
       "sample": {
         "concept": "Data Undang",
         "level": 0,
         "children": [
           {
-            "concept": "Hak Portabilitas",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Administratif Pendapatan",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Tahun Perlindungan",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Undang Lembaga",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Pengolahan Kewajiban",
+            "concept": "Portabilitas Penghapusan",
             "level": 1,
             "children": [
               {
-                "concept": "Controller Pengolahan Kewajiban",
+                "concept": "Perlindungan Pemrosesan Diperlukan",
                 "level": 2,
-                "children": [
-                  {
-                    "concept": "Controller",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
+                "children": []
+              },
+              {
+                "concept": "Mendokumentasikan Akuntabilitas Kepatuhannya",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Lembaga Sosialisasi Masyarakat",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pemrosesan Diperlukan Penilaian",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pemrosesan Transparansi Keabsahan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Akuntabilitas Kepatuhannya Mewajibkan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Penghapusan Mencakup Koreksi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Harmonisasi Kepercayaan Mendukung",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Portabilitas Penghapusan Mencakup",
+                "level": 2,
+                "children": []
               }
             ]
           },
           {
-            "concept": "Tahun Pelanggaran",
+            "concept": "Administratif Dikenakan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Pelindungan Kepatuhan Mengawasi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Regulasi Harmonisasi Kepercayaan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Undang Lembaga Independen",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Undang Perlindungan Pribadi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Administratif Dikenakan Berupa",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Perlindungan Pribadi",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Pengendali Pengolahan Kewajiban",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Kebocoran Dipidana Penjara",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Regulasi Pengendali Pengolahan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Perlindungan Memenuhi Transfer",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pelanggaran Administratif Dikenakan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Memenuhi Transfer Standar",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Lembaga Sosialisasi",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Pribadi Persetujuan Eksplisit",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Perlindungan Pribadi Melindungi",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Lembaga Independen Pengawasan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Transparansi Keabsahan",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Sosialisasi Masyarakat Dilakukan",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Pemrosesan Pribadi Persetujuan",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Pribadi Persetujuan",
             "level": 1,
             "children": [
               {
@@ -385,110 +978,7 @@
             ]
           },
           {
-            "concept": "Lembaga Sosialisasi",
-            "level": 1,
-            "children": []
-          }
-        ]
-      }
-    },
-    {
-      "id": "T7",
-      "domain": "Proses / Sebab-Akibat (Sains)",
-      "SCS": 0.897,
-      "SCR": "100.0%",
-      "ESR": "100.0%",
-      "bentuk": "balanced",
-      "nodes": 7,
-      "depth": 3,
-      "maxBranch": 2,
-      "shapeDistribution": {
-        "balanced": 2,
-        "depth-heavy": 8
-      },
-      "sample": {
-        "concept": "Energi Kemudian",
-        "level": 0,
-        "children": [
-          {
-            "concept": "Fotosintesis Klorofil",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Kemudian Ion",
-                "level": 2,
-                "children": [
-                  {
-                    "concept": "Ion Karbondioksida",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "concept": "Tersebut Glukosa",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Glukosa Tumbuhan",
-                "level": 2,
-                "children": [
-                  {
-                    "concept": "Digunakan Disimpan",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "id": "T6",
-      "domain": "Statistik / Data Angka (BPS)",
-      "SCS": 0.88,
-      "SCR": "90.0%",
-      "ESR": "100.0%",
-      "bentuk": "balanced",
-      "nodes": 6,
-      "depth": 3,
-      "maxBranch": 3,
-      "shapeDistribution": {
-        "balanced": 7,
-        "breadth-heavy": 3
-      },
-      "sample": {
-        "concept": "Persen Inflasi",
-        "level": 0,
-        "children": [
-          {
-            "concept": "Transportasi Pengeluaran",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Inflasi Indonesia",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Inflasi Indonesia Statistik",
-                "level": 2,
-                "children": [
-                  {
-                    "concept": "Indonesia",
-                    "level": 3,
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "concept": "Inflasi Tertinggi",
+            "concept": "Pelindungan Kepatuhan",
             "level": 1,
             "children": []
           }

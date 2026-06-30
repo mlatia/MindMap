@@ -96,27 +96,52 @@ function friendlyError(provider, status, body) {
 }
 
 /** Groq menggunakan endpoint OpenAI-compatible. */
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+/**
+ * Groq (endpoint OpenAI-compatible) DENGAN penanganan rate-limit (429).
+ * Free tier dibatasi per-menit (RPM/TPM) dan per-hari (TPD). Saat 429,
+ * fungsi MENUNGGU sesuai header Retry-After lalu mencoba lagi (bukan gagal),
+ * sehingga eval yang banyak panggilan tetap selesai (pelan) tanpa error palsu.
+ */
 async function callGroq(prompt) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) throw new Error('GROQ_API_KEY belum diset di server/.env. Daftar gratis di console.groq.com');
   const model = process.env.LLM_MODEL || DEFAULT_MODEL.groq;
-  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
-    body: JSON.stringify({
-      model,
-      response_format: { type: 'json_object' },
-      temperature: 0.1,
-      max_tokens: 4096,
-      messages: [
-        { role: 'system', content: prompt.system },
-        { role: 'user',   content: prompt.user }
-      ]
-    })
+  const temperature = parseFloat(process.env.LLM_TEMPERATURE || '0.2');
+  const MAX_RL_RETRY = parseInt(process.env.GROQ_RL_RETRY || '6', 10);
+  const body = JSON.stringify({
+    model,
+    response_format: { type: 'json_object' },
+    temperature,
+    max_tokens: 4096,
+    messages: [
+      { role: 'system', content: prompt.system },
+      { role: 'user',   content: prompt.user }
+    ]
   });
-  if (!res.ok) throw new Error(friendlyError('groq', res.status, await res.text()));
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content || '';
+  for (let attempt = 0; attempt <= MAX_RL_RETRY; attempt += 1) {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
+      body
+    });
+    if (res.status === 429) {
+      const raw = await res.text();
+      const isDaily = /per day|TPD|tokens per day|daily/i.test(raw);
+      if (isDaily) throw new Error('Groq API: kuota HARIAN (TPD) habis. Tunggu reset ~24 jam, kecilkan korpus/N, atau pakai model lebih kecil (llama-3.1-8b-instant).');
+      if (attempt === MAX_RL_RETRY) throw new Error(`Groq API: rate-limit per-menit (TPM/RPM) terus-menerus setelah ${MAX_RL_RETRY} kali tunggu. Perlambat (N kecil) atau pakai llama-3.1-8b-instant.`);
+      const retryAfter = parseFloat(res.headers.get('retry-after')) || Math.min(60, 2 ** attempt);
+      const waitMs = Math.min(65, Math.max(2, retryAfter)) * 1000;
+      process.stdout.write(`\n  [rate-limit Groq, tunggu ${(waitMs/1000).toFixed(0)}s...] `);
+      await sleep(waitMs);
+      continue;
+    }
+    if (!res.ok) throw new Error(friendlyError('groq', res.status, await res.text()));
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content || '';
+  }
+  throw new Error('Groq API: gagal setelah retry rate-limit.');
 }
 
 async function callAnthropic(prompt) {
