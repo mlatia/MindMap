@@ -257,8 +257,8 @@ export default function MindMapDetail() {
       <div ref={wrapRef} className="canvas-wrap">
         {/* Kontrol di DALAM kanvas, sticky tepat di bawah header */}
         <div className="canvas-controls" style={{ top: headH + 6 }}>
-          <div className="ct-group dl-wrap">
-            <button className="icon-btn btn-download" onClick={() => setShowDownload(s => !s)} title="Unduh">{'⬇'} Download</button>
+          <div className="dl-wrap">
+            <button className="pill-btn dl-pill" onClick={() => setShowDownload(s => !s)} title="Unduh (PNG / PDF)" aria-label="Unduh">{'⬇'}</button>
             {showDownload && (
               <div className="dl-menu">
                 <button className="dl-png" onClick={() => handleExport('png')}>{'⬇'} PNG</button>
@@ -278,7 +278,7 @@ export default function MindMapDetail() {
             </label>
           </div>
           <div className="help-wrap">
-            <button className="ct-help" onClick={() => setShowHelp(s => !s)} title="Bantuan"><span className="qm">?</span><span className="hl"> Help</span></button>
+            <button className="pill-btn help-pill" onClick={() => setShowHelp(s => !s)} title="Bantuan" aria-label="Bantuan">{'?'}</button>
             {showHelp && !isMobile && (
               <div className="help-dd" onClick={(e) => e.stopPropagation()}>{helpBody}</div>
             )}

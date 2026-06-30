@@ -856,3 +856,66 @@ input:focus, textarea:focus, select:focus {
   .canvas-controls .dl-wrap { margin-right: auto; }
   .canvas-controls .ct-group:not(.dl-wrap) { flex: 0 0 auto; }
 }
+
+/* ============================================================
+ *  DETAIL v6 - Download & Help = tombol IKON pill (tanpa label),
+ *  tinggi seragam, hemat tempat, tidak dipisah kiri/kanan lagi.
+ * ============================================================ */
+.pill-btn {
+  height: 40px; min-width: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 0.85rem;
+  border: 1.5px solid var(--color-ink);
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 var(--color-ink);
+  font-weight: 800; font-size: 1.1rem; line-height: 1;
+  background: #fff; color: var(--color-ink); cursor: pointer;
+}
+.dl-pill   { background: #3FB985; }            /* hijau (semantik download) */
+.help-pill { background: var(--pink-strong); } /* pink (ikut tema) */
+
+/* Samakan tinggi semua kontrol + rata tengah, tanpa pemisahan kiri/kanan */
+.canvas-controls { align-items: center; }
+.canvas-controls .ct-group { min-height: 40px; }
+.canvas-controls .dl-wrap { margin-right: 0 !important; }
+@media (min-width: 769px) {
+  .canvas-controls .dl-wrap { margin-right: 0 !important; }   /* batalkan pemisahan desktop */
+}
+
+/* Mobile: rata & sedikit lebih ramping */
+@media (max-width: 768px) {
+  .pill-btn { height: 36px; min-width: 36px; padding: 0 0.6rem; font-size: 1rem; }
+  .canvas-controls { align-items: center; gap: 0.4rem; }
+  .canvas-controls .ct-group { min-height: 36px; }
+}
+
+/* ============================================================
+ *  DETAIL v7 - Help dipindah TEPAT di sebelah Download (desktop),
+ *  biar tidak jauh dijangkau. Urutan: Download, Help, [undo/redo + Perbesar].
+ * ============================================================ */
+@media (min-width: 769px) {
+  .canvas-controls .dl-wrap { order: 0; }
+  .canvas-controls .help-wrap { order: 1; }
+  .canvas-controls .ct-group:not(.dl-wrap) { order: 2; }
+}
+/* karena Help kini di kiri, dropdown panduannya buka ke kanan-bawah */
+.help-dd { left: 0; right: auto; }
+
+/* ============================================================
+ *  DETAIL v8 - kontrol dirata-KANAN (desktop), urutan:
+ *  [undo/redo + Perbesar] -> [Download] -> [Help]
+ * ============================================================ */
+@media (min-width: 769px) {
+  .canvas-controls { justify-content: flex-end; }
+  .canvas-controls .ct-group:not(.dl-wrap) { order: 0; }
+  .canvas-controls .dl-wrap { order: 1; margin: 0 !important; }
+  .canvas-controls .help-wrap { order: 2; }
+}
+/* Help kembali di kanan -> dropdown panduan buka ke kiri-bawah */
+.help-dd { left: auto; right: 0; }
+
+/* Menu Download (PNG/PDF): di desktop Download ada di kanan, jadi menu buka
+   ke kiri-bawah (rata kanan) supaya tidak terpotong tepi kanvas. */
+@media (min-width: 769px) {
+  .dl-menu { left: auto; right: 0; }
+}
