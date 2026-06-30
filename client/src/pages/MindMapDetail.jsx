@@ -227,7 +227,7 @@ export default function MindMapDetail() {
           <h1 style={{ fontSize: '1.8rem' }}>{project?.title}</h1>
           <span className="muted">
             {project?.meta?.stats
-              ? `${project.meta.stats.nodes} node · depth ${project.meta.stats.depth} · ${project.meta.attempts} attempt`
+              ? `${project.meta.stats.nodes} node · depth ${project.meta.stats.depth}`
               : 'mind map siap diedit'}
           </span>
         </div>
