@@ -18,7 +18,7 @@ export default function Landing() {
             dalam hitungan detik.
           </h1>
           <p style={{ maxWidth: 520 }}>
-            Sistem berbasis Generative AI dengan strategi <em>Auto-CoT prompting</em>{' '}
+            Sistem berbasis Generative AI dengan strategi <em>adaptasi Auto-CoT prompting</em>{' '}
             mengekstraksi struktur hierarkis konsep dari teks, lalu memvisualisasikannya
             dengan tiga layout: <strong>Reingold-Tilford radial</strong>,{' '}
             <strong>Force-Directed</strong>, dan <strong>Radial Cluster</strong>.
@@ -28,7 +28,6 @@ export default function Landing() {
             <Link to="/login"><button className="secondary">Saya sudah punya akun</button></Link>
           </div>
           <div className="row" style={{ marginTop: '0.4rem', gap: '0.4rem', flexWrap: 'wrap' }}>
-            <span className="tag yellow">Auto-CoT</span>
             <span className="tag blue">3 Layout</span>
             <span className="tag mint">Tema Warna</span>
             <span className="tag">Editor Interaktif</span>
