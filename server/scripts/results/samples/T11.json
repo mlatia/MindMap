@@ -1,177 +1,286 @@
 {
-  "concept": "Gula Darah",
+  "concept": "Nervus Cranialis",
   "level": 0,
   "children": [
     {
-      "concept": "Polidipsia Polifagia",
+      "concept": "Kranial I: Olfaktori",
       "level": 1,
       "children": [
         {
-          "concept": "Pasien Pengobatan Psikologis",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Diabetes Risiko Memperberat",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Meliputi Komplikasi Retinopati",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pengobatan Psikologis Kepatuhan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Darah Mengontrol Metformin",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Risiko Memperberat Hipertensi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Polifagia Mencakup Poliuria",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Continuous Monitoring Teknologi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Polidipsia Polifagia Mencakup",
+          "concept": "Penciuman",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Pemeriksaan Ditegakkan",
+      "concept": "Kranial II: Optik",
       "level": 1,
       "children": [
         {
-          "concept": "Penyakit Menurunkan Berisiko",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Memperbaiki Continuous Monitoring",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Farmakoterapi Membutuhkan Pengelolaan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Diabetes Penyakit Insulin",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pemeriksaan Ditegakkan Diagnosis",
+          "concept": "Penglihatan",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Penyakit Insulin",
+      "concept": "Kranial III: Okulomotor",
       "level": 1,
       "children": [
         {
-          "concept": "Risiko Aktivitas Obesitas",
+          "concept": "Mata Bergerak",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Pasien Pemantauan Edukasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Meliputi Risiko Aktivitas",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pemeriksaan Komplikasi Kardiovaskular",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Darah Pemeriksaan Ditegakkan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Komplikasi Kardiovaskular Perburukan",
+          "concept": "Respon Pupil",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Meliputi Komplikasi",
+      "concept": "Kranial IV: Troklear",
       "level": 1,
       "children": [
         {
-          "concept": "Memperbaiki Sensitivitas Olahraga",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Penyakit Insulin Resistensi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Membutuhkan Pengelolaan Modifikasi",
+          "concept": "Menggerakkan Mata",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Mengontrol Metformin",
+      "concept": "Kranial V: Trigeminal",
       "level": 1,
       "children": [
         {
-          "concept": "Komplikasi Retinopati Nefropati",
+          "concept": "Oftalmik",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Kulit Kepala",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Dahi",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Kelopak Mata Atas",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "concept": "Maksila",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Pipi",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Kelopak Mata Bawah",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Bibir Atas",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Rongga Hidung",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "concept": "Mandibula",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Lidah",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Bibir Bawah",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Dagu",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Rahang",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Kranial VI: Abdusen",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Menggerakkan Mata Keluar",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Kranial VII: Fasialis",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Mengirimkan Informasi Sensorik",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Lidah",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "concept": "Mengendalikan Gerakan Otot Wajah",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Insulin Memperbaiki Sensitivitas",
+          "concept": "Memasok Kelenjar",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Memperbaiki Sensitivitas",
+      "concept": "Kranial VIII: Vestibulocochlear",
       "level": 1,
       "children": [
         {
-          "concept": "Darah Pasien Pemantauan",
+          "concept": "Vestibular",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Keseimbangan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "concept": "Koklea",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Pendengaran",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Kranial IX: Glossofaringeal",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Mengirimkan Informasi Sensorik",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Telinga Luar",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Rongga Telinga Tengah",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Lidah",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Tenggorokan",
+              "level": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "concept": "Mengirimkan Informasi Motorik",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Penyakit Menurunkan",
+      "concept": "Kranial X: Saraf Vagus",
       "level": 1,
-      "children": []
+      "children": [
+        {
+          "concept": "Sensorik",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Motorik",
+          "level": 2,
+          "children": []
+        },
+        {
+          "concept": "Otonom",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Kranial XI: Aksesori Tulang Belakang",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Motorik",
+          "level": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "concept": "Kranial XII: Hipoglosus",
+      "level": 1,
+      "children": [
+        {
+          "concept": "Motorik",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Menggerakkan Lidah",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
     }
   ]
 }

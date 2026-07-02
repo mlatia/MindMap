@@ -88,7 +88,7 @@ async function runOnce(text, seed) {
 }
 
 async function evalText(item) {
-  console.log(`\n${c.bold}${item.id} - ${item.domain}${c.reset} (${item.text.length} char)`);
+  console.log(`\n${c.bold}${item.id} - ${item.domain}${c.reset} (~${item.tokens ?? '?'} token)`);
   const results = [];
   let scrPasses = 0, esrPasses = 0;
   for (let i = 0; i < N; i += 1) {

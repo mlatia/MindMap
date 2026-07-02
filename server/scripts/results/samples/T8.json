@@ -1,182 +1,101 @@
 {
-  "concept": "Marketing Pemasaran",
+  "concept": "PDB",
   "level": 0,
   "children": [
     {
-      "concept": "Meningkatkan Pendapatan",
+      "concept": "Pengertian PDB",
       "level": 1,
       "children": [
         {
-          "concept": "Meningkatkan Pendapatan Langganan",
+          "concept": "Definisi PDB",
+          "level": 2,
+          "children": [
+            {
+              "concept": "Nilai Ekonomi",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Produksi Barang dan Jasa",
+              "level": 3,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "concept": "Jenis PDB",
+      "level": 1,
+      "children": [
+        {
+          "concept": "PDB Riil",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Konsistensi Loyalitas Dibangun",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Digital Pandemi Penting",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Evaluasi Insights Kampanye",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Consideration Conversion Awareness",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Membantu Diferensiasi Kompetitor",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pasar Memungkinkan Penargetan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Meningkatkan Pelanggan Personalisasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Analytics Evaluasi Insights",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pelanggan Personalisasi Retensi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pasar Memperluas Instagram",
+          "concept": "PDB Nominal",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Memengaruhi Pengiriman",
+      "concept": "Komponen PDB",
       "level": 1,
       "children": [
         {
-          "concept": "Pengiriman Efisiensi Kecepatan",
+          "concept": "Konsumsi Rumah Tangga",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Pelanggan Strategi Omnichannel",
+          "concept": "Investasi",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Strategi Omnichannel Menyatukan",
+          "concept": "Pengeluaran Pemerintah",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Influencer Penjualan Konversi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pendapatan Langganan Berbasis",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Visibilitas Content Organik",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Penjualan Konversi Tingkat",
+          "concept": "Ekspor Bersih",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Konsistensi Loyalitas",
+      "concept": "Manfaat PDB",
       "level": 1,
       "children": [
         {
-          "concept": "Pemasaran Digital Pandemi",
+          "concept": "Indikator Pertumbuhan Ekonomi",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Memperluas Instagram Jangkauan",
+          "concept": "Indikator Daya Beli Masyarakat",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Memungkinkan Penargetan Segmentasi",
+          "concept": "Indikator Kesejahteraan Masyarakat",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Keberhasilan Acquisition Indikator",
+          "concept": "Indikator Daya Saing",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Loyalitas Dibangun Kualitas",
+          "concept": "Dasar Perencanaan Ekonomi",
           "level": 2,
           "children": []
         }
       ]
-    },
-    {
-      "concept": "Pendapatan Langganan",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Membantu Visibilitas Content",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Analytics Evaluasi",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Strategi Keberhasilan Acquisition",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Pemasaran Consideration",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Memengaruhi Pengiriman Efisiensi",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Evaluasi Insights",
-      "level": 1,
-      "children": []
-    },
-    {
-      "concept": "Memperluas Instagram",
-      "level": 1,
-      "children": []
     }
   ]
 }

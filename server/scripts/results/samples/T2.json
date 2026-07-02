@@ -1,181 +1,127 @@
 {
-  "concept": "Learning Data",
+  "concept": "Tata Surya",
   "level": 0,
   "children": [
     {
-      "concept": "Melalui Kontainerisasi",
+      "concept": "Pengertian",
       "level": 1,
       "children": [
         {
-          "concept": "Memakai Tensorflow Framework",
+          "concept": "Sistem Benda Langit",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Seperti Network Neural",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Lapisan Tersembunyi Jaringan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Model Melalui Kontainerisasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Tersembunyi Seperti Unsupervised",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Model Memakai Tensorflow",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Preprocessing Normalisasi Imputasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Regularisasi Overfitting Validasi",
+          "concept": "Galaksi Bima Sakti",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Data Preprocessing",
+      "concept": "Teori Pembentukan",
       "level": 1,
       "children": [
         {
-          "concept": "Network Neural Convolutional",
+          "concept": "Teori Nebula",
           "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Awan Gas dan Debu",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Pembentukan Matahari",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Pembentukan Planet",
+              "level": 3,
+              "children": []
+            }
+          ]
         },
         {
-          "concept": "Reinforcement Lingkungan Dinamis",
+          "concept": "Teori Bintang Kembar",
           "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Bintang Kembar",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Pembentukan Planet",
+              "level": 3,
+              "children": []
+            }
+          ]
         },
         {
-          "concept": "Memakai Evaluasi Performa",
+          "concept": "Teori Awan Debu",
           "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Kondensasi",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Pemampatan",
+              "level": 3,
+              "children": []
+            }
+          ]
         },
         {
-          "concept": "Data Mempelajari Kecerdasan",
+          "concept": "Teori Planetesimal",
           "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Bintang Besar",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Pembentukan Planet",
+              "level": 3,
+              "children": []
+            }
+          ]
         },
         {
-          "concept": "Berbasis Boosting Decision",
+          "concept": "Teori Pasang Surut",
           "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Bintang yang Mendekat",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Pembentukan Planet",
+              "level": 3,
+              "children": []
+            }
+          ]
         },
         {
-          "concept": "Model Berbasis Boosting",
+          "concept": "Teori Kondensasi",
           "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Model Tugas",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Melalui Kontainerisasi Deployment",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Data Seperti Network",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Tersembunyi Jaringan Terdiri",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Data Mempelajari",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Melalui Reinforcement Lingkungan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Neural Convolutional Pengolahan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Data Preprocessing Normalisasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Melalui Tersembunyi Seperti",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Tugas Klasifikasi",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Evaluasi Performa Akurasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Data Model Tugas",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Data Tugas",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Model Tugas Memanfaatkan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Data Tugas Klasifikasi",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Evaluasi Performa",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Mempelajari Kecerdasan Algoritma",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Overfitting Validasi Diatasi",
-          "level": 2,
-          "children": []
+          "children": [
+            {
+              "concept": "Bola Kabut Raksasa",
+              "level": 3,
+              "children": []
+            },
+            {
+              "concept": "Pembentukan Matahari dan Planet",
+              "level": 3,
+              "children": []
+            }
+          ]
         }
       ]
     }

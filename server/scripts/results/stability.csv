@@ -1,7 +1,7 @@
 Teks,Domain,SCS,SCR,ESR,bentuk,nodes,depth,maxBranch,pairs,runs
-T2,"Sains dan Teknologi",0.795,100.0%,100.0%,breadth-heavy,35,2,8,3,3
-T5,"Humaniora dan Sosial",0.805,100.0%,100.0%,breadth-heavy,35,2,9,3,3
-T8,"Bisnis dan Ekonomi",0.807,100.0%,100.0%,breadth-heavy,35,2,11,3,3
-T11,"Kesehatan dan Kedokteran",0.796,100.0%,100.0%,breadth-heavy,34,2,9,3,3
-T14,"Hukum dan Kebijakan",0.793,100.0%,100.0%,breadth-heavy,34,2,9,3,3
----,"Rata-rata",0.799,100.0%,100.0%,,,,,,
+T2,"Sains dan Teknologi",0.979,100.0%,100.0%,breadth-heavy,24,3,6,45,10
+T5,"Humaniora dan Sosial",0.983,100.0%,100.0%,breadth-heavy,19,2,5,45,10
+T8,"Bisnis dan Ekonomi",0.982,50.0%,100.0%,balanced,19,3,5,45,10
+T11,"Kesehatan dan Kedokteran",0.957,100.0%,100.0%,breadth-heavy,53,3,12,45,10
+T14,"Hukum dan Kebijakan",0.984,90.0%,100.0%,breadth-heavy,36,5,16,45,10
+---,"Rata-rata",0.977,88.0%,100.0%,,,,,,

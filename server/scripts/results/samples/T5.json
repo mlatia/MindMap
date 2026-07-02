@@ -1,179 +1,96 @@
 {
-  "concept": "Kota Sosial",
+  "concept": "Sosiologi Sastra",
   "level": 0,
   "children": [
     {
-      "concept": "Penduduk Desa",
+      "concept": "Pengertian Sosiologi Sastra",
       "level": 1,
       "children": [
         {
-          "concept": "Budaya Globalisasi Akulturasi",
+          "concept": "Karya Sastra sebagai Produk Budaya",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Penduduk Desa Bermigrasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Sosial Pemerintah Tantangan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Mempercepat Pendidikan Informasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Kebijakan Desentralisasi Pembangunan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Merespons Perumahan Program",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Budaya Memengaruhi Jaringan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Individualistis Transformasi Menggeser",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Pemerintah Merespons Perumahan",
+          "concept": "Pengaruh Kondisi Sosial",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Indonesia Membentuk",
+      "concept": "Fungsi Sosiologi Sastra",
       "level": 1,
       "children": [
         {
-          "concept": "Lingkungan Pendatang Perkotaan",
+          "concept": "Menganalisis Hubungan Sastra dan Masyarakat",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Sosial Individualistis Transformasi",
+          "concept": "Mengungkap Kritik Sosial",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Sosial Berpartisipasi Berinteraksi",
+          "concept": "Mengenal Peran Pengarang",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Indonesia Membentuk Kolonial",
+          "concept": "Menghubungkan Sastra dengan Pembaca",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Indonesia Menunjukkan",
+      "concept": "Pembagian Sosiologi Sastra",
       "level": 1,
       "children": [
         {
-          "concept": "Penduduk Menghadapi Kemacetan",
+          "concept": "Sosiologi Pengarang",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Sosial Lingkungan Pendatang",
+          "concept": "Sosiologi Karya Sastra",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Desa Bermigrasi Ekonomi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Tantangan Budaya Globalisasi",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Sosial Mempercepat Pendidikan",
+          "concept": "Sosiologi Pembaca",
           "level": 2,
           "children": []
         }
       ]
     },
     {
-      "concept": "Sosial Pemerintah",
+      "concept": "Fungsi Karya Sastra",
       "level": 1,
       "children": [
         {
-          "concept": "Sosial Budaya Memengaruhi",
+          "concept": "Fungsi Rekreatif",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Pemerintah Tantangan Munculnya",
+          "concept": "Fungsi Didaktif",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Membentuk Kolonial Struktur",
+          "concept": "Fungsi Estetis",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Indonesia Menunjukkan Pergeseran",
+          "concept": "Fungsi Moralitas",
           "level": 2,
           "children": []
         },
         {
-          "concept": "Desa Kebijakan Ketimpangan",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Sosial Mempercepat",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Menunjukkan Pergeseran Urbanisasi",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Lingkungan Pendatang",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Desentralisasi Pembangunan Pemerataan",
-          "level": 2,
-          "children": []
-        },
-        {
-          "concept": "Kebijakan Ketimpangan Memunculkan",
-          "level": 2,
-          "children": []
-        }
-      ]
-    },
-    {
-      "concept": "Penduduk Menghadapi",
-      "level": 1,
-      "children": [
-        {
-          "concept": "Menghadapi Kemacetan Kepadatan",
+          "concept": "Fungsi Religiusitas",
           "level": 2,
           "children": []
         }

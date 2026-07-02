@@ -95,21 +95,47 @@ function friendlyError(provider, status, body) {
   }
 }
 
-/** Groq menggunakan endpoint OpenAI-compatible. */
+/** Groq (endpoint OpenAI-compatible) — ROTASI BANYAK KUNCI + rate-limit. */
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 /**
- * Groq (endpoint OpenAI-compatible) DENGAN penanganan rate-limit (429).
- * Free tier dibatasi per-menit (RPM/TPM) dan per-hari (TPD). Saat 429,
- * fungsi MENUNGGU sesuai header Retry-After lalu mencoba lagi (bukan gagal),
- * sehingga eval yang banyak panggilan tetap selesai (pelan) tanpa error palsu.
+ * Ambil daftar kunci Groq (boleh gabung beberapa sumber):
+ *   - GROQ_API_KEYS = "key1,key2,key3,..."   (dipisah koma / spasi / baris baru)
+ *   - GROQ_API_KEY_1, GROQ_API_KEY_2, ... GROQ_API_KEY_20
+ *   - GROQ_API_KEY                            (satu kunci, kompatibel lama)
+ */
+function loadGroqKeys() {
+  const keys = [];
+  (process.env.GROQ_API_KEYS || '').split(/[\s,]+/).forEach((k) => {
+    if (k && k.trim()) keys.push(k.trim());
+  });
+  for (let i = 1; i <= 20; i += 1) {
+    const k = process.env[`GROQ_API_KEY_${i}`];
+    if (k && k.trim()) keys.push(k.trim());
+  }
+  if (process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.trim()) {
+    keys.push(process.env.GROQ_API_KEY.trim());
+  }
+  return [...new Set(keys)]; // buang duplikat
+}
+
+const GROQ_KEYS = loadGroqKeys();
+let _groqStart = 0;               // mulai rotasi dari kunci ini
+const _groqDailyDead = new Set(); // index kunci yang kuota HARIAN-nya habis
+
+/**
+ * callGroq dengan ROTASI kunci:
+ *   - 429 kuota HARIAN (TPD/RPD)  -> tandai kunci mati, langsung pindah kunci lain.
+ *   - 429 limit per-menit (TPM/RPM) -> coba kunci lain; kalau semua kena, tunggu lalu ulang.
+ * Gagal HANYA jika semua kunci kuota hariannya habis, atau sudah menunggu MAX_WAIT_ROUNDS kali.
  */
 async function callGroq(prompt) {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) throw new Error('GROQ_API_KEY belum diset di server/.env. Daftar gratis di console.groq.com');
+  if (!GROQ_KEYS.length) {
+    throw new Error('Tidak ada kunci Groq. Isi GROQ_API_KEYS (dipisah koma) / GROQ_API_KEY_1..N / GROQ_API_KEY di server/.env');
+  }
   const model = process.env.LLM_MODEL || DEFAULT_MODEL.groq;
   const temperature = parseFloat(process.env.LLM_TEMPERATURE || '0.2');
-  const MAX_RL_RETRY = parseInt(process.env.GROQ_RL_RETRY || '6', 10);
+  const MAX_WAIT_ROUNDS = parseInt(process.env.GROQ_WAIT_ROUNDS || '8', 10);
   const body = JSON.stringify({
     model,
     response_format: { type: 'json_object' },
@@ -120,28 +146,56 @@ async function callGroq(prompt) {
       { role: 'user',   content: prompt.user }
     ]
   });
-  for (let attempt = 0; attempt <= MAX_RL_RETRY; attempt += 1) {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
-      body
-    });
-    if (res.status === 429) {
-      const raw = await res.text();
-      const isDaily = /per day|TPD|tokens per day|daily/i.test(raw);
-      if (isDaily) throw new Error('Groq API: kuota HARIAN (TPD) habis. Tunggu reset ~24 jam, kecilkan korpus/N, atau pakai model lebih kecil (llama-3.1-8b-instant).');
-      if (attempt === MAX_RL_RETRY) throw new Error(`Groq API: rate-limit per-menit (TPM/RPM) terus-menerus setelah ${MAX_RL_RETRY} kali tunggu. Perlambat (N kecil) atau pakai llama-3.1-8b-instant.`);
-      const retryAfter = parseFloat(res.headers.get('retry-after')) || Math.min(60, 2 ** attempt);
-      const waitMs = Math.min(65, Math.max(2, retryAfter)) * 1000;
-      process.stdout.write(`\n  [rate-limit Groq, tunggu ${(waitMs/1000).toFixed(0)}s...] `);
-      await sleep(waitMs);
-      continue;
+  const N = GROQ_KEYS.length;
+
+  for (let round = 0; round <= MAX_WAIT_ROUNDS; round += 1) {
+    let sawMinuteLimit = false;
+    let minWait = 15;
+    for (let step = 0; step < N; step += 1) {
+      const idx = (_groqStart + step) % N;
+      if (_groqDailyDead.has(idx)) continue;
+      let res;
+      try {
+        res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: `Bearer ${GROQ_KEYS[idx]}` },
+          body
+        });
+      } catch (netErr) {
+        process.stdout.write(`\n  [Groq kunci #${idx + 1} gangguan jaringan -> coba kunci lain...]`);
+        continue;
+      }
+      if (res.status === 429) {
+        const raw = await res.text();
+        const isDaily = /per day|TPD|tokens per day|requests per day|RPD|daily/i.test(raw);
+        if (isDaily) {
+          _groqDailyDead.add(idx);
+          process.stdout.write(`\n  [Groq kunci #${idx + 1} kuota HARIAN habis -> pindah kunci (${_groqDailyDead.size}/${N} mati)]`);
+        } else {
+          sawMinuteLimit = true;
+          const ra = parseFloat(res.headers.get('retry-after'));
+          if (!Number.isNaN(ra) && ra > 0) minWait = Math.min(minWait, ra);
+          process.stdout.write(`\n  [Groq kunci #${idx + 1} limit per-menit -> coba kunci lain...]`);
+        }
+        continue;
+      }
+      if (!res.ok) throw new Error(friendlyError('groq', res.status, await res.text()));
+      const data = await res.json();
+      _groqStart = idx; // lanjut dari kunci yang barusan sukses
+      return data.choices?.[0]?.message?.content || '';
     }
-    if (!res.ok) throw new Error(friendlyError('groq', res.status, await res.text()));
-    const data = await res.json();
-    return data.choices?.[0]?.message?.content || '';
+
+    if (_groqDailyDead.size >= N) {
+      throw new Error(`Semua ${N} kunci Groq kuota HARIAN-nya (TPD) habis. Tunggu reset ~24 jam, tambah kunci, atau pakai model lebih kecil (llama-3.1-8b-instant).`);
+    }
+    if (!sawMinuteLimit) {
+      throw new Error('Groq: semua kunci gagal tanpa alasan rate-limit yang jelas (cek koneksi / API key valid).');
+    }
+    const waitS = Math.min(60, Math.max(5, minWait));
+    process.stdout.write(`\n  [semua kunci aktif kena limit per-menit, tunggu ${waitS.toFixed(0)}s lalu ulang...]`);
+    await sleep(waitS * 1000);
   }
-  throw new Error('Groq API: gagal setelah retry rate-limit.');
+  throw new Error('Groq: gagal setelah rotasi semua kunci + beberapa kali menunggu.');
 }
 
 async function callAnthropic(prompt) {

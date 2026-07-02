@@ -1,22 +1,22 @@
 {
-  "generatedAt": "2026-06-24T02:45:55.154Z",
+  "generatedAt": "2026-07-02T08:20:04.271Z",
   "provider": "groq",
   "N": 10,
   "summary": [
     {
       "Metrik": "ESR (rata-rata)",
-      "Varian A": "0.0%",
-      "Varian B": "0.0%"
+      "Varian A": "86.0%",
+      "Varian B": "96.0%"
     },
     {
       "Metrik": "HR (rata-rata, kecil=baik)",
-      "Varian A": "-",
-      "Varian B": "-"
+      "Varian A": "0.008",
+      "Varian B": "0.000"
     },
     {
       "Metrik": "SCS (rata-rata, NF-2)",
-      "Varian A": "-",
-      "Varian B": "-"
+      "Varian A": "0.921",
+      "Varian B": "0.979"
     }
   ],
   "detail": [
@@ -24,70 +24,70 @@
       "id": "T2",
       "domain": "Sains dan Teknologi",
       "A": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0,
+        "SCS": 0.99296875
       },
       "B": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0,
+        "SCS": 0.9841087962962966
       }
     },
     {
       "id": "T5",
       "domain": "Humaniora dan Sosial",
       "A": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0.0058823529411764705,
+        "SCS": 0.907573302469135
       },
       "B": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0,
+        "SCS": 0.9818541666666666
       }
     },
     {
       "id": "T8",
       "domain": "Bisnis dan Ekonomi",
       "A": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 0.3,
+        "HR": 0,
+        "SCS": 0.9774305555555557
       },
       "B": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0,
+        "SCS": 0.9840509259259259
       }
     },
     {
       "id": "T11",
       "domain": "Kesehatan dan Kedokteran",
       "A": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0.0035714285714285713,
+        "SCS": 0.8754392636684304
       },
       "B": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0,
+        "SCS": 0.9656667309670782
       }
     },
     {
       "id": "T14",
       "domain": "Hukum dan Kebijakan",
       "A": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 1,
+        "HR": 0.03154017973092307,
+        "SCS": 0.849704861111111
       },
       "B": {
-        "ESR": 0,
-        "HR": null,
-        "SCS": null
+        "ESR": 0.8,
+        "HR": 0,
+        "SCS": 0.9800462962962965
       }
     }
   ]

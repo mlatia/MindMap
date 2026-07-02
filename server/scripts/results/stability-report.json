@@ -1,209 +1,155 @@
 {
-  "generatedAt": "2026-06-24T02:54:35.884Z",
-  "provider": "sim",
-  "N": 3,
+  "generatedAt": "2026-07-02T08:04:00.191Z",
+  "provider": "groq",
+  "N": 10,
   "metricRef": "Wang dkk. (2025) STED & Consistency Score (Eq.1, Eq.4, lambda=0.1, Hungarian)",
   "targets": {
     "SCS": ">=0.70",
     "ESR": ">=90%"
   },
   "summary": {
-    "meanSCS": 0.799,
-    "meanSCR": 100,
+    "meanSCS": 0.977,
+    "meanSCR": 88,
     "meanESR": 100
   },
   "perText": [
     {
       "id": "T2",
       "domain": "Sains dan Teknologi",
-      "SCS": 0.795,
+      "SCS": 0.979,
       "SCR": "100.0%",
       "ESR": "100.0%",
       "bentuk": "breadth-heavy",
-      "nodes": 35,
-      "depth": 2,
-      "maxBranch": 8,
+      "nodes": 24,
+      "depth": 3,
+      "maxBranch": 6,
       "shapeDistribution": {
-        "breadth-heavy": 3
+        "breadth-heavy": 10
       },
       "sample": {
-        "concept": "Learning Data",
+        "concept": "Tata Surya",
         "level": 0,
         "children": [
           {
-            "concept": "Melalui Kontainerisasi",
+            "concept": "Pengertian",
             "level": 1,
             "children": [
               {
-                "concept": "Memakai Tensorflow Framework",
+                "concept": "Sistem Benda Langit",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Seperti Network Neural",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Lapisan Tersembunyi Jaringan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Model Melalui Kontainerisasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Tersembunyi Seperti Unsupervised",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Model Memakai Tensorflow",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Preprocessing Normalisasi Imputasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Regularisasi Overfitting Validasi",
+                "concept": "Galaksi Bima Sakti",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Data Preprocessing",
+            "concept": "Teori Pembentukan",
             "level": 1,
             "children": [
               {
-                "concept": "Network Neural Convolutional",
+                "concept": "Teori Nebula",
                 "level": 2,
-                "children": []
+                "children": [
+                  {
+                    "concept": "Awan Gas dan Debu",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Pembentukan Matahari",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Pembentukan Planet",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "concept": "Reinforcement Lingkungan Dinamis",
+                "concept": "Teori Bintang Kembar",
                 "level": 2,
-                "children": []
+                "children": [
+                  {
+                    "concept": "Bintang Kembar",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Pembentukan Planet",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "concept": "Memakai Evaluasi Performa",
+                "concept": "Teori Awan Debu",
                 "level": 2,
-                "children": []
+                "children": [
+                  {
+                    "concept": "Kondensasi",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Pemampatan",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "concept": "Data Mempelajari Kecerdasan",
+                "concept": "Teori Planetesimal",
                 "level": 2,
-                "children": []
+                "children": [
+                  {
+                    "concept": "Bintang Besar",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Pembentukan Planet",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "concept": "Berbasis Boosting Decision",
+                "concept": "Teori Pasang Surut",
                 "level": 2,
-                "children": []
+                "children": [
+                  {
+                    "concept": "Bintang yang Mendekat",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Pembentukan Planet",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
               },
               {
-                "concept": "Model Berbasis Boosting",
+                "concept": "Teori Kondensasi",
                 "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Model Tugas",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Melalui Kontainerisasi Deployment",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Data Seperti Network",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Tersembunyi Jaringan Terdiri",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Data Mempelajari",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Melalui Reinforcement Lingkungan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Neural Convolutional Pengolahan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Data Preprocessing Normalisasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Melalui Tersembunyi Seperti",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Tugas Klasifikasi",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Evaluasi Performa Akurasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Data Model Tugas",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Data Tugas",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Model Tugas Memanfaatkan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Data Tugas Klasifikasi",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Evaluasi Performa",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Mempelajari Kecerdasan Algoritma",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Overfitting Validasi Diatasi",
-                "level": 2,
-                "children": []
+                "children": [
+                  {
+                    "concept": "Bola Kabut Raksasa",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Pembentukan Matahari dan Planet",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
               }
             ]
           }
@@ -213,192 +159,110 @@
     {
       "id": "T5",
       "domain": "Humaniora dan Sosial",
-      "SCS": 0.805,
+      "SCS": 0.983,
       "SCR": "100.0%",
       "ESR": "100.0%",
       "bentuk": "breadth-heavy",
-      "nodes": 35,
+      "nodes": 19,
       "depth": 2,
-      "maxBranch": 9,
+      "maxBranch": 5,
       "shapeDistribution": {
-        "breadth-heavy": 3
+        "breadth-heavy": 7,
+        "balanced": 3
       },
       "sample": {
-        "concept": "Kota Sosial",
+        "concept": "Sosiologi Sastra",
         "level": 0,
         "children": [
           {
-            "concept": "Penduduk Desa",
+            "concept": "Pengertian Sosiologi Sastra",
             "level": 1,
             "children": [
               {
-                "concept": "Budaya Globalisasi Akulturasi",
+                "concept": "Karya Sastra sebagai Produk Budaya",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Penduduk Desa Bermigrasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Sosial Pemerintah Tantangan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Mempercepat Pendidikan Informasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Kebijakan Desentralisasi Pembangunan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Merespons Perumahan Program",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Budaya Memengaruhi Jaringan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Individualistis Transformasi Menggeser",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pemerintah Merespons Perumahan",
+                "concept": "Pengaruh Kondisi Sosial",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Indonesia Membentuk",
+            "concept": "Fungsi Sosiologi Sastra",
             "level": 1,
             "children": [
               {
-                "concept": "Lingkungan Pendatang Perkotaan",
+                "concept": "Menganalisis Hubungan Sastra dan Masyarakat",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Sosial Individualistis Transformasi",
+                "concept": "Mengungkap Kritik Sosial",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Sosial Berpartisipasi Berinteraksi",
+                "concept": "Mengenal Peran Pengarang",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Indonesia Membentuk Kolonial",
+                "concept": "Menghubungkan Sastra dengan Pembaca",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Indonesia Menunjukkan",
+            "concept": "Pembagian Sosiologi Sastra",
             "level": 1,
             "children": [
               {
-                "concept": "Penduduk Menghadapi Kemacetan",
+                "concept": "Sosiologi Pengarang",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Sosial Lingkungan Pendatang",
+                "concept": "Sosiologi Karya Sastra",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Desa Bermigrasi Ekonomi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Tantangan Budaya Globalisasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Sosial Mempercepat Pendidikan",
+                "concept": "Sosiologi Pembaca",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Sosial Pemerintah",
+            "concept": "Fungsi Karya Sastra",
             "level": 1,
             "children": [
               {
-                "concept": "Sosial Budaya Memengaruhi",
+                "concept": "Fungsi Rekreatif",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Pemerintah Tantangan Munculnya",
+                "concept": "Fungsi Didaktif",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Membentuk Kolonial Struktur",
+                "concept": "Fungsi Estetis",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Indonesia Menunjukkan Pergeseran",
+                "concept": "Fungsi Moralitas",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Desa Kebijakan Ketimpangan",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Sosial Mempercepat",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Menunjukkan Pergeseran Urbanisasi",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Lingkungan Pendatang",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Desentralisasi Pembangunan Pemerataan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Kebijakan Ketimpangan Memunculkan",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Penduduk Menghadapi",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Menghadapi Kemacetan Kepadatan",
+                "concept": "Fungsi Religiusitas",
                 "level": 2,
                 "children": []
               }
@@ -410,195 +274,114 @@
     {
       "id": "T8",
       "domain": "Bisnis dan Ekonomi",
-      "SCS": 0.807,
-      "SCR": "100.0%",
+      "SCS": 0.982,
+      "SCR": "50.0%",
       "ESR": "100.0%",
-      "bentuk": "breadth-heavy",
-      "nodes": 35,
-      "depth": 2,
-      "maxBranch": 11,
+      "bentuk": "balanced",
+      "nodes": 19,
+      "depth": 3,
+      "maxBranch": 5,
       "shapeDistribution": {
-        "breadth-heavy": 3
+        "balanced": 10
       },
       "sample": {
-        "concept": "Marketing Pemasaran",
+        "concept": "PDB",
         "level": 0,
         "children": [
           {
-            "concept": "Meningkatkan Pendapatan",
+            "concept": "Pengertian PDB",
             "level": 1,
             "children": [
               {
-                "concept": "Meningkatkan Pendapatan Langganan",
+                "concept": "Definisi PDB",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Nilai Ekonomi",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Produksi Barang dan Jasa",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Jenis PDB",
+            "level": 1,
+            "children": [
+              {
+                "concept": "PDB Riil",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Konsistensi Loyalitas Dibangun",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Digital Pandemi Penting",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Evaluasi Insights Kampanye",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Consideration Conversion Awareness",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Membantu Diferensiasi Kompetitor",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pasar Memungkinkan Penargetan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Meningkatkan Pelanggan Personalisasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Analytics Evaluasi Insights",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pelanggan Personalisasi Retensi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pasar Memperluas Instagram",
+                "concept": "PDB Nominal",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Memengaruhi Pengiriman",
+            "concept": "Komponen PDB",
             "level": 1,
             "children": [
               {
-                "concept": "Pengiriman Efisiensi Kecepatan",
+                "concept": "Konsumsi Rumah Tangga",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Pelanggan Strategi Omnichannel",
+                "concept": "Investasi",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Strategi Omnichannel Menyatukan",
+                "concept": "Pengeluaran Pemerintah",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Influencer Penjualan Konversi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pendapatan Langganan Berbasis",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Visibilitas Content Organik",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Penjualan Konversi Tingkat",
+                "concept": "Ekspor Bersih",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Konsistensi Loyalitas",
+            "concept": "Manfaat PDB",
             "level": 1,
             "children": [
               {
-                "concept": "Pemasaran Digital Pandemi",
+                "concept": "Indikator Pertumbuhan Ekonomi",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Memperluas Instagram Jangkauan",
+                "concept": "Indikator Daya Beli Masyarakat",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Memungkinkan Penargetan Segmentasi",
+                "concept": "Indikator Kesejahteraan Masyarakat",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Keberhasilan Acquisition Indikator",
+                "concept": "Indikator Daya Saing",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Loyalitas Dibangun Kualitas",
+                "concept": "Dasar Perencanaan Ekonomi",
                 "level": 2,
                 "children": []
               }
             ]
-          },
-          {
-            "concept": "Pendapatan Langganan",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Membantu Visibilitas Content",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Analytics Evaluasi",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Strategi Keberhasilan Acquisition",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Pemasaran Consideration",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Memengaruhi Pengiriman Efisiensi",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Evaluasi Insights",
-            "level": 1,
-            "children": []
-          },
-          {
-            "concept": "Memperluas Instagram",
-            "level": 1,
-            "children": []
           }
         ]
       }
@@ -606,190 +389,299 @@
     {
       "id": "T11",
       "domain": "Kesehatan dan Kedokteran",
-      "SCS": 0.796,
+      "SCS": 0.957,
       "SCR": "100.0%",
       "ESR": "100.0%",
       "bentuk": "breadth-heavy",
-      "nodes": 34,
-      "depth": 2,
-      "maxBranch": 9,
+      "nodes": 53,
+      "depth": 3,
+      "maxBranch": 12,
       "shapeDistribution": {
-        "breadth-heavy": 3
+        "breadth-heavy": 10
       },
       "sample": {
-        "concept": "Gula Darah",
+        "concept": "Nervus Cranialis",
         "level": 0,
         "children": [
           {
-            "concept": "Polidipsia Polifagia",
+            "concept": "Kranial I: Olfaktori",
             "level": 1,
             "children": [
               {
-                "concept": "Pasien Pengobatan Psikologis",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Diabetes Risiko Memperberat",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Meliputi Komplikasi Retinopati",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pengobatan Psikologis Kepatuhan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Darah Mengontrol Metformin",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Risiko Memperberat Hipertensi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Polifagia Mencakup Poliuria",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Continuous Monitoring Teknologi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Polidipsia Polifagia Mencakup",
+                "concept": "Penciuman",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Pemeriksaan Ditegakkan",
+            "concept": "Kranial II: Optik",
             "level": 1,
             "children": [
               {
-                "concept": "Penyakit Menurunkan Berisiko",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Memperbaiki Continuous Monitoring",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Farmakoterapi Membutuhkan Pengelolaan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Diabetes Penyakit Insulin",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pemeriksaan Ditegakkan Diagnosis",
+                "concept": "Penglihatan",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Penyakit Insulin",
+            "concept": "Kranial III: Okulomotor",
             "level": 1,
             "children": [
               {
-                "concept": "Risiko Aktivitas Obesitas",
+                "concept": "Mata Bergerak",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Pasien Pemantauan Edukasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Meliputi Risiko Aktivitas",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pemeriksaan Komplikasi Kardiovaskular",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Darah Pemeriksaan Ditegakkan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Komplikasi Kardiovaskular Perburukan",
+                "concept": "Respon Pupil",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Meliputi Komplikasi",
+            "concept": "Kranial IV: Troklear",
             "level": 1,
             "children": [
               {
-                "concept": "Memperbaiki Sensitivitas Olahraga",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Penyakit Insulin Resistensi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Membutuhkan Pengelolaan Modifikasi",
+                "concept": "Menggerakkan Mata",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Mengontrol Metformin",
+            "concept": "Kranial V: Trigeminal",
             "level": 1,
             "children": [
               {
-                "concept": "Komplikasi Retinopati Nefropati",
+                "concept": "Oftalmik",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Kulit Kepala",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Dahi",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Kelopak Mata Atas",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "concept": "Maksila",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Pipi",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Kelopak Mata Bawah",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Bibir Atas",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Rongga Hidung",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "concept": "Mandibula",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Lidah",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Bibir Bawah",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Dagu",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Rahang",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Kranial VI: Abdusen",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Menggerakkan Mata Keluar",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Kranial VII: Fasialis",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Mengirimkan Informasi Sensorik",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Lidah",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "concept": "Mengendalikan Gerakan Otot Wajah",
                 "level": 2,
                 "children": []
               },
               {
-                "concept": "Insulin Memperbaiki Sensitivitas",
+                "concept": "Memasok Kelenjar",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Memperbaiki Sensitivitas",
+            "concept": "Kranial VIII: Vestibulocochlear",
             "level": 1,
             "children": [
               {
-                "concept": "Darah Pasien Pemantauan",
+                "concept": "Vestibular",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Keseimbangan",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "concept": "Koklea",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Pendengaran",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "concept": "Kranial IX: Glossofaringeal",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Mengirimkan Informasi Sensorik",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Telinga Luar",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Rongga Telinga Tengah",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Lidah",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Tenggorokan",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "concept": "Mengirimkan Informasi Motorik",
                 "level": 2,
                 "children": []
               }
             ]
           },
           {
-            "concept": "Penyakit Menurunkan",
+            "concept": "Kranial X: Saraf Vagus",
             "level": 1,
-            "children": []
+            "children": [
+              {
+                "concept": "Sensorik",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Motorik",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "Otonom",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Kranial XI: Aksesori Tulang Belakang",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Motorik",
+                "level": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "concept": "Kranial XII: Hipoglosus",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Motorik",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Menggerakkan Lidah",
+                    "level": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
@@ -797,190 +689,201 @@
     {
       "id": "T14",
       "domain": "Hukum dan Kebijakan",
-      "SCS": 0.793,
-      "SCR": "100.0%",
+      "SCS": 0.984,
+      "SCR": "90.0%",
       "ESR": "100.0%",
       "bentuk": "breadth-heavy",
-      "nodes": 34,
-      "depth": 2,
-      "maxBranch": 9,
+      "nodes": 36,
+      "depth": 5,
+      "maxBranch": 16,
       "shapeDistribution": {
-        "breadth-heavy": 3
+        "breadth-heavy": 10
       },
       "sample": {
-        "concept": "Data Undang",
+        "concept": "Hak Kekayaan Intelektual",
         "level": 0,
         "children": [
           {
-            "concept": "Portabilitas Penghapusan",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Perlindungan Pemrosesan Diperlukan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Mendokumentasikan Akuntabilitas Kepatuhannya",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Lembaga Sosialisasi Masyarakat",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pemrosesan Diperlukan Penilaian",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pemrosesan Transparansi Keabsahan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Akuntabilitas Kepatuhannya Mewajibkan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Penghapusan Mencakup Koreksi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Harmonisasi Kepercayaan Mendukung",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Portabilitas Penghapusan Mencakup",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Administratif Dikenakan",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Pelindungan Kepatuhan Mengawasi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Regulasi Harmonisasi Kepercayaan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Undang Lembaga Independen",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Undang Perlindungan Pribadi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Administratif Dikenakan Berupa",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Perlindungan Pribadi",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Pengendali Pengolahan Kewajiban",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Kebocoran Dipidana Penjara",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Regulasi Pengendali Pengolahan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Perlindungan Memenuhi Transfer",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pelanggaran Administratif Dikenakan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Memenuhi Transfer Standar",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Lembaga Sosialisasi",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Pribadi Persetujuan Eksplisit",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Perlindungan Pribadi Melindungi",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Lembaga Independen Pengawasan",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Transparansi Keabsahan",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Sosialisasi Masyarakat Dilakukan",
-                "level": 2,
-                "children": []
-              },
-              {
-                "concept": "Pemrosesan Pribadi Persetujuan",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Pribadi Persetujuan",
-            "level": 1,
-            "children": [
-              {
-                "concept": "Pelanggaran Kebocoran Dipidana",
-                "level": 2,
-                "children": []
-              }
-            ]
-          },
-          {
-            "concept": "Pelindungan Kepatuhan",
+            "concept": "Kekayaan Industri",
             "level": 1,
             "children": []
+          },
+          {
+            "concept": "Hak Cipta",
+            "level": 1,
+            "children": [
+              {
+                "concept": "Konvensi Berne",
+                "level": 2,
+                "children": []
+              },
+              {
+                "concept": "UUHC",
+                "level": 2,
+                "children": [
+                  {
+                    "concept": "Pengertian Hak Cipta",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Lingkup Hak Cipta",
+                    "level": 3,
+                    "children": [
+                      {
+                        "concept": "Buku",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Ceramah",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Alat Peraga",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Lagu",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Drama",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Karya Seni Rupa",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Karya Arsitektur",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Peta",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Karya Batik",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Fotografi",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Potret",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Karya Sinematograh",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Terjemahan",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Kompilasi",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Permainan Video",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Program Komputer",
+                        "level": 4,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "Batasan Hak Cipta",
+                    "level": 3,
+                    "children": []
+                  },
+                  {
+                    "concept": "Prinsip Dasar Hak Cipta",
+                    "level": 3,
+                    "children": [
+                      {
+                        "concept": "Keaslian",
+                        "level": 4,
+                        "children": []
+                      },
+                      {
+                        "concept": "Perwujudan",
+                        "level": 4,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "concept": "Hak yang Dimiliki Pencipta",
+                    "level": 3,
+                    "children": [
+                      {
+                        "concept": "Hak Ekonomi",
+                        "level": 4,
+                        "children": [
+                          {
+                            "concept": "Hak Perbanyakkan",
+                            "level": 5,
+                            "children": []
+                          },
+                          {
+                            "concept": "Hak Adaptasi",
+                            "level": 5,
+                            "children": []
+                          },
+                          {
+                            "concept": "Hak Pengumuman",
+                            "level": 5,
+                            "children": []
+                          },
+                          {
+                            "concept": "Hak Pertunjukkan",
+                            "level": 5,
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "concept": "Hak Moral",
+                        "level": 4,
+                        "children": [
+                          {
+                            "concept": "Hak Integritas",
+                            "level": 5,
+                            "children": []
+                          },
+                          {
+                            "concept": "Hak Atribusi",
+                            "level": 5,
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
