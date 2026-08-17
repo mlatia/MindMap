@@ -146,7 +146,6 @@ export function sted(T_i, T_j) {
 }
 
 /**
- * Consistency Score C(O) (paper Eq.1) = rata-rata pairwise STED.
  * @param {object[]} trees
  * @returns {{ mean:number, C:number, pairs:number, scoreNormalized:number }}
  */

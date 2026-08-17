@@ -67,11 +67,6 @@ ATURAN STRUKTURAL (WAJIB):
 
 OUTPUT: HANYA JSON valid, tanpa markdown fence (jangan kasih backtick), tanpa komentar, tanpa teks tambahan.`;
 
-/* ---------------------------------------------------------------------------
- * Few-shot demonstrasi STATIS (hard-coded): sengaja DIBUAT KONTRAS agar model
- * tidak belajar satu pola "seimbang" saja. Tiga contoh = tiga bentuk pohon
- * yang berbeda, semuanya setia pada teksnya masing-masing.
- * ------------------------------------------------------------------------- */
 const FEW_SHOT_EXAMPLES = `CONTOH 1 - teks PADAT ANGKA (bentuk LEBAR/DANGKAL muncul alami, breadth-heavy):
 TEKS: "Inflasi tahunan Indonesia tercatat 3,61% pada 2022, lalu 2,61% pada 2023, dan 1,57% pada 2024. Komponen inti menyumbang 2,11%, harga bergejolak 0,12%, sedangkan harga diatur pemerintah 0,34%."
 OUTPUT JSON:
@@ -131,11 +126,6 @@ OUTPUT JSON:
 }
 Perhatikan: jumlah cabang & kedalaman TIDAK dipaksa sama; mengikuti banyaknya detail tiap kategori di teks.`;
 
-/**
- * buildDemonstrations - bagian OTOMATIS satu-satunya dari prompt:
- * pilih kalimat REPRESENTATIF dari teks input via semantic clustering
- * (TF-IDF + k-medoids). Bukan demonstration sampling dari dataset.
- */
 function buildDemonstrations(text, demos = 3) {
   const sentences = splitSentences(text);
   if (sentences.length < 2) return [];

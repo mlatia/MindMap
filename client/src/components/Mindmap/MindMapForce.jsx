@@ -244,18 +244,13 @@ export default function MindMapForce({
 
     // ---- IMPROVED FORCE SIMULATION ----
     const sim = d3.forceSimulation(nodes)
-      // RADIAL paling DOMINAN supaya hierarki ring jelas
       .force('radial', d3.forceRadial(d => d.depth * radiusStep, 0, 0).strength(0.95))
-      // LINK lemah, cuma untuk koneksi visual (bukan structural anchor)
       .force('link', d3.forceLink(links)
         .id(d => d.id)
         .distance(d => 60 + d.target.depth * 25)
         .strength(0.25))
-      // CHARGE lemah supaya tidak chaos
       .force('charge', d3.forceManyBody().strength(-80))
-      // COLLIDE iterasi tinggi untuk anti-overlap
       .force('collide', d3.forceCollide().radius(d => d.r + 4).iterations(6))
-      // ANGULAR sibling separation (custom)
       .force('angular', forceAngularSiblings(nodes, parentMap, 0.15))
       // Convergence parameters
       .alpha(reuse ? 0 : 0.9)

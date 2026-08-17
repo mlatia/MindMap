@@ -86,10 +86,6 @@ export function vectorize(sentences) {
 }
 
 /**
- * K-medoids clustering deterministik atas vektor kalimat.
- * Medoid awal dipilih berdasarkan indeks teratur (kalimat ke-(i*N/k))
- * sehingga output reproducible (penting untuk FR-3).
- *
  * @param {string[]} sentences
  * @param {number} k - jumlah cluster yang diinginkan (1..N)
  * @returns {{clusters:number[][], medoids:number[]}}

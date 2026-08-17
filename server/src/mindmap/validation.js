@@ -67,7 +67,7 @@ function validateStructural(node, depth = 0) {
   if (!Array.isArray(node.children)) {
     throw new Error('Struktural: properti children wajib array');
   }
-  for (const child of node.children) validateStructural(child, depth + 1);
+  for (const child of node.children) validateStructural(child, depth + 1); // rekursif
 }
 
 /**

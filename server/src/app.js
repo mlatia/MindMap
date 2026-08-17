@@ -7,7 +7,6 @@
  * Environment Variables:
  *   API_URL        - URL frontend untuk CORS. Bisa comma-separated list:
  *                    "https://fe.vercel.app,https://other.com"
- *   SESSION_SECRET - secret untuk express-session
  *   NODE_ENV       - development / production / test
  *   LLM_PROVIDER   - groq | anthropic | openai | mock (default mock)
  *
@@ -21,8 +20,6 @@
 import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import session from 'express-session';
-import passport from 'passport';
 
 import { securityMiddleware } from './config/security.config.js';
 import authRoutes from './routes/auth.routes.js';
@@ -75,21 +72,6 @@ app.use(securityMiddleware);
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-// ---- Session & passport (opsional, pakai JWT sebagai primary) ----
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'your-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.NODE_ENV === 'production',
-    httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    maxAge: 86400000,
-  },
-}));
-app.use(passport.initialize());
-app.use(passport.session());
 
 // ---- Root info ----
 app.get('/', (_req, res) => {
